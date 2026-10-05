@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://motionexp.com/schemas/hk-movie-rag/movie.schema.json",
+  "title": "Canonical Release movie",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "movie_id",
+    "chinese_title",
+    "english_title",
+    "release_date",
+    "production_region",
+    "director",
+    "screenwriter",
+    "cast",
+    "genre",
+    "runtime_minutes",
+    "production_company",
+    "data_source"
+  ],
+  "properties": {
+    "movie_id": {"$ref": "#/$defs/movieId"},
+    "chinese_title": {"type": "string"},
+    "english_title": {"type": "string"},
+    "release_date": {"type": "string"},
+    "production_region": {"type": "string"},
+    "director": {"type": "string"},
+    "screenwriter": {"type": "string"},
+    "cast": {"type": "string"},
+    "genre": {"type": "string"},
+    "runtime_minutes": {"type": "string"},
+    "production_company": {"type": "string"},
+    "data_source": {"type": "string"}
+  },
+  "$defs": {
+    "movieId": {
+      "type": "string",
+      "pattern": "^[0-9]{4}_[A-Z0-9]+_[0-9]{3}$"
+    }
+  }
+}

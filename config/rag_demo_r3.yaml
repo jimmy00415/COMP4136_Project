@@ -1,0 +1,103 @@
+schema_version: "1.3"
+rag_release_id: v1.2-demo-r3
+parent_rag_release_id: v1.2-demo-r2
+parent_release_manifest_sha256: e9842db33208e7146d78d86689b13f81fffcf41288d79d84e599b93050445e2c
+expected_movies: 4659
+expected_poster_rows: 4659
+expected_approved_poster_objects: 4546
+expected_unavailable_poster_rows: 113
+expected_derived_inventory_sha256: 3e3cedee507c3017821de1081bc70bbb01d0c73f8683ab484a464d1fc1f7c1db
+expected_facet_count: 4659
+expected_tier_s_count: 51
+expected_tier_a_count: 313
+expected_tier_b_count: 4295
+expected_pilot_count: 24
+embedding_model: gemini-embedding-2
+embedding_dimension: 768
+generation_model: gemini-3.5-flash-lite
+text_extraction_profile: cjk-layout-v1
+document_embedding_profile: vertex-title-text-v1
+relevance_policy_sha256: d6db5e118aeea5dc0484f3c591baac666952f78f4d41bfdcdbbb58693f4f6bba
+poster_authority_sha256: c50ff06a88f91296b63bd74a1e4a6485785bdc4c07e73d09b407a126927c8137
+access_mode: restricted_demo
+supplemental_movies:
+  - movie_id: 2001_SLZQ_001
+    chinese_title: 少林足球
+    english_title: Shaolin Soccer
+    release_date: "2001-07-12"
+    production_region: 香港
+    director: 周星馳
+    screenwriter: 周星馳、曾謹昌、馮勉恆、馮志強
+    cast: 周星馳、趙薇、吳孟達、黃一飛
+    genre: 動作、喜劇、運動
+    runtime_minutes: "112"
+    production_company: 星輝海外有限公司、寰宇娛樂有限公司
+    data_source: Wikidata + 香港電影資料館 + R3 operator approval
+supplemental_facets:
+  - movie_id: 2001_SLZQ_001
+    tier: S
+    tier_reason: R3 operator-approved supplemental S-tier deep document
+    human_review: manual_approved
+    pilot_movie: false
+    pilot_evidence: null
+supplemental_posters:
+  - asset_id: poster:2001_SLZQ_001:v1
+    movie_id: 2001_SLZQ_001
+    asset_type: poster
+    source_object_uri: shaolin-soccer-poster-source.jpg
+    original_object_uri: assets/posters/originals/2001_SLZQ_001.jpg
+    derived_object_uri: assets/posters/derived/2001_SLZQ_001.webp
+    quarantine_object_uri: ""
+    content_sha256: 2d8f7abdee0f4a68c8b6f047bb080c5e3f99083067d854990fa73461a29abd29
+    detected_format: JPEG
+    detected_mime_type: image/jpeg
+    detected_extension: .jpg
+    width: 1128
+    height: 1563
+    color_mode: RGB
+    byte_length: 621639
+    quality_status: manual_approved
+    identity_confidence: null
+    source_url: https://assets.eyefilm.nl/images/posters/poster-Shaolin-Soccer-Stephen-Chow-HK-US-CN-2001.jpg
+    rights_status: restricted
+    version: 1
+    is_primary: false
+    publishable: false
+    created_at: "2026-08-23T00:00:00Z"
+    reviewed_at: "2026-08-23T00:00:00Z"
+deep_documents:
+  - movie_id: 1978_ZQ_001
+    document_id: drunken-master-deep-analysis-v1
+    source_filename: S 級港⽚-醉拳.pdf
+    source_sha256: ab27baf8e22ceb63a476b65dbfb02951a63a9e9bf39d96a47cd8e3f9fd314a75
+    rights_status: restricted
+    quality_status: manual_approved
+    page_count: 3
+  - movie_id: 1982_ZJPD_001
+    document_id: aces-go-places-deep-analysis-v1
+    source_filename: S 級港⽚-最佳拍檔.pdf
+    source_sha256: 69fa1ad28916c043689ef4fe826cde816c05a3b254e5a0372d1a57ca2ce63bce
+    rights_status: restricted
+    quality_status: manual_approved
+    page_count: 3
+  - movie_id: 1985_JSXS_001
+    document_id: mr-vampire-deep-analysis-v1
+    source_filename: S 級港⽚-殭屍先生.pdf
+    source_sha256: 2dce5ec8a1459999c53e9a56f603225e3970061cc7d2f7a35b8d53388096e576
+    rights_status: restricted
+    quality_status: manual_approved
+    page_count: 4
+  - movie_id: 1987_FGBR_001
+    document_id: its-a-mad-mad-mad-world-deep-analysis-v1
+    source_filename: S級港片-富貴逼人.pdf
+    source_sha256: 5aef7f8684bc0d91d77ffb6d7f89cb323358e2804ef8eaacbc0a02cfeb3d3df4
+    rights_status: restricted
+    quality_status: manual_approved
+    page_count: 6
+  - movie_id: 2001_SLZQ_001
+    document_id: shaolin-soccer-deep-analysis-v1
+    source_filename: S 級港⽚-少林足球.pdf
+    source_sha256: c6f713e2f5c60381d7b8745829f89680ebcfcb631c24d86814a9c6dfcd49e863
+    rights_status: restricted
+    quality_status: manual_approved
+    page_count: 5

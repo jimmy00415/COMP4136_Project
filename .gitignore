@@ -1,0 +1,49 @@
+.worktrees/
+.superpowers/
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+credentials/
+service-account*.json
+service_account*.json
+key.json
+*_key.json
+*.pem
+
+# Python tooling
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.cache/
+cache/
+
+# Terraform state
+.terraform/
+*.tfplan
+*.tfstate
+*.tfstate.*
+
+# Read-only source mirrors
+FinalDelivery_2026-07-16/
+1-1500posters/
+posters/
+posters1/
+
+# Generated outputs
+data/generated/
+data/quarantine/
+data/release/*/*
+!data/release/*/release_manifest.json
+assets/generated/
+assets/posters/
+artifacts/
+
+# External course inputs and generated outputs
+course/data/
+course/results/
+course/preparation/

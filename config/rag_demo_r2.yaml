@@ -1,0 +1,43 @@
+schema_version: "1.2"
+rag_release_id: v1.2-demo-r2
+parent_release_manifest_sha256: e9842db33208e7146d78d86689b13f81fffcf41288d79d84e599b93050445e2c
+expected_movies: 4658
+expected_poster_rows: 4658
+expected_approved_poster_objects: 4545
+expected_unavailable_poster_rows: 113
+expected_derived_inventory_sha256: b754727129bc044b6c9da1e6db22067c8279c5e7f8dd41d0350e365376538154
+expected_facet_count: 4658
+expected_tier_s_count: 50
+expected_tier_a_count: 313
+expected_tier_b_count: 4295
+expected_pilot_count: 24
+embedding_model: gemini-embedding-2
+embedding_dimension: 768
+generation_model: gemini-3.5-flash-lite
+text_extraction_profile: cjk-layout-v1
+document_embedding_profile: vertex-title-text-v1
+relevance_policy_sha256: a4ecce727a469689a2a08c6d42e0d7d1eb975761173e3b6e4d1eaf34db7b2aba
+poster_authority_sha256: 9e56adda2a1fdfa648869c53d7e60a085db5d1c6d11db90dbec13bfe12f0eeed
+access_mode: restricted_demo
+deep_documents:
+  - movie_id: 1978_ZQ_001
+    document_id: drunken-master-deep-analysis-v1
+    source_filename: S 級港⽚-醉拳.pdf
+    source_sha256: ab27baf8e22ceb63a476b65dbfb02951a63a9e9bf39d96a47cd8e3f9fd314a75
+    rights_status: restricted
+    quality_status: manual_approved
+    page_count: 3
+  - movie_id: 1982_ZJPD_001
+    document_id: aces-go-places-deep-analysis-v1
+    source_filename: S 級港⽚-最佳拍檔.pdf
+    source_sha256: 69fa1ad28916c043689ef4fe826cde816c05a3b254e5a0372d1a57ca2ce63bce
+    rights_status: restricted
+    quality_status: manual_approved
+    page_count: 3
+  - movie_id: 1987_FGBR_001
+    document_id: its-a-mad-mad-mad-world-deep-analysis-v1
+    source_filename: S級港片-富貴逼人.pdf
+    source_sha256: 5aef7f8684bc0d91d77ffb6d7f89cb323358e2804ef8eaacbc0a02cfeb3d3df4
+    rights_status: restricted
+    quality_status: manual_approved
+    page_count: 6

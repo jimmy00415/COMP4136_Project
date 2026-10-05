@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://motionexp.com/schemas/hk-movie-rag/movie_document.schema.json",
+  "title": "Versioned movie analysis document front matter",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "movie_id",
+    "document_id",
+    "document_type",
+    "language",
+    "title",
+    "source_urls",
+    "rights_status",
+    "authorship_method",
+    "content_version",
+    "content_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "movie_id": {
+      "type": "string",
+      "pattern": "^[0-9]{4}_[A-Z0-9]+_[0-9]{3}$"
+    },
+    "document_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "document_type": {
+      "enum": ["analysis", "review", "research_note", "transcript"]
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$"
+    },
+    "title": {"type": "string", "minLength": 1, "maxLength": 500},
+    "source_urls": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https?://(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)(?:\\.(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?))*(?:/(?:[A-Za-z0-9._~!$&'()*+,;=:@-]|%[0-9A-Fa-f]{2})*)*(?:\\?(?:[A-Za-z0-9._~!$&'()*+,;=:@/?-]|%[0-9A-Fa-f]{2})*)?(?:#(?:[A-Za-z0-9._~!$&'()*+,;=:@/?-]|%[0-9A-Fa-f]{2})*)?(?![\\s\\S])"
+      }
+    },
+    "rights_status": {"enum": ["unknown", "cleared", "restricted", "denied"]},
+    "authorship_method": {"enum": ["human", "ai_assisted", "ai_generated"]},
+    "content_version": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "quality_status": {
+      "enum": ["machine_passed", "manual_approved", "rejected", "rights_blocked"],
+      "default": "machine_passed"
+    }
+  }
+}

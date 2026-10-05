@@ -1,0 +1,1 @@
+{"distance_cutoff":0.36,"distance_metric":"pgvector_cosine_distance","embedding_dimension":768,"embedding_model":"gemini-embedding-2","golden_sha256":"f56b81c15d8876f1078356913740f6d028a7c13addd84252c01629301ae3c489","policy_id":"general-relevance/v1","release_id":"v1.2-demo","schema_version":"1.0"}

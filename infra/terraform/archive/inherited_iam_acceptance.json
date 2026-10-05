@@ -1,0 +1,347 @@
+{
+  "schema_version": 1,
+  "status": "accepted",
+  "project": {
+    "id": "motionexpaiweb",
+    "number": "880586285913",
+    "parent": {
+      "type": "organization",
+      "id": "797368190621"
+    }
+  },
+  "accepted_principals": [
+    "domain:motionexp.com",
+    "serviceAccount:880586285913-compute@developer.gserviceaccount.com",
+    "serviceAccount:880586285913@cloudservices.gserviceaccount.com",
+    "serviceAccount:moviescriptwriter-728@motionexpaiweb.iam.gserviceaccount.com",
+    "serviceAccount:moviescriptwriter12jun@motionexpaiweb.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@compute-system.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@container-engine-robot.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@containerregistry.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@dataflow-service-producer-prod.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@dataproc-accounts.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@gcf-admin-robot.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@gcp-sa-aiplatform-re.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@gcp-sa-aiplatform.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@gcp-sa-backupdr.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@gcp-sa-cloudaicompanion.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@gcp-sa-discoveryengine.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@gcp-sa-networkmanagement.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@gcp-sa-notebooks.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@gcp-sa-osconfig.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@gcp-sa-pubsub.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@gcp-sa-vertex-rag.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@gcp-sa-vpcaccess.iam.gserviceaccount.com",
+    "serviceAccount:service-880586285913@service-networking.iam.gserviceaccount.com",
+    "user:admin@motionexp.com"
+  ],
+  "rationale": [
+    "Existing application service accounts are accepted only through the exact reviewed snapshots.",
+    "Broad user instruction accepts the current security posture captured by these snapshots.",
+    "No IAM removal is authorized by this bootstrap."
+  ],
+  "project_policy": {
+    "sha256": "bbd7ea0bbbebdec16bb6988330f013bf7f3bf1d5c7c298e407f0270116fe3d93",
+    "policy": {
+      "version": 3,
+      "bindings": [
+        {
+          "role": "roles/aiplatform.admin",
+          "members": [
+            "serviceAccount:moviescriptwriter12jun@motionexpaiweb.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/aiplatform.ragServiceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@gcp-sa-vertex-rag.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/aiplatform.reasoningEngineServiceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@gcp-sa-aiplatform-re.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/aiplatform.serviceAgent",
+          "members": [
+            "serviceAccount:moviescriptwriter12jun@motionexpaiweb.iam.gserviceaccount.com",
+            "serviceAccount:service-880586285913@gcp-sa-aiplatform.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/aiplatform.user",
+          "members": [
+            "serviceAccount:moviescriptwriter12jun@motionexpaiweb.iam.gserviceaccount.com",
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/backupdr.admin",
+          "members": [
+            "serviceAccount:880586285913-compute@developer.gserviceaccount.com",
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/backupdr.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@gcp-sa-backupdr.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/cloudaicompanion.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@gcp-sa-cloudaicompanion.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/cloudfunctions.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@gcf-admin-robot.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/cloudsupport.techSupportEditor",
+          "members": [
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/compute.admin",
+          "members": [
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/compute.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@compute-system.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/container.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@container-engine-robot.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/containerregistry.ServiceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@containerregistry.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/dataflow.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@dataflow-service-producer-prod.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/dataproc.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@dataproc-accounts.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/discoveryengine.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@gcp-sa-discoveryengine.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/documentai.editor",
+          "members": [
+            "serviceAccount:moviescriptwriter12jun@motionexpaiweb.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/editor",
+          "members": [
+            "serviceAccount:880586285913@cloudservices.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/iam.serviceAccountUser",
+          "members": [
+            "serviceAccount:moviescriptwriter12jun@motionexpaiweb.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/logging.logWriter",
+          "members": [
+            "serviceAccount:880586285913-compute@developer.gserviceaccount.com",
+            "serviceAccount:moviescriptwriter-728@motionexpaiweb.iam.gserviceaccount.com",
+            "serviceAccount:moviescriptwriter12jun@motionexpaiweb.iam.gserviceaccount.com",
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/monitoring.metricWriter",
+          "members": [
+            "serviceAccount:880586285913-compute@developer.gserviceaccount.com",
+            "serviceAccount:moviescriptwriter-728@motionexpaiweb.iam.gserviceaccount.com",
+            "serviceAccount:moviescriptwriter12jun@motionexpaiweb.iam.gserviceaccount.com",
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/networkmanagement.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@gcp-sa-networkmanagement.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/notebooks.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@gcp-sa-notebooks.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/osconfig.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@gcp-sa-osconfig.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/owner",
+          "members": [
+            "serviceAccount:moviescriptwriter-728@motionexpaiweb.iam.gserviceaccount.com",
+            "serviceAccount:moviescriptwriter12jun@motionexpaiweb.iam.gserviceaccount.com",
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/pubsub.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@gcp-sa-pubsub.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/resourcemanager.tagAdmin",
+          "members": [
+            "serviceAccount:880586285913-compute@developer.gserviceaccount.com",
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/resourcemanager.tagUser",
+          "members": [
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/servicenetworking.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@service-networking.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/serviceusage.apiKeysAdmin",
+          "members": [
+            "serviceAccount:moviescriptwriter-728@motionexpaiweb.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/serviceusage.apiKeysViewer",
+          "members": [
+            "serviceAccount:moviescriptwriter12jun@motionexpaiweb.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/storage.admin",
+          "members": [
+            "serviceAccount:moviescriptwriter12jun@motionexpaiweb.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/storage.admin",
+          "members": [
+            "user:admin@motionexp.com"
+          ],
+          "condition": {
+            "title": "hk-rag-archive-operator",
+            "expression": "resource.type == \"storage.googleapis.com/Bucket\" && resource.name == \"projects/_/buckets/motionexpaiweb-880586285913-hk-movie-rag-source-archive\"",
+            "description": "Persistent bucket-scoped management access for the HK Movie RAG source archive."
+          }
+        },
+        {
+          "role": "roles/storage.objectAdmin",
+          "members": [
+            "serviceAccount:moviescriptwriter12jun@motionexpaiweb.iam.gserviceaccount.com",
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/viewer",
+          "members": [
+            "serviceAccount:880586285913-compute@developer.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/vpcaccess.serviceAgent",
+          "members": [
+            "serviceAccount:service-880586285913@gcp-sa-vpcaccess.iam.gserviceaccount.com"
+          ]
+        }
+      ]
+    }
+  },
+  "organization_policy": {
+    "sha256": "e194d4659e3da6f8600671d590a8b753768e5c0c5a86b433834f70715cabf572",
+    "policy": {
+      "version": 1,
+      "bindings": [
+        {
+          "role": "roles/aiplatform.admin",
+          "members": [
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/apim.admin",
+          "members": [
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/billing.creator",
+          "members": [
+            "domain:motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/orgpolicy.policyAdmin",
+          "members": [
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/owner",
+          "members": [
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/resourcemanager.organizationAdmin",
+          "members": [
+            "user:admin@motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/resourcemanager.projectCreator",
+          "members": [
+            "domain:motionexp.com"
+          ]
+        },
+        {
+          "role": "roles/serviceusage.apiKeysAdmin",
+          "members": [
+            "user:admin@motionexp.com"
+          ]
+        }
+      ]
+    }
+  }
+}

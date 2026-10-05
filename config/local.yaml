@@ -1,0 +1,28 @@
+release_version: v1.2
+source_manifest: FinalDelivery_2026-07-16/manifest_v1.2.json
+source_validation: FinalDelivery_2026-07-16/validation_report_v1.2.json
+movies_csv: FinalDelivery_2026-07-16/1970-2026香港電影標準化元數據集_v1.2.csv
+movies_xlsx: FinalDelivery_2026-07-16/1970-2026香港電影標準化元數據集_v1.2.xlsx
+tiers_xlsx: FinalDelivery_2026-07-16/分級片單_S-A-B_v1.2.xlsx
+issue_ledger_xlsx: FinalDelivery_2026-07-16/待補全問題台帳_v1.2.xlsx
+inventory_roots:
+  - FinalDelivery_2026-07-16
+  - 1-1500posters
+  - posters
+  - posters1
+canonical_poster_roots:
+  - path: 1-1500posters
+    recursive: false
+  - path: posters/posters
+    recursive: false
+expected:
+  release_movies: 4658
+  quarantine_movies: 1264
+  tier_counts: {S: 50, A: 313, B: 4295}
+  pilot_movies: 24
+  audit_rows: 1008
+  poster_states:
+    machine_passed: 4545
+    content_conflict: 73
+    placeholder: 9
+    missing: 31

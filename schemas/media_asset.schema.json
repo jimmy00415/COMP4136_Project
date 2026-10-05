@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://motionexp.com/schemas/hk-movie-rag/media_asset.schema.json",
+  "title": "Canonical Release media asset",
+  "$ref": "#/$defs/mediaAsset",
+  "$defs": {
+    "movieId": {
+      "type": "string",
+      "pattern": "^[0-9]{4}_[A-Z0-9]+_[0-9]{3}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "rightsStatus": {
+      "enum": ["unknown", "cleared", "restricted", "denied"]
+    },
+    "httpUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)(?:\\.(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?))*(?:/(?:[A-Za-z0-9._~!$&'()*+,;=:@-]|%[0-9A-Fa-f]{2})*)*(?:\\?(?:[A-Za-z0-9._~!$&'()*+,;=:@/?-]|%[0-9A-Fa-f]{2})*)?(?:#(?:[A-Za-z0-9._~!$&'()*+,;=:@/?-]|%[0-9A-Fa-f]{2})*)?(?![\\s\\S])"
+    },
+    "qualityStatus": {
+      "enum": [
+        "machine_passed",
+        "content_conflict",
+        "placeholder",
+        "missing",
+        "manual_approved",
+        "rejected",
+        "rights_blocked"
+      ]
+    },
+    "posterSubmission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "movie_id",
+        "submission_id",
+        "source_url",
+        "retrieved_at",
+        "rights_status",
+        "expected_sha256"
+      ],
+      "properties": {
+        "schema_version": {"const": "1.0"},
+        "movie_id": {"$ref": "#/$defs/movieId"},
+        "submission_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "source_url": {"$ref": "#/$defs/httpUrl"},
+        "retrieved_at": {"type": "string", "format": "date-time"},
+        "rights_status": {"$ref": "#/$defs/rightsStatus"},
+        "expected_sha256": {"$ref": "#/$defs/sha256"},
+        "expected_mime_type": {"enum": ["image/jpeg", "image/png", "image/webp"]},
+        "quality_status": {"$ref": "#/$defs/qualityStatus", "default": "machine_passed"}
+      }
+    },
+    "mediaAsset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asset_id",
+        "movie_id",
+        "asset_type",
+        "source_object_uri",
+        "original_object_uri",
+        "derived_object_uri",
+        "quarantine_object_uri",
+        "content_sha256",
+        "detected_format",
+        "detected_mime_type",
+        "detected_extension",
+        "width",
+        "height",
+        "color_mode",
+        "byte_length",
+        "quality_status",
+        "identity_confidence",
+        "source_url",
+        "rights_status",
+        "version",
+        "is_primary",
+        "publishable",
+        "created_at",
+        "reviewed_at"
+      ],
+      "properties": {
+        "asset_id": {"type": "string", "minLength": 1},
+        "movie_id": {"$ref": "#/$defs/movieId"},
+        "asset_type": {"const": "poster"},
+        "source_object_uri": {"type": "string"},
+        "original_object_uri": {"type": "string"},
+        "derived_object_uri": {"type": "string"},
+        "quarantine_object_uri": {"type": "string"},
+        "content_sha256": {"type": "string", "pattern": "^(|[0-9a-f]{64})$"},
+        "detected_format": {"enum": ["", "JPEG", "PNG", "WEBP"]},
+        "detected_mime_type": {"enum": ["", "image/jpeg", "image/png", "image/webp"]},
+        "detected_extension": {"enum": ["", ".jpg", ".png", ".webp"]},
+        "width": {"type": ["integer", "null"], "minimum": 1},
+        "height": {"type": ["integer", "null"], "minimum": 1},
+        "color_mode": {"type": "string"},
+        "byte_length": {"type": ["integer", "null"], "minimum": 0},
+        "quality_status": {"$ref": "#/$defs/qualityStatus"},
+        "identity_confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "source_url": {
+          "anyOf": [
+            {"$ref": "#/$defs/httpUrl"},
+            {"type": "null"}
+          ]
+        },
+        "rights_status": {"$ref": "#/$defs/rightsStatus"},
+        "version": {"type": "integer", "minimum": 1},
+        "is_primary": {"type": "boolean"},
+        "publishable": {"type": "boolean"},
+        "created_at": {
+          "anyOf": [
+            {"type": "string", "format": "date-time"},
+            {"type": "null"}
+          ]
+        },
+        "reviewed_at": {
+          "anyOf": [
+            {"type": "string", "format": "date-time"},
+            {"type": "null"}
+          ]
+        }
+      }
+    }
+  }
+}

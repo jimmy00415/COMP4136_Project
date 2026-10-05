@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#e63946">
+    <title>MotionExpert｜香港電影 RAG Chatbot</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="masthead">
+        <div class="brand-lockup">
+          <span class="brand-mark" aria-hidden="true">ME</span>
+          <div>
+            <p class="eyebrow">MotionExpert · Hong Kong Movie RAG</p>
+            <h1>從電影資料，找到有出處的答案。</h1>
+            <p class="masthead-subtitle">1970‑2026 香港電影元數據｜垂類 AI 基座</p>
+          </div>
+        </div>
+      </header>
+
+      <aside class="rights-notice" aria-label="演示限制">
+        <strong>MotionExpert beta</strong>
+        <span>回答以受管治的香港電影資料庫為基礎，並顯示可追溯引用。</span>
+      </aside>
+
+      <section id="chat-panel" class="chat-layout" aria-labelledby="chat-title">
+        <div class="chat-column">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">GROUNDED CHAT</p>
+              <h2 id="chat-title">一起來研究香港電影</h2>
+            </div>
+            <div class="chat-controls">
+              <p id="release-summary" class="release-summary" aria-live="polite"></p>
+              <button id="new-chat-button" class="quiet-button" type="button">新對話</button>
+            </div>
+          </div>
+
+          <div class="examples" aria-label="示例問題">
+            <button type="button" data-question="有沒有好的香港喜劇推薦？">喜劇推薦</button>
+            <button type="button" data-question="請查詢《少林足球》的影片資料。">影片資料查詢</button>
+            <button type="button" data-question="《醉拳》的視覺美學有甚麼特色？">視覺美學分析</button>
+            <button type="button" data-question="比較《醉拳》和《少林足球》的視覺與喜劇風格。">跨作品風格對比</button>
+          </div>
+
+          <div id="conversation" class="conversation" aria-live="polite" aria-label="對話結果">
+            <p class="empty-state">答案會在這裡顯示，並附上資料庫引用。</p>
+          </div>
+
+          <form id="question-form" class="question-form">
+            <label for="question">你的問題</label>
+            <textarea id="question" name="question" rows="3" maxlength="1000" required placeholder="一起來研究香港電影吧，請隨意提問"></textarea>
+            <div class="form-footer">
+              <p id="chat-status" class="status" role="status"></p>
+              <button id="ask-button" type="submit">查找並回答</button>
+            </div>
+            <p id="chat-error" class="error" role="alert" aria-live="assertive"></p>
+          </form>
+        </div>
+
+        <aside class="scope-card">
+          <p class="section-kicker">Current scope</p>
+          <dl>
+            <div><dt>電影</dt><dd id="scope-movies">—</dd></div>
+            <div><dt>深度文檔</dt><dd id="scope-documents">—</dd></div>
+            <div><dt>深度頁面</dt><dd id="scope-pages">—</dd></div>
+          </dl>
+          <p>依托第一階段元數據基座；遇到缺少參考資料的議題，系統不會生成沒有依據的答案。</p>
+        </aside>
+      </section>
+    </main>
+  </body>
+</html>

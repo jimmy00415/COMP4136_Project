@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hk-movie-rag"
+version = "0.1.0"
+description = "Governed Hong Kong movie RAG data foundation"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.116,<1",
+  "google-auth>=2.26,<3",
+  "google-genai>=1.30,<2",
+  "google-cloud-storage==3.13.0",
+  "opencc>=1.3,<2",
+  "openpyxl==3.1.5",
+  "Pillow==11.3.0",
+  "pydantic>=2.9",
+  "pyarrow==21.0.0",
+  "PyYAML>=6.0.2",
+  "jsonschema==4.25.1",
+  "pypdf>=6,<7",
+  "psycopg[pool,binary]>=3.3,<4",
+  "pgvector>=0.4,<1",
+  "uvicorn[standard]>=0.35,<1",
+]
+
+[project.scripts]
+hk-movie-rag = "hk_movie_rag.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hk_movie_rag"]
+include = [
+  "src/hk_movie_rag/authorities/*.json",
+  "src/hk_movie_rag/migrations/*.sql",
+  "src/hk_movie_rag/policies/*.json",
+  "src/hk_movie_rag/policies/*.jsonl",
+  "src/hk_movie_rag/schemas/*.json",
+  "src/hk_movie_rag/static/*.html",
+  "src/hk_movie_rag/static/*.js",
+  "src/hk_movie_rag/static/*.css",
+]
+
+[dependency-groups]
+dev = [
+  "httpx>=0.28,<1",
+  "mypy>=1.17,<2",
+  "pytest>=8.3",
+  "python-hcl2==8.1.2",
+  "ruff>=0.6",
+  "types-PyYAML>=6.0.12",
+]
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100

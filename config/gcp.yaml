@@ -1,0 +1,9 @@
+project_id: motionexpaiweb
+region: us-central1
+required_account: admin@motionexp.com
+archive_bucket_template: "{project_id}-{project_number}-hk-movie-rag-source-archive"
+archive_prefix: source/v1.2
+required_services:
+  - cloudresourcemanager.googleapis.com
+  - serviceusage.googleapis.com
+  - storage.googleapis.com

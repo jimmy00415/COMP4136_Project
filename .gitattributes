@@ -1,0 +1,6 @@
+tests/fixtures/analysis/**/*.md text eol=lf
+evals/*.jsonl text eol=lf
+evals/*.json text eol=lf
+src/hk_movie_rag/policies/*.json text eol=lf
+src/hk_movie_rag/policies/*.jsonl text eol=lf
+src/hk_movie_rag/authorities/*.json text eol=lf
