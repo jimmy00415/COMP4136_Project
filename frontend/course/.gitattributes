@@ -1,0 +1,3 @@
+# Preserve the exact bytes served by the existing backend, on every OS.
+public/static/app.js -text
+public/static/styles.css -text

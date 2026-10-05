@@ -1,0 +1,6 @@
+*
+!Dockerfile
+!nginx.conf
+!backend-proxy.conf
+!public/
+!public/**

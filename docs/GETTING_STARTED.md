@@ -6,7 +6,7 @@
 
 | Goal | Requirements |
 |---|---|
-| Try the [hosted chatbot](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app) | A browser |
+| Try the [hosted chatbot](https://hk-movie-course-frontend-4l6lw3rnaa-uc.a.run.app) | A browser |
 | Install source and run controlled tests | Git, uv, Python 3.13; Node.js for browser-script tests |
 | Serve a local backend | Matching release data, PostgreSQL/pgvector, Google Cloud credentials, and configured process environment |
 | Repeat live evaluation | Exact external catalog, serving revision/image pins, usable Google credentials, and a fresh output directory |
@@ -75,7 +75,7 @@ The hosted demo exposes the same `/api/chat` contract. This example submits a fa
 import json
 from urllib.request import Request, urlopen
 
-BASE_URL = "https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app"
+BASE_URL = "https://hk-movie-course-frontend-4l6lw3rnaa-uc.a.run.app"
 
 def ask(question, history):
     payload = {"question": question, "history": history}

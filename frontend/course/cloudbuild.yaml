@@ -1,0 +1,20 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ['build', '-t', '${_IMAGE}', '.']
+  - name: gcr.io/cloud-builders/docker
+    args: ['run', '-d', '--name', 'course-ui', '--network', 'cloudbuild', '${_IMAGE}']
+  - name: gcr.io/cloud-builders/docker
+    args: ['logs', 'course-ui']
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - run
+      - --rm
+      - --network=container:course-ui
+      - --volume=/workspace:/workspace:ro
+      - --workdir=/workspace
+      - python:3.13-slim@sha256:ffb752e139c0a19692a43af8d8523b274222dd68eebad5d583b45c2201c6e30a
+      - python
+      - smoke.py
+      - http://127.0.0.1:8080
+images: ['${_IMAGE}']
+timeout: 600s

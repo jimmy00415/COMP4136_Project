@@ -11,14 +11,14 @@ Ask in Chinese. Resolve the right film. Recommend within constraints. Inspect th
 <a href="src/hk_movie_rag/vertex_clients.py"><img src="https://img.shields.io/badge/Google_Cloud-Vertex_AI-4285F4?logo=googlecloud&logoColor=white" alt="Google Cloud Vertex AI"></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-205A83" alt="MIT source-code license"></a>
 
-**[Try the chatbot](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app)** · **[Getting started](docs/GETTING_STARTED.md)** · **[Evaluation](docs/EVALUATION.md)** · **[Read the report](report/COMP4136_HK_Movie_RAG_Report.pdf)**
+**[Try the chatbot](https://hk-movie-course-frontend-4l6lw3rnaa-uc.a.run.app)** · **[Getting started](docs/GETTING_STARTED.md)** · **[Evaluation](docs/EVALUATION.md)** · **[Read the report](report/COMP4136_HK_Movie_RAG_Report.pdf)**
 
 </div>
 
 HK Movie RAG turns a versioned **4,659-film catalog** into a conversational interface for factual lookup and constrained recommendations. It combines entity resolution, structured filtering, PostgreSQL/pgvector retrieval, and Vertex AI generation. Answers expose citations and canonical movie cards; ambiguous titles and unsupported facts lead to clarification or refusal.
 
 <p align="center">
-  <a href="https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app"><img src="docs/assets/chatbot-preview.png" width="880" alt="Live HK Movie RAG interface showing a three-film John Woo recommendation, metadata citations, and the first canonical movie card"></a>
+  <a href="https://hk-movie-course-frontend-4l6lw3rnaa-uc.a.run.app"><img src="docs/assets/chatbot-preview.png" width="880" alt="Live HK Movie RAG interface showing a three-film John Woo recommendation, metadata citations, and the first canonical movie card"></a>
 </p>
 
 <p align="center"><sub>Actual deployed interface: a constrained recommendation with metadata citations. Preview shows the answer and first movie card; this documentation example is separate from the evaluation run.</sub></p>
@@ -42,7 +42,7 @@ The application also includes PDF passage retrieval and a same-origin poster pro
 
 ### Explore the hosted demo
 
-Open the **[live chatbot](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app)**. No local setup is needed.
+Open the **[live chatbot](https://hk-movie-course-frontend-4l6lw3rnaa-uc.a.run.app)**. No local setup is needed. The course frontend uses the same deployed backend as the evaluation; its branding is independent. See [frontend deployment](frontend/course/README.md).
 
 | Try this | Behavior to inspect |
 |---|---|
@@ -129,7 +129,7 @@ Minimal Python request to the hosted demo:
 import json
 from urllib.request import Request, urlopen
 
-url = "https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app/api/chat"
+url = "https://hk-movie-course-frontend-4l6lw3rnaa-uc.a.run.app/api/chat"
 payload = {"question": "《少林足球》的電影類型有哪些？", "history": []}
 request = Request(
     url,
