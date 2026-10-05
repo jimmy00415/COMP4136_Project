@@ -1,0 +1,29 @@
+{
+  "built_at_utc": "2026-10-05T12:02:31.567497+00:00",
+  "evidence_checks": "passed; independent aggregate/paired/bootstrap reproduction",
+  "sources": {
+    "challenge_cases.jsonl": "2ab256dc99112b6864f9c41f51f77d216ebff8aeccfa6458c30107f54787e7f5",
+    "challenge_answers.jsonl": "095b5c18f7a8d918601c0093cb30528b6d3d2ba9ecd4a942a5d6defa8ab71968",
+    "challenge_review.json": "85b94e4715b2135300b912825be136fadfde6825940f4d12b91c0d3df6c136e0",
+    "challenge_summary.json": "037fd237957a498286d0f76bc4b86ed76309c9f9d848d443e5c1da213f5604c8",
+    "FINAL_REPORT.md": "5d245037b55ba4d63f4d5862fb0b77975d012c1e7513966d00a0ead5057d9b32",
+    "build_report.py": "b68ad872895ea23fcfb2d0a6fea5e25ba0e36094a10b3ea4db9bce4e4cb89248"
+  },
+  "outputs": {
+    "COMP4136_HK_Movie_RAG_Report.pdf": "5dadeb7ca940e31a5983871b10cf901890ba5c534110bd4a4a90a549a43d3c74",
+    "figures\\architecture.png": "61786982ff54f0f66452ca28905405073173a4e0a5794ffd9636550b1c6cf52e",
+    "figures\\bm25_equation.png": "d51f3ec7620c3814ff0bf259ed9dba3738fc853caf7ffa7b66373559904eee91",
+    "figures\\family_results.png": "3ba3f6b83a90168a14e189fa641fbe384d07e3d1f1ab0796c67007f422bd2778",
+    "figures\\paired_difference.png": "0ec04272d9f27aa9b235dfc245c36421b09829b2822eddc700d4767f5a859311",
+    "figures\\architecture.svg": "6f8cb3a90a9005619333016447bc249bf277007c70897fe44d9d6170ea24ee5b",
+    "figures\\bm25_equation.svg": "e395ab90524cebf8c3da853931b1bf9bdae7e66b7128ac22365f4a6bd9b715f4",
+    "figures\\family_results.svg": "48526daab38626ffe83a414d31a345673b9e3883b4a007387dbbba281cf80684",
+    "figures\\paired_difference.svg": "065eb68601876c7ad683f33b03cf99d612d897883544a99dc384efc0dc07ea90"
+  },
+  "runtime": {
+    "matplotlib": "3.11.2"
+  },
+  "human_audits": "pending",
+  "submission_ready": false,
+  "visual_review": "pending; build success does not establish visual inspection"
+}

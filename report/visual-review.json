@@ -1,0 +1,138 @@
+{
+  "reviewed_at_utc": "2026-10-05T12:04:14.532926+00:00",
+  "reviewer": "Root AI; actual tool-displayed images inspected by the assistant",
+  "review_type": "AI visual review; not a human audit",
+  "pdf_sha256": "5dadeb7ca940e31a5983871b10cf901890ba5c534110bd4a4a90a549a43d3c74",
+  "page_count": 12,
+  "render": {
+    "tool": "Poppler pdftoppm",
+    "dpi": 130,
+    "exit_code": 0,
+    "diagnostics": "Default display-font mapping warnings preserved locally. Embedded report fonts render correctly in inspected images."
+  },
+  "pages": [
+    {
+      "page": 1,
+      "render_sha256": "98f7858f5a39f4c56080ee3efc573f69ac769daf8a4ffa1d2bb39357a695d7a8",
+      "inspected": true,
+      "finding": "Title, blank identity fields, abstract and RQs are legible; no clipping."
+    },
+    {
+      "page": 2,
+      "render_sha256": "8d0aa87ab69a5546f832489e377f2a524c8c3c5358fe44a3a7f225f240787a9c",
+      "inspected": true,
+      "finding": "Five background subsections fit one page; current research and references 5/6 are visible."
+    },
+    {
+      "page": 3,
+      "render_sha256": "bc01a9cf6245d44bcc760e559f0d092dcd7efafeb4d1bc5423d09a5eb9b2285b",
+      "inspected": true,
+      "finding": "Architecture arrows, boundaries and labels are legible; module table fits."
+    },
+    {
+      "page": 4,
+      "render_sha256": "8bf2ab7699bd18ea87526b73e378e82bf413b58e978cd14d3b0d56b0916d6ac5",
+      "inspected": true,
+      "finding": "BM25 equation, parameter values, caption and baseline description fit."
+    },
+    {
+      "page": 5,
+      "render_sha256": "fcfe2333ed69c0f4099d8403f790b3c577a3f7d4a86b1183c62bee2502dc0379",
+      "inspected": true,
+      "finding": "Protocol table, scoring and preserved failed-run disclosure fit without orphaned headings."
+    },
+    {
+      "page": 6,
+      "render_sha256": "43d536f5a47ab97d31ce4c7707f72bd060977d503d3d5f091d28a82faad9b214",
+      "inspected": true,
+      "finding": "Zero-based family bars, hatch distinction, denominators, legend and outcome table are legible."
+    },
+    {
+      "page": 7,
+      "render_sha256": "98a31ebcc58f535eb650dc665530bb2e0390c3057fb6f564b54217032317e6aa",
+      "inspected": true,
+      "finding": "Actual Chinese titles and fullwidth commas render; M02 and M06 identities are visible."
+    },
+    {
+      "page": 8,
+      "render_sha256": "b1d07d873e91778ce116ab9c691be46cc8d172b331652c0a47004dcad6809311",
+      "inspected": true,
+      "finding": "Chinese diagnostic phrases, conjunction analysis and future-work table render correctly."
+    },
+    {
+      "page": 9,
+      "render_sha256": "293241d55f830e1cf851a25da2a36cea7efb4614e76098bfdb6aa56052efe1b5",
+      "inspected": true,
+      "finding": "Paired point/bounds and zero line are clear; descriptive uncertainty and limits fit."
+    },
+    {
+      "page": 10,
+      "render_sha256": "a0a8dc10d968de8af5af07f826d8a263a3f06c8979865f3a0112aeb932da36de",
+      "inspected": true,
+      "finding": "Operational metrics and public-artifact table fit; no cost or throughput claim."
+    },
+    {
+      "page": 11,
+      "render_sha256": "f94182069faa4d9397cc86aba90ffa8b1c542a9548e631eef0855d2288e48eee",
+      "inspected": true,
+      "finding": "Contribution disclosure and all eight references fit; literature links are in the PDF."
+    },
+    {
+      "page": 12,
+      "render_sha256": "c5a7c238f634285b3c32ef2505376b957632ce6e169d0175ecb15b7963dea378",
+      "inspected": true,
+      "finding": "Hashes wrap 32+32 without truncation; independent offline commands and pending conditions fit."
+    }
+  ],
+  "figures": {
+    "figures\\architecture.png": {
+      "sha256": "61786982ff54f0f66452ca28905405073173a4e0a5794ffd9636550b1c6cf52e",
+      "inspected": true,
+      "finding": "Viewed standalone PNG and in final PDF; labels, spacing and data encodings legible."
+    },
+    "figures\\bm25_equation.png": {
+      "sha256": "d51f3ec7620c3814ff0bf259ed9dba3738fc853caf7ffa7b66373559904eee91",
+      "inspected": true,
+      "finding": "Viewed standalone PNG and in final PDF; labels, spacing and data encodings legible."
+    },
+    "figures\\family_results.png": {
+      "sha256": "3ba3f6b83a90168a14e189fa641fbe384d07e3d1f1ab0796c67007f422bd2778",
+      "inspected": true,
+      "finding": "Viewed standalone PNG and in final PDF; labels, spacing and data encodings legible."
+    },
+    "figures\\paired_difference.png": {
+      "sha256": "0ec04272d9f27aa9b235dfc245c36421b09829b2822eddc700d4767f5a859311",
+      "inspected": true,
+      "finding": "Viewed standalone PNG and in final PDF; labels, spacing and data encodings legible."
+    }
+  },
+  "repairs": [
+    "Compressed related-work text to remove an orphan overflow page without shrinking body type.",
+    "Selected embedded CJK font for U+FF00..U+FFEF punctuation after reproducing missing U+FF0C in Arial. Rebuilt and inspected all 12 final pages."
+  ],
+  "content_review": {
+    "independent_ai_reviewer": "report_readme_final_review",
+    "important_finding": "Add current RAG research context to meet background-survey requirement.",
+    "resolution": "Added source-checked ICLR 2024 Self-RAG and April 2026 v4 agentic RAG survey; no SOTA benchmark claim.",
+    "minor_finding": "Engineering guide report deferral contradicted current PDF.",
+    "resolution_minor": "Guide now links final PDF; only presentation deferred."
+  },
+  "checks": {
+    "independent_public_aggregate_paired_bootstrap": "passed",
+    "manifest_source_output_hashes": "passed",
+    "local_markdown_links": 30,
+    "course_tests": "33 passed",
+    "builder_ruff": "passed",
+    "embedded_fonts": [
+      "/AAAAAA+Arial-BoldMT",
+      "/AAAAAA+Arial-ItalicMT",
+      "/AAAAAA+ArialMT",
+      "/AAAAAA+CourierNewPSMT",
+      "/AAAAAA+MicrosoftJhengHeiRegular-0"
+    ],
+    "text_missing_glyph_checks": "passed"
+  },
+  "visual_status": "passed; no unresolved clipping, overlap or missing glyph observed",
+  "human_audits": "pending",
+  "submission_ready": false
+}

@@ -1,5 +1,7 @@
 # Core HK Movie source publication
 
+Documentation update: the [complete course README](../README.md) and [final report](../report/COMP4136_HK_Movie_RAG_Report.pdf) now consolidate the unchanged implementation and recorded studies. The no-PDF statements below describe earlier publication stages. No presentation, course-platform submission or human approval is claimed.
+
 Only the Hong Kong Movie RAG system is published here. The former memory experiment, its source, frozen TEST data, model files and report artifacts are not part of this Git tree.
 
 The application's 33 Python files, browser UI and packaged policies/migrations/schemas retain the exact source-repository blobs from commit 7b1b87002a0b0bc3548fc365a46095c00ea683da. The destination repository's original LICENSE is preserved. Documentation adds coursework setup and provenance. Two configuration tests now use existing controlled input paths while retaining actual release/GCP settings, so a source checkout does not require private source files for those unit tests.

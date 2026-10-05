@@ -25,7 +25,7 @@ The raw movie catalog, PDFs, posters, cloud receipts and private operating histo
 
 The completed 4 October 2026 pass used 30 sequential service requests: all HTTP 200; 28/30 original automatic proxy passes. Two questions about 英雄本色 prompted clarification because both 1973 and 1986 films exist. The median observed response time was 0.959 seconds and maximum 2.962 seconds. These are small diagnostic results, not a general accuracy benchmark or a causal comparison.
 
-Root AI reviewed all responses. Human audit remains pending. Names, student numbers and group details remain blank at the author's request. No report PDF or presentation is included.
+Root AI reviewed all responses. Human audit remains pending. Names, student numbers and group details remain blank at the author's request. The [final report PDF](report/COMP4136_HK_Movie_RAG_Report.pdf) and [editable report](report/FINAL_REPORT.md) now bring the system and studies together. No presentation is included.
 
 ## Challenge evaluation and paired baseline
 

@@ -7,3 +7,11 @@ course/review_challenge.py text eol=lf
 course/challenge_review.json -text whitespace=cr-at-eol
 course/challenge_summary.json -text whitespace=cr-at-eol
 course/challenge_answers.jsonl -text
+# Keep report source/output hashes stable across checkout platforms.
+report/*.md text eol=lf
+report/*.py text eol=lf
+report/*.json text eol=lf
+# Generated SVG path whitespace and line endings belong to the exact export.
+report/figures/*.svg -text whitespace=-blank-at-eol,cr-at-eol
+report/figures/*.png binary
+report/*.pdf binary
