@@ -1,3 +1,3 @@
 # Preserve the exact bytes served by the existing backend, on every OS.
-public/static/app.js -text
-public/static/styles.css -text
+public/static/app.js -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+public/static/styles.css -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
