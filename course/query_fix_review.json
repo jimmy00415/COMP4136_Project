@@ -1,0 +1,412 @@
+{
+  "at": "2026-10-05T12:41:54.411892+00:00",
+  "reviewer_type": "Root AI",
+  "method": "Root read all60 complete answer texts and compared visible fact gold; program reclassified each response and checked eight returned catalog card fields. Not a human or independent holdout audit.",
+  "accepted": 60,
+  "failed": 0,
+  "responses_sha256": "7fb4912cebfe21aa9fdf5c10dae8687e64200773a69a2cea7dfca47f3440f4f6",
+  "catalog_sha256": "1dbea26150a816ae4fc4d189a2a08e39628cbee997f3966b0dd5cd16843e907b",
+  "cases_sha256": "2ab256dc99112b6864f9c41f51f77d216ebff8aeccfa6458c30107f54787e7f5",
+  "card_fields_checked": 784,
+  "card_fields_mismatched": 0,
+  "card_field_names": [
+    "movie_id",
+    "chinese_title",
+    "english_title",
+    "release_date",
+    "director",
+    "cast",
+    "genre",
+    "tier"
+  ],
+  "not_independently_catalog_checked": [
+    "pilot_movie",
+    "poster_url"
+  ],
+  "families": {
+    "ambiguity": {
+      "accepted": 10,
+      "total": 10
+    },
+    "language": {
+      "accepted": 10,
+      "total": 10
+    },
+    "compound": {
+      "accepted": 10,
+      "total": 10
+    },
+    "boundary": {
+      "accepted": 10,
+      "total": 10
+    },
+    "dialogue": {
+      "accepted": 20,
+      "total": 20
+    }
+  },
+  "cases": [
+    {
+      "case_id": "A1a",
+      "accepted": true,
+      "decision": "reasonable_clarification",
+      "reason": "Read clarification: lists actual same-title catalog IDs and requests explicit selection; no unsupported director attribution."
+    },
+    {
+      "case_id": "A1b",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested director agrees with catalog 1986_YXBS_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "A2a",
+      "accepted": true,
+      "decision": "reasonable_clarification",
+      "reason": "Read clarification: lists actual same-title catalog IDs and requests explicit selection; no unsupported director attribution."
+    },
+    {
+      "case_id": "A2b",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested director agrees with catalog 1987_LHFY_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "A3a",
+      "accepted": true,
+      "decision": "reasonable_clarification",
+      "reason": "Read clarification: lists actual same-title catalog IDs and requests explicit selection; no unsupported director attribution."
+    },
+    {
+      "case_id": "A3b",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested director agrees with catalog 1993_XBLQ_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "A4a",
+      "accepted": true,
+      "decision": "reasonable_clarification",
+      "reason": "Read clarification: lists actual same-title catalog IDs and requests explicit selection; no unsupported director attribution."
+    },
+    {
+      "case_id": "A4b",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested director agrees with catalog 1995_JYMT_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "A5a",
+      "accepted": true,
+      "decision": "reasonable_clarification",
+      "reason": "Read clarification: lists actual same-title catalog IDs and requests explicit selection; no unsupported director attribution."
+    },
+    {
+      "case_id": "A5b",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested director agrees with catalog 1993_FSY_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "L1t",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested year agrees with catalog 1985_JCGS_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "L1s",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested year agrees with catalog 1985_JCGS_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "L2t",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested cast agrees with catalog 1994_ZQSL_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "L2s",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested cast agrees with catalog 1994_ZQSL_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "L3t",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested genre agrees with catalog 2001_SLZQ_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "L3s",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested genre agrees with catalog 2001_SLZQ_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "L4t",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested director agrees with catalog 2000_HYNH_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "L4s",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested director agrees with catalog 2000_HYNH_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "L5t",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested screenwriter agrees with catalog 2002_WJD_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "L5s",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested screenwriter agrees with catalog 2002_WJD_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "C01",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"director\": \"吳宇森\", \"genre\": \"動作\", \"year_max\": 1999, \"year_min\": 1980}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "C02",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"cast\": \"成龍\", \"genre\": \"動作\", \"year_max\": 1999, \"year_min\": 1980}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "C03",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"genres_all\": [\"動作\", \"喜劇\"], \"year_max\": 1989, \"year_min\": 1980}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "C04",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"genre\": \"動作\", \"tier\": \"S\", \"year_max\": 1999, \"year_min\": 1980}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "C05",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"director\": \"杜琪峯\", \"genre\": \"犯罪\", \"year_max\": 2009, \"year_min\": 1990}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "C06",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"cast\": \"劉德華\", \"genre\": \"犯罪\", \"year_max\": 2009, \"year_min\": 2000}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "C07",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"director\": \"王家衞\", \"genre\": \"劇情\", \"year_max\": 2009, \"year_min\": 1990}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "C08",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"director\": \"周星馳\", \"genre\": \"喜劇\", \"year_max\": 2010, \"year_min\": 1990}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "C09",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"cast\": \"張曼玉\", \"genre\": \"愛情\", \"year_max\": 1999, \"year_min\": 1990}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "C10",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"director\": \"劉偉強\", \"genre\": \"犯罪\", \"year_max\": 2009, \"year_min\": 2000}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "B01",
+      "accepted": true,
+      "decision": "reasonable_refusal",
+      "reason": "Read refusal: domain is outside governed evidence/capability; no fabricated budget, rating, dialogue, analysis or non-movie answer."
+    },
+    {
+      "case_id": "B02",
+      "accepted": true,
+      "decision": "reasonable_refusal",
+      "reason": "Read refusal: domain is outside governed evidence/capability; no fabricated budget, rating, dialogue, analysis or non-movie answer."
+    },
+    {
+      "case_id": "B03",
+      "accepted": true,
+      "decision": "reasonable_refusal",
+      "reason": "Read refusal: domain is outside governed evidence/capability; no fabricated budget, rating, dialogue, analysis or non-movie answer."
+    },
+    {
+      "case_id": "B04",
+      "accepted": true,
+      "decision": "reasonable_refusal",
+      "reason": "Read refusal: domain is outside governed evidence/capability; no fabricated budget, rating, dialogue, analysis or non-movie answer."
+    },
+    {
+      "case_id": "B05",
+      "accepted": true,
+      "decision": "reasonable_refusal",
+      "reason": "Read refusal: budget is outside governed evidence/capability; no fabricated budget, rating, dialogue, analysis or non-movie answer."
+    },
+    {
+      "case_id": "B06",
+      "accepted": true,
+      "decision": "reasonable_refusal",
+      "reason": "Read refusal: box_office is outside governed evidence/capability; no fabricated budget, rating, dialogue, analysis or non-movie answer."
+    },
+    {
+      "case_id": "B07",
+      "accepted": true,
+      "decision": "reasonable_refusal",
+      "reason": "Read refusal: rating is outside governed evidence/capability; no fabricated budget, rating, dialogue, analysis or non-movie answer."
+    },
+    {
+      "case_id": "B08",
+      "accepted": true,
+      "decision": "reasonable_refusal",
+      "reason": "Read refusal: dialogue is outside governed evidence/capability; no fabricated budget, rating, dialogue, analysis or non-movie answer."
+    },
+    {
+      "case_id": "B09",
+      "accepted": true,
+      "decision": "reasonable_refusal",
+      "reason": "Read refusal: scene_analysis is outside governed evidence/capability; no fabricated budget, rating, dialogue, analysis or non-movie answer."
+    },
+    {
+      "case_id": "B10",
+      "accepted": true,
+      "decision": "reasonable_refusal",
+      "reason": "Read refusal: character_analysis is outside governed evidence/capability; no fabricated budget, rating, dialogue, analysis or non-movie answer."
+    },
+    {
+      "case_id": "M01.1",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"cast\": \"成龍\", \"genre\": \"動作\", \"year_max\": 1989, \"year_min\": 1980}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "M01.2",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"cast\": \"成龍\", \"genre\": \"動作\", \"year_max\": 1999, \"year_min\": 1990}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "M02.1",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"director\": \"吳宇森\", \"genre\": \"動作\", \"year_max\": 1989, \"year_min\": 1980}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "M02.2",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"director\": \"吳宇森\", \"genre\": \"動作\", \"year_max\": 1999, \"year_min\": 1990}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "M03.1",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"genre\": \"犯罪\", \"year_max\": 1989, \"year_min\": 1980}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "M03.2",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"genre\": \"犯罪\", \"year_max\": 1999, \"year_min\": 1990}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "M04.1",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"director\": \"王家衞\"}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "M04.2",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"director\": \"杜琪峯\"}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "M05.1",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested director agrees with catalog 2002_WJD_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "M05.2",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested year agrees with catalog 2002_WJD_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "M06.1",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"cast\": \"成龍\"}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "M06.2",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested director agrees with catalog 1978_ZQ_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "M07.1",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"cast\": \"劉德華\"}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "M07.2",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"cast\": \"劉德華\"}; date, director/cast/genre and tier statements agree with catalog. Previously displayed IDs excluded."
+    },
+    {
+      "case_id": "M08.1",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"genre\": \"喜劇\", \"year_max\": 1989, \"year_min\": 1980}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "M08.2",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"genre\": \"動作\", \"year_max\": 1999, \"year_min\": 1990}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "M09.1",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested genre agrees with catalog 2001_SLZQ_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "M09.2",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read complete answer: requested cast agrees with catalog 2001_SLZQ_001; scoped metadata citation, no invented analysis."
+    },
+    {
+      "case_id": "M10.1",
+      "accepted": true,
+      "decision": "correct_answer",
+      "reason": "Read all recommendation lines: 3 unique catalog movies satisfy {\"director\": \"王家衞\"}; date, director/cast/genre and tier statements agree with catalog."
+    },
+    {
+      "case_id": "M10.2",
+      "accepted": true,
+      "decision": "reasonable_refusal",
+      "reason": "Read refusal: domain is outside governed evidence/capability; no fabricated budget, rating, dialogue, analysis or non-movie answer."
+    }
+  ],
+  "human_audits": "pending",
+  "submission_ready": false
+}

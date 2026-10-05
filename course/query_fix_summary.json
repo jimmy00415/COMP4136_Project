@@ -1,0 +1,118 @@
+{
+  "at": "2026-10-05T12:39:42.385074+00:00",
+  "attempts": 60,
+  "responses": 60,
+  "mechanical_passes": 60,
+  "config_stable": true,
+  "responses_sha256": "7fb4912cebfe21aa9fdf5c10dae8687e64200773a69a2cea7dfca47f3440f4f6",
+  "inputs_unchanged": true,
+  "runner_unchanged": true,
+  "human_audits": "pending",
+  "submission_ready": false,
+  "config_after": {
+    "access_mode": "public_tech_demo",
+    "rag_release_id": "v1.2-demo-r3",
+    "manifest_sha256": "97a8ca8f431f4904e967f0646fc6bb99387c4944dddea2570d816874a4f0478a",
+    "status": "active",
+    "embedding_model": "gemini-embedding-2",
+    "embedding_dimension": 768,
+    "generation_model": "gemini-3.5-flash-lite",
+    "relevance_policy_sha256": "d6db5e118aeea5dc0484f3c591baac666952f78f4d41bfdcdbbb58693f4f6bba",
+    "poster_authority_sha256": "c50ff06a88f91296b63bd74a1e4a6485785bdc4c07e73d09b407a126927c8137",
+    "serving_revision": "hk-movie-rag-demo-00001-qfix-0a81de7",
+    "image_digest": "sha256:6c031ad921888783e1167dca78e0138cf45ff4c34b0a17f58a1c9847ada92cbd",
+    "facets": {
+      "total": 4659,
+      "tier_s": 51,
+      "tier_a": 313,
+      "tier_b": 4295,
+      "pilot_movies": 24
+    },
+    "counts": {
+      "movies": 4659,
+      "media_assets": 4659,
+      "metadata_passages": 4659,
+      "movie_documents": 5,
+      "pdf_passages": 21,
+      "embeddings": 4680
+    }
+  },
+  "study": "Known-case system-only development regression after application repair",
+  "unseen_holdout": false,
+  "baseline_rerun": false,
+  "freeze": {
+    "at": "2026-10-05T12:38:26.951901+00:00",
+    "study": "known-case development regression; system only",
+    "unseen_holdout": false,
+    "baseline_rerun": false,
+    "catalog_sha256": "1dbea26150a816ae4fc4d189a2a08e39628cbee997f3966b0dd5cd16843e907b",
+    "cases_sha256": "2ab256dc99112b6864f9c41f51f77d216ebff8aeccfa6458c30107f54787e7f5",
+    "runner_sha256": "563d787d79a8a97a4aff68436478ef1d084f4be7888c341b720273d5b29b07e9",
+    "original_classifier_sha256": "9c41b7abeb9a945d339f362ec8296e8aa02d3219f3a3ab32b6fa311ef0473d34",
+    "config_before": {
+      "access_mode": "public_tech_demo",
+      "rag_release_id": "v1.2-demo-r3",
+      "manifest_sha256": "97a8ca8f431f4904e967f0646fc6bb99387c4944dddea2570d816874a4f0478a",
+      "status": "active",
+      "embedding_model": "gemini-embedding-2",
+      "embedding_dimension": 768,
+      "generation_model": "gemini-3.5-flash-lite",
+      "relevance_policy_sha256": "d6db5e118aeea5dc0484f3c591baac666952f78f4d41bfdcdbbb58693f4f6bba",
+      "poster_authority_sha256": "c50ff06a88f91296b63bd74a1e4a6485785bdc4c07e73d09b407a126927c8137",
+      "serving_revision": "hk-movie-rag-demo-00001-qfix-0a81de7",
+      "image_digest": "sha256:6c031ad921888783e1167dca78e0138cf45ff4c34b0a17f58a1c9847ada92cbd",
+      "facets": {
+        "total": 4659,
+        "tier_s": 51,
+        "tier_a": 313,
+        "tier_b": 4295,
+        "pilot_movies": 24
+      },
+      "counts": {
+        "movies": 4659,
+        "media_assets": 4659,
+        "metadata_passages": 4659,
+        "movie_documents": 5,
+        "pdf_passages": 21,
+        "embeddings": 4680
+      }
+    },
+    "planned_calls": 60,
+    "attempts_per_case": 1,
+    "human_audits": "pending",
+    "submission_ready": false
+  },
+  "application_source_commit": "0a81de7447b1ddbfaf7f7786bb97d52815469939",
+  "measured_runner": "course/query_fix_eval_run1.py",
+  "measured_runner_sha256": "563d787d79a8a97a4aff68436478ef1d084f4be7888c341b720273d5b29b07e9",
+  "root_ai_review_sha256": "703b279b09c37c44f862f05a4cefdd35217ef0c619e452494dff5a14c3fdbd21",
+  "build": {
+    "id": "b0120b3e-c465-4297-a307-6b2b7b6f87c4",
+    "status": "SUCCESS",
+    "image_digest": "sha256:6c031ad921888783e1167dca78e0138cf45ff4c34b0a17f58a1c9847ada92cbd",
+    "log_url": "https://console.cloud.google.com/cloud-build/builds/b0120b3e-c465-4297-a307-6b2b7b6f87c4?project=880586285913"
+  },
+  "promotion": {
+    "at": "2026-10-05T12:42:10.349925+00:00",
+    "revision": "hk-movie-rag-demo-00001-qfix-0a81de7",
+    "traffic": [
+      {
+        "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION",
+        "revision": "hk-movie-rag-demo-00001-qfix-0a81de7",
+        "percent": 100
+      }
+    ],
+    "runtime_data_secrets_unchanged": true,
+    "production_config_readback": true,
+    "production_health_and_id_smoke": true
+  },
+  "test_evidence": {
+    "affected_suite_passed": 1464,
+    "external_catalog_test_deselected": 1,
+    "course_suite_passed": 40,
+    "ui_node_suite_passed": 7,
+    "full_suite_claim": "not certified; external release inputs unavailable",
+    "initial_full_attempt": "Stopped before completion: run imported an earlier parser snapshot before later reviewed fixes. Partial log retained locally. Final affected/course/UI suites verified separately."
+  },
+  "historical_results_unchanged": true
+}

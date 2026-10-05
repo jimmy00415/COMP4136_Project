@@ -4,13 +4,14 @@ A Chinese-language Hong Kong cinema assistant for **evidence-grounded factual qu
 
 The project combines a governed film release, structured query handling, PostgreSQL/pgvector retrieval, Vertex AI generation and citation validation. Its course evaluation compares the deployed implementation with a simple **BM25 + LLM baseline** on the same questions.
 
-**Main finding:** the deployed system completed more of the selected dialogue turns, but did **not** outperform the baseline overall. Both gains and failures are preserved.
+**Current deployed version:** after targeted query fixes, a separate development regression completed **60/60** previously observed turns. The original paired study found 41/60 versus 44/60 and remains unchanged in the report. The new result is not an unseen holdout or a new baseline comparison.
 
 ## Read this first
 
 | Resource | Purpose |
 |---|---|
 | [Final report](report/COMP4136_HK_Movie_RAG_Report.pdf) | Methods, experiments, cases, limitations and references |
+| [Deployed repair results](course/QUERY_FIX_RESULTS.md) | Current revision, real 60/60 development result and evidence |
 | [Editable report](report/FINAL_REPORT.md) | Complete report text and figure captions |
 | [Challenge results](course/CHALLENGE_RESULTS.md) | Detailed Chinese analysis and exact run hashes |
 | [Actual answer records](course/challenge_answers.jsonl) | 120 safe projections of real outputs/errors |
@@ -61,19 +62,23 @@ cd COMP4136_Project
 uv sync --frozen --python 3.13
 
 # Course tests: no catalog, credentials or live model calls.
-uv run pytest -q course/test_simple_eval.py course/test_challenge_eval.py course/test_review_challenge.py
+uv run pytest -q course/test_simple_eval.py course/test_challenge_eval.py course/test_review_challenge.py course/test_query_fix_eval.py
+
+# Relevant application regressions; the excluded test needs an external CSV.
+uv run pytest -q tests/test_retrieval.py tests/test_rag_query.py -k "not every_bounded_release_credit"
+node --test tests/static_app_ui_contract.mjs
 
 # Broader source tests, excluding external-release integration tests.
 uv run pytest -q --ignore=tests/integration
 ```
 
-The focused course suite was verified at **33 passing tests**. Earlier publication verified 171 configuration/deployment-script tests. These are stated suite results, not a claim that all external-data integration tests passed. A full pytest run without external release inputs is not expected to pass.
+After the deployed repair, **40 course tests**, **1,464 relevant application tests** (one external-catalog test deselected) and **7 browser-script tests** passed. Earlier publication verified 171 configuration/deployment-script tests. A full pytest run without external release inputs is not expected to pass; even `--ignore=tests/integration` needs the external CSV for one release-credit test.
 
 The repository provides application code, controlled fixtures, policies, migrations, Dockerfile and dependency lock. A populated database, full catalog, raw PDFs/posters, credentials and complete operating receipts are external.
 
 ### Run the backend
 
-A real backend needs populated PostgreSQL/pgvector, the matching verified release, Google Cloud credentials and serving/policy identities. Copy `.env.example` only as a configuration-name template and supply environment variables securely. It contains historical release values; **it is not the evaluated R3 configuration**. Evaluated pins are in `course/run_simple_eval.py` and the report.
+A real backend needs populated PostgreSQL/pgvector, the matching verified release, Google Cloud credentials and serving/policy identities. Copy `.env.example` only as a configuration-name template and supply environment variables securely. It contains historical release values; **it is not the evaluated R3 configuration**. Historical study pins are in `course/run_simple_eval.py` and the report; current revision/image pins and actual cloud readbacks are in [query-fix summary](course/query_fix_summary.json).
 
 After supplying all matching data and environment variables:
 
@@ -83,7 +88,7 @@ uv run uvicorn hk_movie_rag.demo_api:app --host 127.0.0.1 --port 8080
 
 This command reads the process environment; it does not automatically load `.env`. Follow the engineering guide for ingestion/deployment. Installing source does not provision cloud resources.
 
-The evaluated [Cloud Run technical demo](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app) is externally operated, not a guaranteed permanent grading endpoint. Offline tests and published observations remain inspectable without it.
+The [Cloud Run technical demo](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app) now serves revision `hk-movie-rag-demo-00001-qfix-0a81de7`. It is externally operated, not a guaranteed permanent grading endpoint. Offline tests and published observations remain inspectable without it.
 
 ## API
 
@@ -113,6 +118,8 @@ Responses contain `answer_markdown`, `citations` and `movies`. History uses `que
 The unchanged 4 October study sent 30 sequential requests, all HTTP 200; the original mechanical proxy passed **28/30**. Two other responses clarified an ambiguous title but did not exercise their intended tasks. This selected, easier study has no baseline and does not establish overall accuracy.
 
 ### Paired 60-turn challenge
+
+This section and the PDF describe the original revision. For the subsequent source repair and separate 60/60 known-case regression, see [deployed repair results](course/QUERY_FIX_RESULTS.md). The following historical table and figures are unchanged.
 
 The 5 October study freezes 60 turns per arm: ambiguity/explicit IDs (10), five Traditional/Simplified pairs (10), compound recommendations (10), evidence/domain boundaries (10), and ten two-turn conversations (20).
 
@@ -148,12 +155,15 @@ Tracked cases: `course/challenge_cases.jsonl`, SHA-256 `2ab256dc99112b6864f9c41f
 External catalog: 4,659 records, SHA-256 `1dbea26150a816ae4fc4d189a2a08e39628cbee997f3966b0dd5cd16843e907b`.
 
 ```shell
+# HISTORICAL runner: intentionally rejects the current repaired revision as drift.
 # Default: configuration GETs only; no chat/generation.
 uv run python course/challenge_eval.py --catalog /path/to/catalog.jsonl --output /path/to/new-run
 
 # Explicitly authorized NEW study; output directory must not exist.
 uv run python course/challenge_eval.py --catalog /path/to/catalog.jsonl --output /path/to/new-run --execute
 ```
+
+To test the current deployed revision, use the separately pinned [query-fix runner and command](course/QUERY_FIX_RESULTS.md#inspect-and-reproduce). It keeps the original study and its input hashes intact.
 
 The frozen study is complete. New calls yield new observations, not reproductions of identical stochastic answers. The runner keeps access tokens private and suppresses credential-bearing errors. Do not commit authentication files.
 
