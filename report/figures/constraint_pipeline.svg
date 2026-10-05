@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="734.4pt" height="129.6pt" viewBox="0 0 734.4 129.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-05T21:21:40.097708</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 129.6 
+L 734.4 129.6 
+L 734.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 7.92549 89.144444 
+L 173.964706 89.144444 
+L 173.964706 32.108889 
+L 7.92549 32.108889 
+z
+" clip-path="url(#p3143b9e16c)" style="fill: #eff4f8; stroke: #205a83; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 175.962023 60.626667 
+Q 182.192684 60.626667 187.305311 60.626667 
+" clip-path="url(#p3143b9e16c)" style="fill: none; stroke: #687782; stroke-linecap: round"/>
+    <path d="M 182.505311 58.226667 
+L 187.305311 60.626667 
+L 182.505311 63.026667 
+z
+" clip-path="url(#p3143b9e16c)" style="fill: #687782; stroke: #687782; stroke-linecap: round"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 190.42549 89.144444 
+L 356.464706 89.144444 
+L 356.464706 32.108889 
+L 190.42549 32.108889 
+z
+" clip-path="url(#p3143b9e16c)" style="fill: #eff4f8; stroke: #205a83; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 358.462023 60.626667 
+Q 364.692684 60.626667 369.805311 60.626667 
+" clip-path="url(#p3143b9e16c)" style="fill: none; stroke: #687782; stroke-linecap: round"/>
+    <path d="M 365.005311 58.226667 
+L 369.805311 60.626667 
+L 365.005311 63.026667 
+z
+" clip-path="url(#p3143b9e16c)" style="fill: #687782; stroke: #687782; stroke-linecap: round"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 372.92549 89.144444 
+L 538.964706 89.144444 
+L 538.964706 32.108889 
+L 372.92549 32.108889 
+z
+" clip-path="url(#p3143b9e16c)" style="fill: #eff4f8; stroke: #205a83; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 540.962023 60.626667 
+Q 547.192684 60.626667 552.305311 60.626667 
+" clip-path="url(#p3143b9e16c)" style="fill: none; stroke: #687782; stroke-linecap: round"/>
+    <path d="M 547.505311 58.226667 
+L 552.305311 60.626667 
+L 547.505311 63.026667 
+z
+" clip-path="url(#p3143b9e16c)" style="fill: #687782; stroke: #687782; stroke-linecap: round"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 555.42549 89.144444 
+L 721.464706 89.144444 
+L 721.464706 32.108889 
+L 555.42549 32.108889 
+z
+" clip-path="url(#p3143b9e16c)" style="fill: #eff4f8; stroke: #205a83; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #243344" transform="translate(47.980254 57.223346)">Parse constraints</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #243344" transform="translate(50.984942 69.226081)">+ actual history</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #243344" transform="translate(232.049004 57.223346)">Filter candidates</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #243344" transform="translate(214.110723 69.226081)">ALL required predicates</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #243344" transform="translate(408.316192 57.223346)">Rank eligible items</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #243344" transform="translate(401.712286 69.226081)">Count + no repetition</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #243344" transform="translate(582.546661 57.223346)">Answer from evidence</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #243344" transform="translate(595.430254 69.226081)">Citations + cards</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p3143b9e16c">
+   <rect x="2.2" y="2.2" width="730" height="125.2"/>
+  </clipPath>
+ </defs>
+</svg>

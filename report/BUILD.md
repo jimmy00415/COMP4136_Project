@@ -1,24 +1,22 @@
-# Offline report build
+# Offline final-report build
 
-The report is separate from the frozen application runtime. Building it makes no network or model calls and does not change evaluation files. It verifies byte hashes of the published cases, answer projections, explicit AI audit and reviewed summary, then independently reproduces totals, family outcomes, paired counts and the descriptive cluster-bootstrap interval.
+The report describes the repaired deployment and a fresh paired comparison against BM25 + LLM: 60/60 versus 50/60 known development turns. It uses 120 retained responses from one run, without pooling historical scores. No population confidence interval or unseen-test claim is presented.
 
-Use a separate Python 3.11+ document environment with these already verified authoring versions:
+The builder runs offline. `paired_evidence.py` verifies exact hashes of cases, paired answers, Root AI review, reviewed summary, freeze and measured runner. It independently recounts paired outcomes, task families, decisions, cards, citations and timings. The 784 + 680 field agreement is a retained full-catalog audit result, not a fresh catalog audit inside the document builder. Both original mechanical judgments and seven reasoned corrections are available.
+
+Use a separate document environment, preserving the application dependency lock:
 
 ```shell
 python -m pip install reportlab==4.4.9 matplotlib==3.11.2 Pillow==12.3.0 pypdf==6.10.0
 python report/build_report.py --font-directory C:/Windows/Fonts
 ```
 
-The pypdf version above must match the authoring environment receipt; it is used for QA, not by the builder. Do not change the application's `uv.lock` for document-only dependencies. On this workstation the existing external document environment was used; no dependency was installed into the application.
+On this workstation the existing external document environment was used. No application dependency or cloud resource was changed. The pypdf package is for QA, not PDF generation. Fonts are local licensed Arial/Courier and Microsoft JhengHei: `arial.ttf`, `arialbd.ttf`, `ariali.ttf`, `cour.ttf`, `msjh.ttc`. They are not distributed. Changing fonts/runtime can change layout and hashes.
 
-The builder embeds locally installed Arial/Courier and Microsoft JhengHei (`arial.ttf`, `arialbd.ttf`, `ariali.ttf`, `cour.ttf`, `msjh.ttc`) for English, identifiers and actual Chinese case text. Fonts are not distributed in this repository. Supply a compatible licensed local font directory; a different font/runtime can change layout and output hashes, requiring fresh visual review.
-
-Outputs are one report PDF, four scientific PNG/SVG figures and a build manifest. The SVG/PNG figures are static export artifacts built with matplotlib from real reviewed evidence; they do not use an image-generation model or a dashboard runtime. The build manifest always records visual review pending at build time; the separate, hash-bound visual review records the later actual inspection.
-
-Render all pages with Poppler, for example:
+Outputs: one final PDF, three PNG/SVG figures, and an evidence-bound build manifest. Figures use matplotlib, including two architecture/process diagrams and one side-by-side paired chart derived from observed per-family counts. The old baseline equation and paired-difference figures are removed from the current report directory.
 
 ```shell
 pdftoppm -r 120 -png report/COMP4136_HK_Movie_RAG_Report.pdf /path/to/review/page
 ```
 
-Read `visual-review.json` for the recorded Root AI page/figure inspection and exact reviewed output hashes. That inspection is AI review, not human approval. Rebuilding the PDF invalidates its prior visual-review hash unless the output is byte-identical.
+The build manifest records visual review pending at build time. `visual-review.json` binds the subsequent Root AI inspection of every final page to exact PDF and image hashes. This is AI review, not human approval. A changed PDF invalidates an older visual-review receipt.

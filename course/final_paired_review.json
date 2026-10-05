@@ -1,0 +1,877 @@
+{
+  "reviewer": "Root AI",
+  "reviewer_type": "AI",
+  "status": "complete",
+  "responses_sha256": "6567f1d86c43f03c18234580c54df22917a283a8b362d782a16032ab4d17fedb",
+  "human_audits": "pending",
+  "submission_ready": false,
+  "entries": [
+    {
+      "case_id": "A1a",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Root AI read full actual answer: identifies real duplicate-title catalog IDs and requests selection without arbitrary attribution."
+    },
+    {
+      "case_id": "A1a",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Root AI read full actual answer: identifies real duplicate-title catalog IDs and requests selection without arbitrary attribution."
+    },
+    {
+      "case_id": "A1b",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "A1b",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "A2a",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Root AI read full actual answer: identifies real duplicate-title catalog IDs and requests selection without arbitrary attribution."
+    },
+    {
+      "case_id": "A2a",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Root AI read complete actual answer: Lists both catalog versions and asks for year/ID; clarification wording missed by mechanical phrases."
+    },
+    {
+      "case_id": "A2b",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "A2b",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "A3a",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Root AI read full actual answer: identifies real duplicate-title catalog IDs and requests selection without arbitrary attribution."
+    },
+    {
+      "case_id": "A3a",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Root AI read complete actual answer: Lists both catalog versions and asks for year/ID; clarification wording missed by mechanical phrases."
+    },
+    {
+      "case_id": "A3b",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "A3b",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "A4a",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Root AI read full actual answer: identifies real duplicate-title catalog IDs and requests selection without arbitrary attribution."
+    },
+    {
+      "case_id": "A4a",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Root AI read complete actual answer: Lists both catalog versions and asks which version; clarification wording missed by mechanical phrases."
+    },
+    {
+      "case_id": "A4b",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "A4b",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "A5a",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Root AI read full actual answer: identifies real duplicate-title catalog IDs and requests selection without arbitrary attribution."
+    },
+    {
+      "case_id": "A5a",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Root AI read complete actual answer: Lists both catalog versions and asks for year/ID; clarification wording missed by mechanical phrases."
+    },
+    {
+      "case_id": "A5b",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "A5b",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L1t",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested year agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L1t",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested year agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L1s",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested year agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L1s",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested year agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L2t",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested cast agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L2t",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested cast agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L2s",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested cast agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L2s",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested cast agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L3t",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested genre agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L3t",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested genre agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L3s",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested genre agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L3s",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested genre agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L4t",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L4t",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L4s",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L4s",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L5t",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested screenwriter agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L5t",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested screenwriter agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L5s",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested screenwriter agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "L5s",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested screenwriter agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "C01",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"吳宇森\", \"genre\": \"動作\", \"year_max\": 1999, \"year_min\": 1980}"
+    },
+    {
+      "case_id": "C01",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"吳宇森\", \"genre\": \"動作\", \"year_max\": 1999, \"year_min\": 1980} Minor prose count-word inconsistency (says two, supplies three eligible recommendations) retained; task completion accepted from actual three choices. Co-director statement agrees with catalog."
+    },
+    {
+      "case_id": "C02",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"cast\": \"成龍\", \"genre\": \"動作\", \"year_max\": 1999, \"year_min\": 1980}"
+    },
+    {
+      "case_id": "C02",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"cast\": \"成龍\", \"genre\": \"動作\", \"year_max\": 1999, \"year_min\": 1980}"
+    },
+    {
+      "case_id": "C03",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"genres_all\": [\"動作\", \"喜劇\"], \"year_max\": 1989, \"year_min\": 1980}"
+    },
+    {
+      "case_id": "C03",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Root AI read full actual answer: fewer than requested 3 eligible recommendations despite sufficient catalog-wide gold; conservative evidence limitation is not hallucination, but task is incomplete. Actual top-eight retrieval and history retained."
+    },
+    {
+      "case_id": "C04",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Root AI read full actual answer: fewer than requested 3 eligible recommendations despite sufficient catalog-wide gold; conservative evidence limitation is not hallucination, but task is incomplete. Actual top-eight retrieval and history retained."
+    },
+    {
+      "case_id": "C04",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"genre\": \"動作\", \"tier\": \"S\", \"year_max\": 1999, \"year_min\": 1980}"
+    },
+    {
+      "case_id": "C05",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"杜琪峯\", \"genre\": \"犯罪\", \"year_max\": 2009, \"year_min\": 1990}"
+    },
+    {
+      "case_id": "C05",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"杜琪峯\", \"genre\": \"犯罪\", \"year_max\": 2009, \"year_min\": 1990}"
+    },
+    {
+      "case_id": "C06",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Root AI read full actual answer: fewer than requested 3 eligible recommendations despite sufficient catalog-wide gold; conservative evidence limitation is not hallucination, but task is incomplete. Actual top-eight retrieval and history retained."
+    },
+    {
+      "case_id": "C06",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"cast\": \"劉德華\", \"genre\": \"犯罪\", \"year_max\": 2009, \"year_min\": 2000}"
+    },
+    {
+      "case_id": "C07",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"王家衞\", \"genre\": \"劇情\", \"year_max\": 2009, \"year_min\": 1990}"
+    },
+    {
+      "case_id": "C07",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"王家衞\", \"genre\": \"劇情\", \"year_max\": 2009, \"year_min\": 1990}"
+    },
+    {
+      "case_id": "C08",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"周星馳\", \"genre\": \"喜劇\", \"year_max\": 2010, \"year_min\": 1990}"
+    },
+    {
+      "case_id": "C08",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"周星馳\", \"genre\": \"喜劇\", \"year_max\": 2010, \"year_min\": 1990}"
+    },
+    {
+      "case_id": "C09",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"cast\": \"張曼玉\", \"genre\": \"愛情\", \"year_max\": 1999, \"year_min\": 1990}"
+    },
+    {
+      "case_id": "C09",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"cast\": \"張曼玉\", \"genre\": \"愛情\", \"year_max\": 1999, \"year_min\": 1990}"
+    },
+    {
+      "case_id": "C10",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"劉偉強\", \"genre\": \"犯罪\", \"year_max\": 2009, \"year_min\": 2000}"
+    },
+    {
+      "case_id": "C10",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"劉偉強\", \"genre\": \"犯罪\", \"year_max\": 2009, \"year_min\": 2000}"
+    },
+    {
+      "case_id": "B01",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B01",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B02",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B02",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B03",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B03",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B04",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B04",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B05",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B05",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read complete actual answer: Explicitly says budget is not recorded; no invented monetary value; mechanical refusal phrase missed."
+    },
+    {
+      "case_id": "B06",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read complete actual answer: Explicitly says box-office data is not recorded; no invented revenue; mechanical refusal phrase missed."
+    },
+    {
+      "case_id": "B06",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B07",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B07",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read complete actual answer: Explicitly says IMDb rating is not recorded; no invented numeric rating; mechanical refusal phrase missed."
+    },
+    {
+      "case_id": "B08",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B08",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B09",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B09",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B10",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "B10",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "M01.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"cast\": \"成龍\", \"genre\": \"動作\", \"year_max\": 1989, \"year_min\": 1980}"
+    },
+    {
+      "case_id": "M01.1",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"cast\": \"成龍\", \"genre\": \"動作\", \"year_max\": 1989, \"year_min\": 1980}"
+    },
+    {
+      "case_id": "M01.2",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Root AI read full actual answer: fewer than requested 3 eligible recommendations despite sufficient catalog-wide gold; conservative evidence limitation is not hallucination, but task is incomplete. Actual top-eight retrieval and history retained."
+    },
+    {
+      "case_id": "M01.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"cast\": \"成龍\", \"genre\": \"動作\", \"year_max\": 1999, \"year_min\": 1990}"
+    },
+    {
+      "case_id": "M02.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"吳宇森\", \"genre\": \"動作\", \"year_max\": 1989, \"year_min\": 1980}"
+    },
+    {
+      "case_id": "M02.1",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"吳宇森\", \"genre\": \"動作\", \"year_max\": 1989, \"year_min\": 1980} Minor prose count-word inconsistency (says two, supplies three eligible recommendations) retained; task completion accepted from actual three choices. Co-director statement agrees with catalog."
+    },
+    {
+      "case_id": "M02.2",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Root AI read full actual answer: fewer than requested 3 eligible recommendations despite sufficient catalog-wide gold; conservative evidence limitation is not hallucination, but task is incomplete. Actual top-eight retrieval and history retained."
+    },
+    {
+      "case_id": "M02.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"吳宇森\", \"genre\": \"動作\", \"year_max\": 1999, \"year_min\": 1990}"
+    },
+    {
+      "case_id": "M03.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"genre\": \"犯罪\", \"year_max\": 1989, \"year_min\": 1980}"
+    },
+    {
+      "case_id": "M03.1",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Root AI read full actual answer: fewer than requested 3 eligible recommendations despite sufficient catalog-wide gold; conservative evidence limitation is not hallucination, but task is incomplete. Actual top-eight retrieval and history retained."
+    },
+    {
+      "case_id": "M03.2",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Root AI read full actual answer: fewer than requested 3 eligible recommendations despite sufficient catalog-wide gold; conservative evidence limitation is not hallucination, but task is incomplete. Actual top-eight retrieval and history retained."
+    },
+    {
+      "case_id": "M03.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"genre\": \"犯罪\", \"year_max\": 1999, \"year_min\": 1990}"
+    },
+    {
+      "case_id": "M04.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"王家衞\"}"
+    },
+    {
+      "case_id": "M04.1",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"王家衞\"}"
+    },
+    {
+      "case_id": "M04.2",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"杜琪峯\"}"
+    },
+    {
+      "case_id": "M04.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"杜琪峯\"}"
+    },
+    {
+      "case_id": "M05.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "M05.1",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "M05.2",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested year agrees with intended movie/actual-history referent and citation; no unsupported requested fact. Correct target year is present; redundant clarification/sequel alternatives noted, not penalized as missing answer."
+    },
+    {
+      "case_id": "M05.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested year agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "M06.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"cast\": \"成龍\"}"
+    },
+    {
+      "case_id": "M06.1",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"cast\": \"成龍\"}"
+    },
+    {
+      "case_id": "M06.2",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "M06.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested director agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "M07.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"cast\": \"劉德華\"}"
+    },
+    {
+      "case_id": "M07.1",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"cast\": \"劉德華\"}"
+    },
+    {
+      "case_id": "M07.2",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Root AI read full actual answer: fewer than requested 3 eligible recommendations despite sufficient catalog-wide gold; conservative evidence limitation is not hallucination, but task is incomplete. Actual top-eight retrieval and history retained."
+    },
+    {
+      "case_id": "M07.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"cast\": \"劉德華\"}"
+    },
+    {
+      "case_id": "M08.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"genre\": \"喜劇\", \"year_max\": 1989, \"year_min\": 1980}"
+    },
+    {
+      "case_id": "M08.1",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Root AI read full actual answer: fewer than requested 3 eligible recommendations despite sufficient catalog-wide gold; conservative evidence limitation is not hallucination, but task is incomplete. Actual top-eight retrieval and history retained."
+    },
+    {
+      "case_id": "M08.2",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Root AI read full actual answer: fewer than requested 3 eligible recommendations despite sufficient catalog-wide gold; conservative evidence limitation is not hallucination, but task is incomplete. Actual top-eight retrieval and history retained."
+    },
+    {
+      "case_id": "M08.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"genre\": \"動作\", \"year_max\": 1999, \"year_min\": 1990}"
+    },
+    {
+      "case_id": "M09.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested genre agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "M09.1",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested genre agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "M09.2",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested cast agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "M09.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested cast agrees with intended movie/actual-history referent and citation; no unsupported requested fact."
+    },
+    {
+      "case_id": "M10.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"王家衞\"}"
+    },
+    {
+      "case_id": "M10.1",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Root AI read full actual answer: requested number of unique returned movies satisfies every catalog predicate and actual-history exclusion; cited narrative facts agree with catalog. {\"director\": \"王家衞\"}"
+    },
+    {
+      "case_id": "M10.2",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    },
+    {
+      "case_id": "M10.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Root AI read full actual answer: unsupported domain or field is explicitly withheld; no fabricated budget/rating/dialogue/analysis."
+    }
+  ],
+  "reviewed_at": "2026-10-05T13:14:04.558586+00:00",
+  "method": "Root AI opened and read all120 complete answer texts after run completion; card fields and eligibility checked against external frozen catalog; independent AI source/output review supports verdicts.",
+  "card_field_audit": {
+    "system": {
+      "checked": 784,
+      "mismatches": 0
+    },
+    "baseline": {
+      "checked": 680,
+      "mismatches": 0
+    },
+    "fields": [
+      "movie_id",
+      "chinese_title",
+      "english_title",
+      "release_date",
+      "director",
+      "cast",
+      "genre",
+      "tier"
+    ],
+    "outside_scope": [
+      "pilot_movie",
+      "poster_url",
+      "independent real-world truth"
+    ]
+  }
+}

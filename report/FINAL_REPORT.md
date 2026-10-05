@@ -1,328 +1,372 @@
 # Hong Kong Movie RAG
-## Evidence-Grounded Question Answering and a Paired Diagnostic Evaluation
 
-**COMP4136 Mini-Project | Technical report | 5 October 2026**
+## Evidence-Grounded Chinese Question Answering and Conversational Recommendations
 
-Author: ____________________  Student ID: ____________________  Group: __________
+**COMP4136 Mini-Project | Final Report | 5 October 2026**
 
-## Abstract
-
-This project implements and evaluates a Chinese-language assistant for Hong Kong cinema. A release of 4,659 films supports factual question answering, constrained recommendations, clarification and conversational follow-ups. The deployed system combines domain and entity handling, structured/database retrieval, evidence-restricted generation and validated citations. An initial 30-question diagnostic obtained 28 mechanical passes, but did not test comparative effectiveness. We therefore conducted a harder paired study of 60 selected turns per implementation, comparing the unchanged service with a local BM25 retriever and the same configured Vertex generator. Each arm used its own actual history. Explicit AI review of all 120 outputs/errors found 41/60 completed tasks for the service and 44/60 for the baseline. Dialogue completion favored the service, 18/20 versus 8/20; explicit-ID and compound-constraint tasks exposed weaknesses. Both request failures remain counted. We disclose a citation-adapter defect in an earlier run and the separately frozen correction; the reused questions are not an unseen holdout. The results support a limited conversational benefit, not overall superiority or a causal retriever claim. The contribution is a working, inspectable domain system and an outcome-aware evaluation that explains its successes and failures.
-
-## 1. Introduction and research questions
-
-Film assistants need more than plausible prose. An unqualified title can identify two releases, a recommendation can contain correctly cited films that violate a genre intersection, and a follow-up can replace only one of several constraints. These cases make evidence identity and task completion separate requirements.
-
-The project owner developed the system and engineering for this course. Its practical aim is to help users explore a structured Hong Kong film collection while making factual provenance visible. It does not train a new foundation model or claim a new retrieval algorithm. Its research question is whether the implemented routing and context controls provide observable value relative to a simple retrieval-generation implementation.
-
-- **RQ1:** Which selected factual, ambiguity, boundary and recommendation tasks can each implementation complete?
-- **RQ2:** Does the implemented system handle two-turn condition changes and references better than the simple baseline?
-- **RQ3:** What do actual answers and retrieved evidence reveal about failure mechanisms?
-
-The study is diagnostic. A truthful result need not favor the proposed system. Subsequent sections describe the literature, native implementation, data, fixed protocol, real observations and limits. Names and identifiers remain blank at the owner's request; this is not a claim of completed course submission.
-
-<!-- pagebreak -->
-
-## 2. Background survey and project positioning
-
-### 2.1 Sparse relevance ranking
-
-BM25 ranks lexical matches using term-frequency saturation and document-length normalization [1]. It is an interpretable reference for a film collection with explicit titles, people and dates. Lexical overlap does not execute a conjunction, identify the latest conversational condition, or ensure that three eligible records reach the reader. To accommodate Chinese segmentation and script variation, the baseline uses generic normalization and character tokens rather than whitespace tokenization.
-
-### 2.2 Dense retrieval and retrieval-augmented generation
-
-Dense Passage Retrieval learns question and passage encoders to select evidence by representation similarity [2]. Relevance selection differs from satisfying precise year/person/genre conditions. This project uses an embedding service and pgvector rather than retraining DPR, and does not claim that DPR's benchmark gains transfer to this catalog.
-
-Lewis et al. combine generation with retrieved non-parametric evidence in fine-tuned RAG models [3], motivating external knowledge and provenance. Here, RAG denotes a deployed pipeline with deterministic paths and a hosted generator, not a reproduction of their trained architecture. A cited metadata record supports its stored fields; it does not by itself justify a plot interpretation or filtering decision.
-
-### 2.3 Evaluation beyond a favorable example
-
-BEIR evaluates retrieval across heterogeneous tasks and reports that BM25 remains a robust baseline [4]. Its broader lesson for this project is that a more elaborate retrieval system needs comparison and task-specific evidence; complexity is not a performance guarantee. This study is much smaller than BEIR and does not use its datasets, ranking metrics or generalization setting. It evaluates completed film-assistant tasks, including clarification and refusal, rather than ranking relevance alone.
-
-### 2.4 Recent research directions
-
-Self-RAG (ICLR 2024) trains adaptive retrieval and critique through reflection tokens rather than always trusting a fixed set of passages [5]. A survey revised in April 2026 organizes agentic RAG around reflection, planning, tool use and different control structures, while identifying evaluation, coordination, memory, efficiency and governance challenges [6]. These are current research directions, not a universal best-system ranking. Our deterministic routing is neither trained Self-RAG nor an autonomous agentic planner, and this metadata study does not benchmark those methods. Their relevance is to motivate future retrieval/reader verification; adding agentic complexity without new evidence would not explain or repair the measured parser failures.
-
-### 2.5 Justified engineering contribution
-
-The implementation supplies release-bound evidence, duplicate-title resolution, person-role and recommendation parsing, bounded conversational anchors, and agreement between citations and movie cards. The baseline retains generic normalization and an evidence-only prompt while omitting specialized routing and structured filtering.
-
-The evaluation examines outcomes and intermediate evidence because gates can over-refuse valid questions and parsers can mishandle natural ranges. It does not assume superiority or isolate one component's causal effect.
-
-<!-- pagebreak -->
-
-## 3. Native system and implementation
-
-### 3.1 Data and serving architecture
-
-The native application source is preserved from the owner's source repository at commit `7b1b87002a0b0bc3548fc365a46095c00ea683da` [7]. A FastAPI service serves the browser UI and a JSON chat endpoint. PostgreSQL/pgvector holds the release-bound metadata, passages and embeddings; Vertex clients provide embedding and generation. Policies and manifests bind the release, model/dimension, relevance settings and serving identity.
-
-![Figure 1. Implementation and evaluation boundary.](figures/architecture.png)
-
-*Figure 1.* The two implementations share the frozen metadata universe and selected questions. Each keeps its own actual history. The production release also contains PDF passages, shown separately because they are available but not evaluated here. Gold labels are consumed only by evaluation, never by retrieval or generation.
-
-### 3.2 Query processing and output guarantees
-
-The orchestration validates the question/history, resolves explicit film context and handles unresolved title ambiguity. Domain handling can reject non-film requests before model generation. Recommendation/history planning interprets person roles, year/genre conditions, transitions and exclusions. The repository supplies structured recommendation or vector evidence; canonical metadata facts may be rendered directly, while other supported paths invoke restricted generation.
-
-The service retrieves at most eight unique passages in its general answer path. It validates evidence/citation identities, restricts exact targets and derives movie cards from selected evidence rather than unrelated neighbors. These checks improve traceability; they do not prove that a parsed condition matches the user's intention.
-
-| Native module | Responsibility |
+| Submission information | Details |
 |---|---|
-| `demo_api.py` | Request validation, UI/API and nonsecret configuration |
-| `rag_query.py` | Answer orchestration, canonical facts and grounding |
-| `retrieval.py` | Recommendation, entity/person and context constraints |
-| `rag_db.py` | Release-scoped PostgreSQL/pgvector access |
-| `vertex_clients.py` | Hosted embedding/generation clients |
+| Author name | ______________________________ |
+| Student ID | ______________________________ |
+| Group number | ______________________________ |
+| Topic | Question answering / vertical-domain LLM application |
 
-History stores actual questions, answers and returned IDs, bounded to four exchanges and 12,000 characters. Failed requests supply no fabricated answer. The harness checkpoint is `6365c9f`; evaluation/report preparation left native code, deployment and resources unchanged.
+**GitHub repository:** [https://github.com/jimmy00415/COMP4136_Project](https://github.com/jimmy00415/COMP4136_Project)
 
-<!-- pagebreak -->
+**Live chatbot:** [https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app)
 
-## 4. Data and baseline methodology
+### Abstract
 
-### 4.1 Fixed film release
+Answering questions about Hong Kong cinema requires more than plausible language generation. Titles can refer to multiple films, users mix Traditional and Simplified Chinese, recommendations combine several conditions, and follow-up requests depend on earlier selections. A useful assistant must also recognize when its evidence cannot support an answer. This project implements a deployed retrieval-augmented generation (RAG) system that combines a versioned catalog, structured constraint handling, PostgreSQL/pgvector retrieval, Vertex AI generation, and citation validation. Canonical metadata questions use direct evidence rendering; supported descriptive requests use selected evidence and a generator. Unsupported questions receive clarification or refusal.
 
-The evaluation catalog contains 4,659 movie metadata records. Release configuration reports 51 S-tier, 313 A-tier and 4,295 B-tier films. Structured fields include unique movie ID, Chinese/English title, release date, director, cast, genre and production information. The catalog preserves source-description strings referring to Hong Kong Film Archive and IMDb, but this study does not independently verify their collection provenance or every film fact. The reference is agreement with the frozen release fields, not absolute real-world correctness.
+The evaluated release contains 4,659 film records. A fresh paired study applies the same 60 known development turns to the deployed system and a BM25 + LLM baseline using the same catalog and configured generation model. All 120 responses are retained. Complete AI-assisted review accepted 60/60 system turns and 50/60 baseline turns, a descriptive difference of 16.7 percentage points. Both methods completed ambiguity, script-variant, and boundary tasks. The system completed more compound recommendations and dialogue turns. All 784 system and 680 baseline audited movie-card fields agreed with the catalog.
 
-There is one deterministic metadata passage per film. The live release additionally exposes five documents with 21 PDF passages and 4,680 embeddings in total. Boundary questions concern films without those five deep documents. All returned citations in both course studies were metadata. Original PDFs, vector exports and posters were unnecessary evaluation inputs; the service was not changed to remove them.
-
-Preprocessing for evaluation builds gold facts and feasible recommendation sets from metadata. A valid recommendation may return any three distinct films satisfying all conditions; matching a particular ranking is unnecessary. Person/director eligibility permits explicit co-credit and aliases stored in the fields. The dataset builder checks full-catalog feasibility before inference. Gold fields and eligible-ID lists are not sent to either arm.
-
-### 4.2 Simple BM25 implementation
-
-The baseline serializes each metadata record as one uniformly weighted JSON document. NFKC and OpenCC `s2hk` normalization handle generic script differences. Chinese runs yield character unigrams and adjacent bigrams; Latin/digit runs yield tokens. It uses unique query terms, `k1 = 1.5`, `b = 0.75`, and the highest eight positive-scoring records, breaking ties by movie ID.
-
-![Figure 2. The implemented BM25 score.](figures/bm25_equation.png)
-
-*Figure 2.* Here `f(t,d)` is document term frequency, `df(t)` document frequency, `N` record count and `Lavg` mean token length. The non-negative IDF variant and unique query-term convention are implemented explicitly; this is not a claim of identical behavior to a standard search engine.
-
-### 4.3 Reader and conversation input
-
-Retrieval uses the current question plus that arm's recent question strings and actual movie IDs. The generator additionally receives the arm's bounded history and only the retrieved records as factual evidence. A competent evidence-only prompt asks for identity clarification, latest-condition handling, grounded citations, non-repetition and honest refusal when evidence is insufficient. It requests JSON answer, citation IDs and ordered movie IDs.
-
-The reader uses Vertex/global, configured `gemini-3.5-flash-lite`, 1,024 output tokens, default temperature and one SDK attempt. Output validation rejects unknown/unretrieved IDs, duplicate identities and unmarked citations. The main comparison is between complete implementations: prompts, deterministic paths, internal retries and available PDF evidence differ. It is not a controlled BM25-versus-vector ablation.
+The result supports more complete constraint-aware task delivery on this selected set, rather than proving universal superiority or unseen-test accuracy. Both methods can clarify and refuse responsibly. System median latency was lower (0.763 vs. 1.349 seconds), but its observed maximum was higher (51.523 vs. 14.430 seconds). The study compares complete applications with different internal retry and fallback policies, not equal-compute retrieval alone. The contribution is a deployed, inspectable cinema assistant with reproducible comparative evidence; no model-weight fine-tuning is claimed.
 
 <!-- pagebreak -->
 
-## 5. Experimental protocol and integrity
+## 1. Motivation and Background Survey
 
-### 5.1 Studies and task set
+### 1.1 Problem and objectives
 
-The original 4 October diagnostic used 30 selected single-turn questions: ten facts, ten recommendations and ten domain/evidence boundaries. All 30 requests returned HTTP 200; 28 passed the original automatic proxy. Two title clarifications did not exercise their intended tasks. Its questions, raw scores and responses remain unchanged; it has no baseline and is not pooled with the challenge.
+Hong Kong film catalogs are well suited to a domain-specific language interface: users naturally describe actors, directors, periods, and genres rather than database fields. However, a request such as "three action films directed by John Woo between 1980 and 1999" is a conjunction of predicates, not merely a semantic-similarity query. A fluent answer can still be wrong if one film violates the year range or refers to a different title identity.
 
-The harder challenge contains 60 author-selected turns per implementation:
+The project targets four objectives: identify catalog entities precisely; satisfy explicit recommendation constraints; preserve or replace conversational context appropriately; and expose supporting evidence while withholding unsupported claims. The application is factual lookup and catalog discovery, rather than unrestricted film criticism or a personalized preference model.
 
-| Family | Turns | Intended behavior |
-|---|---:|---|
-| Ambiguity / explicit ID | 10 | Clarify five duplicate titles; answer five specified versions |
-| Script variants | 10 | Five distinct Traditional/Simplified question pairs |
-| Compound recommendations | 10 | Three distinct films satisfying every condition |
-| Evidence/domain boundaries | 10 | Appropriate refusal without unsupported facts |
-| Dialogue | 20 | Ten two-turn sessions: updates, references, exclusions and domain switch |
+### 1.2 Development of retrieval-augmented question answering
 
-Both turns of a conversation count. Some first questions overlap across sessions or resemble the original diagnostic. Forty declared clusters group dialogue pairs, script pairs and paired ambiguity tasks; remaining questions are separate clusters. This does not eliminate all repeated-question dependence.
+Dense Passage Retrieval uses a dual-encoder approach to retrieve passages for open-domain question answering [1]. Its central advantage is semantic matching beyond literal word overlap. Nevertheless, similarity alone does not encode an inclusive year interval, a required cast member, or whether two films share a title. This motivates combining dense search with structured predicates in the present application.
 
-### 5.2 Dispatch and scoring
+Lewis et al. combine retrieval with generation for knowledge-intensive NLP tasks [2]. External evidence provides a way to update and inspect knowledge without placing every fact in model parameters. Their learned RAG formulation is background for this project; this implementation uses managed models and application-level orchestration rather than reproducing their training procedure.
 
-Cases, catalog, source bytes, prompt, model and release/policy identities were frozen before each run. Arm order alternates by turn. Each arm uses its own real history, without cross-arm answer copying. There are no manual per-case retries; three consecutive call failures would stop an arm. That guard was not triggered. End-of-run checks found the release configuration and frozen inputs unchanged.
+BEIR evaluates retrieval across diverse tasks and domains [3]. Its relevance here is methodological: performance on one selected collection should not be assumed to transfer to other query distributions. The project reports a bounded development evaluation instead of equating a perfect local score with universal reliability.
 
-Mechanical scoring checks fact/target/citation identity, recommendation count and conjunctions, exclusions, and intended clarification/refusal. A disclaimer followed by unsupported content fails; so does a correct citation attached to an ineligible recommendation. Root AI read every output/error and recorded an explicit verdict. Original automatic scores are preserved alongside all seven overrides. The judgments are AI review, not human annotation.
+Self-RAG integrates retrieval, generation, and critique using learned reflection signals [4]. The present system does not train reflection tokens, but adopts the practical principle that retrieving context is insufficient without checking whether the answer is supported. An agentic RAG survey further identifies planning, memory, evaluation, and governance as important design concerns [5]. For bounded catalog tasks, explicit routing and deterministic evidence checks offer an inspectable alternative to unrestricted agent autonomy.
 
-### 5.3 Preserved protocol failures
+### 1.3 Position of this project
 
-An initial package-name lookup failed before freeze/benchmark dispatch; it made zero formal calls. The first completed run then exposed a baseline adapter defect: bare film IDs in `citation_ids` were rejected despite valid marked answers and retrieved identities. This also erased useful first-turn history. Its 120 records and mechanical totals, 43/60 versus 29/60, are preserved but cannot support method superiority.
-
-The correction only adds the canonical prefix to an ID already supplied as evidence. Answer text, questions, gold, BM25 parameters, prompt, model and scoring did not change. The separately frozen run2 retains parent hashes. Because the same questions were seen during diagnosis, the corrected comparison is explicitly not an unseen holdout. No runs are pooled or unfavorable cases removed.
+The contribution is an implemented domain application with generic query and evidence controls, not a new foundation model or a state-of-the-art retrieval claim. Direct metadata rendering reduces unnecessary generation; structured filtering separates relevance from eligibility; history handling supports follow-ups; and an evidence-bound audit makes the behavior reviewable.
 
 <!-- pagebreak -->
 
-## 6. Quantitative results
+## 2. Data and System Architecture
 
-The corrected study ran on **5 October 2026, 18:40:00–18:43:23 HKT**. Both arms attempted 60 requests and returned 59 complete answer payloads. The service's B08 `RemoteDisconnected` and the baseline's M09.1 `ClientError` are retained. The saved exception class does not establish the latter's cause.
+### 2.1 Versioned evidence collection
 
-![Figure 3. AI-reviewed task completion by challenge family.](figures/family_results.png)
-
-*Figure 3.* Bars start at zero; labels give completed/attempted turns. The dialogue denominator is 20, other family denominators are 10. Results describe these selected tasks and include failures. No subgroup intervals were estimated.
-
-| Reviewed outcome | Deployed system | BM25 + LLM |
-|---|---:|---:|
-| Correct fact/recommendation completion | 27 | 28 |
-| Reasonable clarification | 5 | 5 |
-| Reasonable refusal | 9 | 11 |
-| Task/semantic/filter error | 18 | 15 |
-| Request failure | 1 | 1 |
-| **Successful task outcome** | **41/60 (68.3%)** | **44/60 (73.3%)** |
-
-Mechanical totals were 42/60 and 38/60. AI review corrected four baseline ambiguity clarifications missed by phrase matching (A1a/A2a/A3a/A5a), two legitimate no-data refusals (B06/B07), and one service refusal with an incorrect explanation (B09). The net change is −1 for the service and +6 for the baseline, yielding the reviewed totals above.
-
-The paired outcomes are 30 both-pass, 11 service-only, 14 baseline-only and five both-fail. Thus the service-minus-baseline difference is **−5.0 percentage points**. Dialogue favors the service, 18/20 versus 8/20; other groups do not justify an overall advantage. A safe partial recommendation remains a failed task when three eligible films exist in the full catalog but fewer are returned.
-
-<!-- pagebreak -->
-
-## 7. Application case study: context and evidence
-
-### 7.1 A successful constraint update
-
-In session M02, the user first requests three 1980s John Woo action films, then asks **“改成1990年代，其他條件不變，推薦3部。”**: change to the 1990s, keep other conditions, and recommend three. The deployed system retains the director/action constraints and returns `1990_DXJT_001`, `1992_LSST_001` and `1991_ZHSH_001` for **《喋血街頭》《辣手神探》《縱橫四海》**. Their release metadata satisfy the updated decade and director conditions.
-
-The baseline's top eight contain only one eligible film for this follow-up, so it returns one. This is a coverage failure rather than invented film facts. The case shows an observable conversational benefit of the complete deployed implementation. It does not prove whether the benefit comes from structured selection, routing, prompt differences or their interaction.
-
-### 7.2 An ordinal reference must use actual output order
-
-M06.2 asks for the director of the second film just recommended. The two implementations returned different first-turn orders: the service's second film is **《醉拳》**, whereas the baseline's is **《警察故事續集》**. Their respective director answers, Yuen Woo-ping and Jackie Chan, both match metadata. Evaluation resolves the reference separately for each arm; copying the service's target into the baseline gold would unfairly mark a correct response wrong.
-
-### 7.3 Clarification and refusal are task outcomes
-
-An unqualified **《英雄本色》** corresponds to 1973 and 1986 records. Asking for year or ID is reasonable, while arbitrarily choosing one version is not. However, once A1b explicitly specifies the 1986 ID, refusing for insufficient fields is a failure: the director field is present. Likewise, lack of box-office/rating fields justifies refusal, but the explanation should match the request rather than misclassify it as a person-list query.
-
-### 7.4 A failure can propagate without a memory mistake
-
-The baseline M09.1 request failed with `ClientError`; M09.2 therefore has no actual previous answer or movie anchor. Asking for clarification on that missing context is safe, but the session task is still incomplete. This dependent failure remains in the overall denominator. It is not evidence of an additional, independent memory-reasoning failure, nor proof that the exception was an authentication problem.
-
-Together these cases show why counting plausible answers alone is inadequate. Outcome-aware evaluation must inspect the requested action, evidence eligibility, actual history and failure dependencies. Exact returned wording and identities remain inspectable in the public 120-record projection [7].
-
-<!-- pagebreak -->
-
-## 8. Failure analysis and intermediate diagnostics
-
-### 8.1 Native gates over-refuse valid facts
-
-All five explicit-ID director questions fail in the deployed arm despite the relevant field existing. The two Police Story language variants also fail with a natural “please query” lead-in. Offline calls to the unchanged `_canonical_metadata_intents` reproduce the distinction: a simple title/director request resolves to `director`, while adding “電影 ID …” yields no canonical intent; “請查詢 … 上映年份” similarly yields none. This is consistent with residual-expression handling in the authority gate. It is a source-level reproduction, not a production request trace, and should not be presented as direct proof of every runtime step.
-
-### 8.2 Ranges and intersections need semantic correctness
-
-C01 requests John Woo action films from **1980–1999**; the full catalog has 11 eligible films. The service explicitly renders **1980–1980** and says there are fewer than three. The unchanged `_year_constraints` reproduces this first-year collapse for the Chinese range expression. Similar behavior appears in other director/year tasks. The data are not missing; the supported range is parsed too narrowly.
-
-C03 asks for action **and** comedy. The service includes **《武館》**, whose catalog genre is action/drama, without comedy. The title, citation and card fields remain correct, yet the selection violates the conjunction. The baseline honestly returns only two eligible retrieved films; it also fails the three-film task, for a different reason.
-
-### 8.3 Baseline reader and context failures
-
-C08 retrieves six eligible Stephen Chow director/co-director comedy films in its top eight, but returns only two and claims only two are available. This underuses already retrieved co-credit/alias evidence; it is not solely a recall problem. M02.1 similarly retrieves four eligible records and uses only two.
-
-In M05, the baseline treats **《無間道II》《無間道III終極無間》** as same-title versions of **《無間道》**, although their full titles differ. The false ambiguity propagates into the follow-up. The native service also retains gaps: M04.2 cannot resolve a director switch to Johnnie To, and M07.2 misinterprets a no-repeat continuation.
-
-| Observed issue | Evidence-based next step, not performed here |
+| Data component | Evaluated release |
 |---|---|
-| ID/natural-expression over-refusal | Test residual parsing without weakening exact identity gates |
-| Chinese range collapse | Add boundary/range parsing regressions |
-| Genre AND mismatch | Validate selected records against the complete conjunction |
-| Too few eligible BM25 records | Study condition-aware candidate coverage separately |
-| Ignored co-credit/alias evidence | Check reader use of already supplied fields |
+| Film records / metadata passages | 4,659 / 4,659 |
+| Film tiers | S: 51; A: 313; B: 4,295 |
+| Stored document material | Five PDFs containing 21 passages |
+| Stored embeddings | 4,680 vectors; 768 dimensions |
+| Release identity | `v1.2-demo-r3` |
+| Evaluation reference | Versioned 4,659-record catalog snapshot |
 
-These are repair hypotheses grounded in outputs and offline diagnostics. Production code and the frozen results were not changed to improve the reported scores.
+Metadata includes movie ID, Chinese and English titles, release date, director, cast, genre, production information, and tier. Returned source labels include the Hong Kong Film Archive, IMDb, Wikidata, and operator-approved corrections. These are provenance labels in the release, not a claim that this study independently re-verified each original website. Tier is a catalog field, not an independently measured quality score.
 
-<!-- pagebreak -->
+Film identity is represented by a stable movie ID. Chinese script normalization and bounded title/person handling support matching while keeping canonical returned fields intact. Metadata is represented as citable passages, preserving source kind and movie identity. Stored-vector compatibility is checked against the release's embedding model and dimension. The experiment uses the existing release; it does not rebuild data, re-embed records, or change model weights.
 
-## 9. Interpretation, uncertainty and limitations
+### 2.2 Application architecture
 
-![Figure 4. Paired aggregate difference and descriptive uncertainty.](figures/paired_difference.png)
+![System architecture](figures/architecture.png)
 
-*Figure 4.* Service-minus-baseline completion difference: −5.0 percentage points. The displayed bounds, −24.6 to +15.0 points, are the 2.5/97.5 percentile bounds from 10,000 resamples of the 40 declared clusters (seed 4136). They describe this selected sample; they do not prove population superiority, equivalence or an independent holdout result.
+*Figure 1. Evidence-controlled application flow. Structured lookup and vector retrieval feed the answer layer; clarification and refusal are valid terminal actions. The experiment measures metadata tasks, not every available retrieval route.*
 
-The difference is calculated from paired pass/fail outcomes, not from unrelated aggregate intervals. Each bootstrap draw resamples whole declared clusters and retains their turns; its denominator can vary because clusters differ in size. Some repeated initial questions lie across clusters, so residual dependence remains. No family-specific confidence intervals or significance claims are invented.
+The browser submits a question and bounded history to FastAPI. The application resolves identity, intent, constraints, and conversational context before selecting release-bound evidence. PostgreSQL stores canonical fields and pgvector supports dense passage search. The answer layer renders supported canonical facts directly or requests evidence-grounded text from Vertex AI. Citation checks and canonical movie cards expose the evidence selected for the response.
 
-The service's dialogue advantage is a concrete observation on ten two-turn sessions. It does not establish long-history robustness, human satisfaction or a causal benefit of an individual module. Similarly, the baseline's higher point total does not prove that BM25 is universally superior. Routing, prompts, evidence availability, retries and deterministic paths differ.
-
-The cases are author-selected metadata diagnostics, not random population samples. Gold uses the same frozen collection that supplies inference evidence; factual agreement does not independently verify the collection's truth or completeness. Refusal expectations are authored, and audits are AI judgments. A fresh AI review checked all outputs and recorded calculations without finding an important discrepancy, but that remains distinct from independent human evaluation.
-
-The corrected run reused questions seen during protocol diagnosis. Cases were not tuned against answers, and the correction did not change ranking/prompt/scoring, but the run cannot be labeled unseen. The original 30-case result and both 120-call versions remain separate.
-
-PDF reasoning, visual poster quality, concurrency, adversarial inputs, multi-model sensitivity, repeated stochastic trials and longer conversations were not tested. The absence of observed unsupported metadata fields in selected outputs cannot establish zero hallucination for arbitrary users. Before stronger claims, a future study should use new cases, independent human spot checks and a controlled component comparison after clearly versioned repairs.
+All observed citations (98 system, 95 baseline) were metadata. Available PDF retrieval and poster correctness are not evaluated.
 
 <!-- pagebreak -->
 
-## 10. Operational observations and reproducibility
+## 3. Methodology
 
-### 10.1 Timing, usage and citation integrity
+### 3.1 Query routing and identity resolution
 
-Across all 60 attempts per arm, including failures, median observed request time is **0.733 s** for the service and **1.367 s** for the baseline; maxima are **3.741 s** and **51.125 s**. These serial, mixed-task observations include network and local/cloud processing. Deterministic service paths and different retries mean they are not a model-speed benchmark, throughput estimate or stable SLO.
+First, determine whether the request is within the governed film domain. Next, resolve explicit movie IDs or bounded title references. A title matching several films must trigger clarification, rather than silently selecting the most famous film. Explicit ID wrappers such as "ID" or "請查詢" are interpreted generically; no evaluation-specific answers or movie IDs are embedded in the repair logic.
 
-The baseline's 59 successful provider records report 107,411 input, 9,113 output and 116,524 total tokens. Failed-request potential usage is unknown. The production API does not expose provider usage, so no token or financial cost comparison is made. Sixty API attempts must not be described as sixty production LLM generations.
+For a supported canonical field, the response is rendered from the selected record and its metadata citation. Requests for absent fields, such as an unsupported box-office total, cannot be justified by a title match alone. Other supported requests use selected evidence and generation, followed by grounding checks.
 
-The service returns 69 citations across 39 cited answers; the baseline returns 95 across 50. All are metadata. A check of 912 returned title/director/cast/genre/date/tier fields found agreement with the catalog. Valid identity and card fields do not guarantee correct filters or explanations.
+### 3.2 Eligibility before fluent recommendation
 
-### 10.2 Inspectable artifacts
+Let D be the active catalog, C the interpreted constraints, and H the bounded history. The eligible set is E(C,H) = {m in D: every required predicate is satisfied and m is not excluded by H}. Predicates may include director, cast, genre, tier, inclusive release-year bounds, and requested exclusions. Ranking operates on eligible candidates; relevance must not override a required condition. The repository orders candidates by tier, pilot status, cosine distance, release year, and movie ID. Before generation, the answer layer rechecks constraints and uniqueness.
 
-| Artifact | Purpose |
+![Constraint pipeline](figures/constraint_pipeline.png)
+
+*Figure 2. Recommendation correctness requires both a valid eligible set and a supported answer. A plausible description cannot compensate for a violated predicate.*
+
+Chinese ranges such as "1980至1999" are parsed before a single-year fallback. Genre conjunctions require intersection; alternatives require union only within the relevant genre phrase. An unrelated "or" elsewhere must not weaken a conjunction. Person-role cues distinguish director from cast, while analysis verbs must not become spurious person names. Items must satisfy count and uniqueness requirements, or explain why the available evidence is insufficient.
+
+### 3.3 Retrieval and evidence validation
+
+Dense retrieval uses query embeddings compatible with the stored release and cosine-distance search in pgvector. Structured identity and recommendation routes use corresponding repository operations. Relevance policy and release identity are explicit inputs. No universal distance threshold or single top-k is asserted for every route; the application selects the appropriate path.
+
+The answer contract includes `answer_markdown`, `citations`, and `movies`. Citations identify selected evidence and source kind. Movie cards are constructed from canonical evidence, rather than trusting a model to invent structured fields. These controls make errors easier to inspect; a valid citation identity alone does not prove that every generated sentence is entailed.
+
+<!-- pagebreak -->
+
+## 4. Conversation and Implementation
+
+### 4.1 Context update semantics
+
+A follow-up is interpreted as a change to the previous task rather than an isolated keyword query. "Change to the 1990s; keep the other conditions" replaces the period while retaining relevant constraints. "Now switch to" a different director replaces person context. "Do not repeat the previous ones" excludes actual prior selections. Ordinal references resolve against the system's previous returned list, not a gold answer supplied by the evaluator.
+
+The history supplied during evaluation contains actual preceding questions and responses. Ten independent two-turn sessions measure this behavior. The design does not claim arbitrary long-term memory, unlimited conversation length, or robustness to every malicious history.
+
+### 4.2 Source organization
+
+| Component | Main implementation |
 |---|---|
-| `challenge_cases.jsonl` | Exact frozen 60-turn questions/gold |
-| `challenge_eval.py` | BM25, separate histories, dispatch and mechanical checks |
-| `challenge_answers.jsonl` | Safe projection of all 120 actual outputs/errors |
-| `challenge_review.json` | Explicit Root AI verdict for every record |
-| `challenge_summary.json` | Reviewed/mechanical totals, paired statistics and diagnostics |
-| `report/build_report.py` | Rebuilds figures/PDF from published evidence and text |
+| API and browser interface | `demo_api.py`; `static/` |
+| Answer orchestration and grounding | `rag_query.py` |
+| Query, recommendation, and history parsing | `retrieval.py` |
+| PostgreSQL and pgvector access | `rag_db.py`; database migrations |
+| Managed-model clients | `vertex_clients.py` |
+| Evaluation and retained outputs | `course/final_paired_eval.py`; paired JSONL evidence |
 
-Complete raw provider/operating receipts, freeze snapshots, preserved parent run, source-level diagnostics and the full catalog remain local; public projections are not mislabeled as raw receipts. SHA-256 identities and the exact source checkpoints appear in Appendix A.
+The code is published in the course repository [6]. The application uses Python 3.13, FastAPI, PostgreSQL/pgvector, and containerized Cloud Run deployment. The evaluated generation model is `gemini-3.5-flash-lite`; the embedding model is `gemini-embedding-2` with 768-dimensional vectors. These are recorded runtime identities, not substitutes to change silently during reproduction.
 
-The focused evaluation suite passed **33 offline tests**. A delivery verifier reproduced mechanical/AI aggregates, paired statistics, generated cases and exact public projections; it verified parent and original-study hashes. A fresh reviewer also reproduced all 59 saved BM25 rankings and the 912 field comparisons. Full external-data integration is not claimed. The report figures use the actual reviewed summary, not illustrative or placeholder values.
+### 4.3 Deployment and engineering verification
 
-Runtime was Python 3.13.15, google-genai 1.75.0 and OpenCC 1.4.1. Public model names are frozen observed configuration; only baseline successful records expose provider model-version evidence. Rerunning stochastic generation would create a new study, not identical answers.
+The candidate was previously regression-tested at zero production traffic, then promoted to 100% traffic with configuration, health, and explicit-ID readbacks. The fresh paired study evaluates that same serving image without another deployment. The service uses project `motionexpaiweb` in `us-central1`; existing CPU, memory, database, credentials, and scaling configuration were retained.
+
+Recorded checks include 1,464 affected application tests, 45 course-harness tests, and seven browser-script contract tests passing. One external-catalog integration test was excluded because its release CSV was unavailable. Full repository integration certification is not claimed. Parser regressions cover variants outside the measured questions, including conjunction scope, unsupported requests, director switching, and deduplication.
+
+This is application-level adaptation, not parameter fine-tuning. Neither the dataset nor the evaluation questions were rewritten to manufacture passing scores. The live chatbot [7] provides a practical way to inspect the interface and evidence.
 
 <!-- pagebreak -->
 
-## 11. Conclusion and author contributions
+## 5. BM25 + LLM Baseline
 
-This project delivers a working Hong Kong movie assistant and a diagnostic evaluation of evidence-grounded task completion. The corrected paired study finds a useful dialogue advantage, 18/20 versus 8/20, but a lower overall reviewed total, 41/60 versus 44/60. Explicit-ID over-refusal, year-range collapse and intersection errors explain why engineering sophistication does not ensure broader success. Baseline failures include insufficient eligible retrieval and underuse of available evidence. These results answer the stated questions within the selected tasks without asserting general superiority.
+### 5.1 A simple, evidence-controlled comparator
 
-The main lesson is to evaluate intent, identity, constraints, evidence and conversational dependencies together. Correct citation identities are necessary for traceability but insufficient for satisfying a user's request. The next engineering work should preserve this evidence, version the repairs and evaluate them on additional cases.
+The baseline uses the same 4,659-record catalog and the same configured generator, `gemini-3.5-flash-lite`. It is a real retrieval-and-generation implementation, rather than an ungrounded chatbot. BM25 [8] indexes uniformly serialized metadata after NFKC and OpenCC normalization. Chinese text uses unigrams and adjacent bigrams; Latin tokens and movie IDs are preserved. No task-specific title router, person-role parser, predicate SQL, or deterministic field renderer is added to this comparator.
 
-### 11.1 Contribution disclosure
+| Baseline setting | Frozen value |
+|---|---|
+| BM25 term saturation / length normalization | k1 = 1.5; b = 0.75 |
+| Retrieved evidence budget | Top eight positively scored metadata records |
+| Generation | Same configured model; global Vertex endpoint |
+| Output budget and format | 1,024 output tokens; structured JSON |
+| Prompt | Evidence-only; explicit clarification/refusal and all-constraint instructions |
+| History | The baseline's own actual preceding responses |
 
-The project owner confirms that the native application and engineering were developed for COMP4136, not submitted as another course's assignment. The contribution includes the release/data foundation, API/UI, query/recommendation and history handling, evidence contracts and cloud deployment. This disclosure records the owner's statement; it is not an independent authorship audit.
+Retrieval uses the latest question together with preceding question text and returned movie IDs. The generator receives the latest question, actual history, and retrieved evidence. It never receives expected actions, reference fields, eligible-ID sets, or evaluation scores. The prompt asks it to honor all explicit constraints, avoid invented facts, clarify ambiguity, and cite supplied evidence. Output identity validation rejects unselected or unmarked citations, and cards are materialized from retrieved canonical records.
 
-AI assistance supported course cases/gold tooling, the baseline/evaluator, offline analysis and audit, figures, documentation and this report. AI review is identified as such and is not credited as a human group member. The actual student name, ID and group number remain blank by request. Human audits and registration/submission are pending. No presentation was produced in this report-only delivery.
+### 5.2 Fairness and the comparison boundary
+
+The two implementations share questions, catalog, configured generator, maximum generation output length, and task acceptance rules. Calls alternate arm order, and each arm maintains its own actual history. The deployed system can render canonical facts without generation and has structured filtering; these are part of the system being evaluated, not properties artificially added to the baseline.
+
+The internal computation is not identical. Baseline SDK attempts are set to one. The deployed generator permits three SDK attempts, up to two recommendation outputs, and deterministic metadata fallback after provider or validation failure. The public API does not expose how often those paths were used. The comparison therefore evaluates delivered task behavior of two complete applications, not isolated retrieval quality, equal-compute inference, or a causal effect of a single module. Both failures and conservative but incomplete answers remain counted.
+
+<!-- pagebreak -->
+
+## 6. Experimental Protocol
+
+### 6.1 Task design and reference answers
+
+The study compares the repaired deployment with BM25 + LLM on 60 selected turns per arm: 120 actual responses. These questions were known during development; the purpose is a controlled development comparison. Cases, runner source, imported evaluation modules, catalog, and runtime identities were frozen before dispatch. Each arm receives one question-level attempt per case. No question-level retries, failure omission, or substituted responses are permitted. This does not prevent the application's internal generation retry/fallback paths described in Section 5.2.
+
+| Task family | Turns | Acceptance requirement |
+|---|---|---|
+| Ambiguity / explicit ID | 10 | Clarify duplicate titles; answer an identified film correctly |
+| Traditional / Simplified Chinese | 10 | Resolve the same intended catalog entity and field |
+| Compound recommendations | 10 | Satisfy every predicate, count, and uniqueness requirement |
+| Evidence / domain boundary | 10 | Refuse unsupported facts or out-of-domain requests |
+| Dialogue | 20 | Use actual history; update, replace, or exclude context correctly |
+
+The reference is the versioned catalog snapshot. Fact cases identify the expected film and field. Recommendation cases record constraints and eligible counts, rather than forcing one preferred movie order. Clarification cases identify multiple valid movie IDs. Boundary cases specify an unsupported capability. A refusal or clarification can therefore be correct even when no factual answer is produced.
+
+### 6.2 Quantitative and qualitative scoring
+
+Mechanical checks examine requested fields, movie identity, citations, recommendation predicates, result count, and repetition. Root AI review then inspects all 120 complete response texts against the catalog and distinguishes correct answers, reasonable refusals, reasonable clarifications, and errors. A second AI reviewer also inspected all outputs. Human review remains pending.
+
+Mechanical scoring initially accepted 60 system and 43 baseline turns. Seven baseline decisions were false negatives: A2a-A5a were valid clarifications, and B05-B07 valid refusals. The automatic phrase rules did not recognize their wording. The reviewed baseline score is therefore 50/60; all overrides and original verdicts are retained. Fair scoring must reward appropriate uncertainty for either method.
+
+Task completion = accepted turns / attempted turns. Card-field agreement = matching audited fields / audited fields. The eight fields are movie ID, Chinese title, English title, release date, director, cast, genre, and tier. Poster URL and pilot status are outside this audit. Latency is client-observed request duration, not model-only generation time.
+
+### 6.3 Experimental controls
+
+Actual calls ran on 5 October 2026, 21:08:06-21:11:51 HKT. Arm order alternates across cases. Each dialogue uses that arm's actual preceding answer and selected IDs; neither arm receives reference answers. Release, model and policy identities, data counts, and frozen input hashes matched before and after execution. Both arms returned all 60 responses, without an early stop or transport error.
+
+Raw answers, histories, retrieved baseline IDs, usage records, and original and reviewed verdicts are retained. System responses are not equivalent to LLM invocations: direct metadata routes may bypass generation. Its internal model-call count and total cost are not exposed, so no equal-token or cost comparison is claimed.
+
+<!-- pagebreak -->
+
+## 7. Results
+
+![Paired development task completion](figures/family_results.png)
+
+*Figure 3. Fresh paired, AI-reviewed task completion. Labels are accepted/attempted turns. Both arms use the same known development cases, catalog, and configured generator. This is a development comparison, not an unseen benchmark.*
+
+| Result | Deployed system | BM25 + LLM |
+|---|---|---|
+| Attempts / retained responses | 60 / 60 | 60 / 60 |
+| Mechanical passes | 60 | 43 |
+| AI-reviewed acceptances | 60 / 60 | 50 / 60 |
+| Correct answers | 44 | 34 |
+| Refusals / clarifications / errors | 11 / 5 / 0 | 11 / 5 / 10 |
+| Recommendation-task completion | 24 / 24 | 14 / 24 |
+| Movie cards / metadata citations | 98 / 98 | 85 / 95 |
+| Catalog card-field agreement | 784 / 784 | 680 / 680 |
+| Median latency (seconds) | 0.763 | 1.349 |
+| Observed maximum latency (seconds) | 51.523 | 14.430 |
+
+Both methods pass 50 paired turns; the system alone passes ten; no turn is passed only by the baseline. The task-completion difference is 16.7 percentage points. The gains occur in compound recommendations (10/10 vs. 7/10) and dialogue (20/20 vs. 13/20). The remaining three families tie at 10/10.
+
+All ten baseline failures are incomplete recommendation tasks: its top-eight context contains fewer than three eligible films although the full catalog contains at least three. Often it correctly declines to invent a missing item. That is evidence discipline, but does not complete the requested task. Both methods' returned card fields match the catalog, so these data do not demonstrate superior card factuality or baseline hallucination.
+
+System median latency is lower, but its observed tail is worse: C08 takes 51.523 seconds, with internal cause unexposed. Sequential timings do not certify load performance. Selected, correlated development cases cannot establish future accuracy or population significance.
+
+<!-- pagebreak -->
+
+## 8. Case Study: Inspecting Actual Outputs
+
+The examples below come from retained API responses. English descriptions explain the behavior; quoted Chinese snippets preserve actual answer text. The catalog is the reference for film facts.
+
+### 8.1 Same title, different identity: case A1a
+
+**Question:** "《英雄本色》的導演是誰？"
+
+The response identifies `1973_YXBS_001` and `1986_YXBS_001` and requests an explicit selection. It returns no cards or citations for an arbitrary choice. The intermediate result is a non-unique entity match. Clarification is correct because the title alone does not select a catalog record.
+
+### 8.2 Script-compatible factual lookup: case L3t
+
+**Question:** "《少林足球》的電影類型有哪些？"
+
+**Actual answer:** "《少林足球》類型：動作、喜劇、運動。[metadata:2001_SLZQ_001]"
+
+The film ID, genre field, and citation agree with the canonical record. The matching Simplified-Chinese variant is also accepted. Direct rendering is appropriate: generated analysis would add risk without improving the requested field lookup.
+
+### 8.3 Multiple conditions: case C01
+
+**Question:** "推薦3部1980至1999年吳宇森導演的動作片。"
+
+The response returns *The Killer* (1989), *A Better Tomorrow* (1986), and *Bullet in the Head* (1990), each with a metadata citation. Their IDs are `1989_DXSX_001`, `1986_YXBS_001`, and `1990_DXJT_001`. The catalog has 11 eligible films; these three are unique and satisfy director, genre, and inclusive year bounds. Correctness concerns eligibility and supported facts, not the optimality of this order.
+
+### 8.4 Evidence boundary: case B06
+
+**Question:** "《重慶森林》在香港的總票房是多少？"
+
+**Actual answer:** "目前只有結構化電影資料，現有欄位不足以支持這個問題。[metadata:1994_ZQSL_001]"
+
+The service resolves the film but does not invent box-office revenue. Entity recognition and answerability are separate decisions: a movie record does not supply every possible fact about that film.
+
+### 8.5 Conversational update: case M03.2
+
+**Follow-up:** "改成1990年代，其他條件不變。"
+
+With actual preceding recommendation history, the system returns `1999_QH_001`, `1997_XGZZ_001`, and `1990_AFZC_001`. Each satisfies the retained crime-genre condition and replacement 1990-1999 interval. This illustrates a state update rather than treating the short follow-up as an isolated, underspecified query.
+
+<!-- pagebreak -->
+
+## 8. Case Study: Comparative Evidence
+
+### 8.6 Candidate coverage: case C03
+
+The request asks for three films from 1980-1989 satisfying both action and comedy genres. The full catalog has 121 eligible records. The system returns three valid, distinct films: `1985_JCGS_001`, `1985_JSXS_001`, and `1981_BJZ_001`.
+
+The baseline's top-eight context contains only two eligible records. Its retained answer returns two rather than fabricating a third. The failure is insufficient coverage for the requested count, not an incorrect returned movie. Structured eligibility over the catalog supplies a larger valid candidate pool than this fixed lexical context.
+
+### 8.7 Narrow conjunction: case C04
+
+The request combines action genre, 1980-1999, and tier S. Twenty catalog records satisfy the conditions. The system returns `1989_DXSX_001`, `1986_YXBS_001`, and `1999_QH_001`. The baseline retrieves no eligible record among its top eight and refuses to supply three. This is a defensible response to its available evidence, but falls short of the catalog-supported task.
+
+### 8.8 Actual-history follow-up: case M02.2
+
+The user changes a preceding John Woo action recommendation to the 1990s while retaining other conditions. Each method receives its own earlier response. Exactly three catalog records are eligible. The system returns `1990_DXJT_001`, `1992_LSST_001`, and `1991_ZHSH_001`. The baseline has only one eligible retrieved record and provides that one while declining the requested three.
+
+Together with M03.2's successful period replacement, this example shows the value of converting a short follow-up into an explicit eligibility query. It does not isolate conversation parsing from retrieval: a module ablation would be needed for that causal claim.
+
+### 8.9 Fairness beyond favorable examples
+
+Both methods ask appropriate identity clarification and refuse unsupported budget, revenue, and rating requests. Seven baseline answers were upgraded after qualitative inspection because automatic wording rules were too narrow. Original judgments and reasons for changes remain visible in the audit.
+
+There are minor accepted-baseline prose issues: C01 and M02.1 announce two recommendations while listing at least three valid selections, and M05.1 uses loose series/version wording. Requested facts or counts are nevertheless supplied, so these are qualitative caveats rather than additional task failures. The report separates incomplete delivery, incorrect facts, and presentation quality instead of treating them as interchangeable.
+
+<!-- pagebreak -->
+
+## 9. Discussion, Limitations, and Future Work
+
+### 9.1 Why the design works on the observed tasks
+
+Successful examples are consistent with the division of responsibilities. Identity handling prevents a title collision from becoming an unsupported factual claim. Structured predicates make eligibility explicit. Direct rendering preserves canonical fields. Evidence-constrained generation describes selected items, while conversation handling updates a bounded task state. These explanations follow implementation and observed outputs; they are not causal effects established by ablation.
+
+The comparative evidence is specific: 120 retained responses, equal observed task outcomes in three families, ten additional completed recommendation tasks, and zero mismatches in 1,464 audited card fields across both arms. Structured eligibility gives the system a practical advantage over this top-eight BM25 comparator when valid candidates are absent from its retrieved context. It does not imply that every sparse or hybrid retriever would fail similarly.
+
+### 9.2 Remaining failure risks
+
+No system task failure was observed in this final run, while ten baseline tasks were incomplete. Nevertheless, unusual paraphrases may fall outside bounded parsing rules; mixed scripts or aliases may produce unresolved identity; conflicting conditions may create an empty eligible set; and long conversations may exceed intended context semantics. Generated prose can also contain an unsupported interpretation despite a valid citation. Citation presence is an inspectable link, not a blanket truth certificate.
+
+The catalog can contain errors or incomplete coverage. Agreement is dataset consistency, not independent verification of film history. PDF interpretation and plot analysis require passage-level gold evidence; the metadata-only study cannot certify them. External data, private database state, and credentials are needed to reproduce the entire deployment; a clean source checkout is insufficient.
+
+### 9.3 Evaluation validity and next experiment
+
+Cases were inspected during development, including parser repairs. The fresh comparison uses unchanged questions and honest outputs, but is still a development study. AI review and the selected set limit external validity. Different internal retry, regeneration, direct-rendering, and fallback policies mean that the result is not an equal-compute experiment or a single-module causal test.
+
+A stronger next study should freeze unseen paraphrases, aliases, conflicting conditions, empty sets, and longer dialogues before inspecting answers. Independent human annotators should label answerability, factual support, and eligibility with adjudication. BM25 context-size sweeps, hybrid retrieval, and controlled module ablations would distinguish coverage and parsing effects. Document tasks need passage-level gold evidence, while concurrent requests should measure operational latency and failures.
+
+### 9.4 Responsible public application
+
+The chatbot is a technical demonstration. External posters and documents have separate provenance and rights constraints; the source-code license does not grant rights to every data asset. Credentials and full private data are excluded from GitHub. The system should continue to prefer an evidence limitation over an invented answer when the release cannot support a request.
+
+<!-- pagebreak -->
+
+## 10. Conclusion and Author Contributions
+
+This project delivers a Chinese-language cinema assistant integrating catalog identity, structured constraints, retrieval, evidence-grounded answering, and conversational updates. In a fresh paired study, it completes 60/60 known development turns versus 50/60 for BM25 + LLM. All ten gains concern completing recommendations, while both methods responsibly clarify and refuse and return catalog-consistent cards.
+
+The practical result is stronger task delivery on this set, supported by retained answers, intermediate candidate coverage, and explicit scoring corrections. Generation cannot replace entity resolution, eligibility checks, or evidence boundaries. The study demonstrates comparative value of the complete implementation; unseen generalization, module-level causality, and operational robustness require further evidence.
+
+### Author contributions and assistance disclosure
+
+The owner confirms that the application and engineering were developed for COMP4136 and were not submitted as another course's assignment. The owner defined the application, supplied the native project, and directed the deliverable. Name, student ID, and group number remain blank at the owner's request; no identities or human review signatures have been invented.
+
+AI assistance supported query repairs, regression tests, evaluation tooling, output inspection, figures, documentation, and report preparation. The qualitative audit is identified as Root AI review. AI is not a group member, and its audit does not substitute for the student's responsibility to understand the code and verify submitted work. Native source and subsequent repairs are versioned in the repository.
 
 ## References
 
-[1] S. Robertson and H. Zaragoza, “The Probabilistic Relevance Framework: BM25 and Beyond,” *Foundations and Trends in Information Retrieval*, vol. 3, no. 4, pp. 333–389, 2009, doi: 10.1561/1500000019. [Author manuscript](https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf).
+[1] V. Karpukhin et al., "Dense Passage Retrieval for Open-Domain Question Answering," in *Proc. EMNLP*, 2020, pp. 6769-6781, doi: 10.18653/v1/2020.emnlp-main.550. [Publisher record](https://aclanthology.org/2020.emnlp-main.550/).
 
-[2] V. Karpukhin et al., “Dense Passage Retrieval for Open-Domain Question Answering,” in *Proceedings of EMNLP*, 2020, pp. 6769–6781, doi: 10.18653/v1/2020.emnlp-main.550. [ACL Anthology](https://aclanthology.org/2020.emnlp-main.550/).
+[2] P. Lewis et al., "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks," in *Advances in Neural Information Processing Systems*, vol. 33, 2020. [Author manuscript](https://arxiv.org/abs/2005.11401).
 
-[3] P. Lewis et al., “Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,” *Advances in Neural Information Processing Systems*, 2020, arXiv:2005.11401. [Paper](https://arxiv.org/abs/2005.11401).
+[3] N. Thakur, N. Reimers, A. Ruckle, A. Srivastava, and I. Gurevych, "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models," in *NeurIPS Datasets and Benchmarks*, 2021. [Author manuscript](https://arxiv.org/abs/2104.08663).
 
-[4] N. Thakur, N. Reimers, A. Rücklé, A. Srivastava, and I. Gurevych, “BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models,” 2021, arXiv:2104.08663. [Paper](https://arxiv.org/abs/2104.08663).
+[4] A. Asai, Z. Wu, Y. Wang, A. Sil, and H. Hajishirzi, "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection," in *Proc. ICLR*, 2024. [Author manuscript](https://arxiv.org/abs/2310.11511).
 
-[5] A. Asai, Z. Wu, Y. Wang, A. Sil, and H. Hajishirzi, “Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection,” in *Proceedings of ICLR*, 2024. [Conference paper](https://proceedings.iclr.cc/paper_files/paper/2024/file/25f7be9694d7b32d5cc670927b8091e1-Paper-Conference.pdf).
+[5] A. Singh, A. Ehtesham, S. Kumar, T. T. Khoei, and A. V. Vasilakos, "Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG," arXiv:2501.09136v4, Apr. 2026. [Versioned survey](https://arxiv.org/abs/2501.09136v4).
 
-[6] A. Singh, A. Ehtesham, S. Kumar, T. T. Khoei, and A. V. Vasilakos, “Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG,” arXiv:2501.09136v4, revised Apr. 1, 2026. [Survey](https://arxiv.org/abs/2501.09136v4).
+[6] Project owner, "COMP4136_Project: Hong Kong Movie RAG," code and evaluation package, 2026. [GitHub](https://github.com/jimmy00415/COMP4136_Project). Accessed: Oct. 5, 2026.
 
-[7] Project owner, “COMP4136 Hong Kong Movie RAG: source and evaluation artifacts,” GitHub repository, evaluation snapshot `f405285`, 2026. [Published artifacts](https://github.com/jimmy00415/COMP4136_Project/tree/f4052852e802db88762fb97aff0e7dab97c7ceb7). Accessed: Oct. 5, 2026.
+[7] Project owner, "Hong Kong Movie RAG: live technical demo," 2026. [Chatbot](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app). Accessed: Oct. 5, 2026.
 
-[8] “COMP4136 Mini-Project,” supplied course handout, 2026, pp. 1–5. The report structure follows its background, implementation, experiments, application, contribution and reference requirements.
+[8] S. Robertson and H. Zaragoza, "The Probabilistic Relevance Framework: BM25 and Beyond," *Foundations and Trends in Information Retrieval*, vol. 3, no. 4, pp. 333-389, 2009, doi: 10.1561/1500000019. [Publisher record](https://doi.org/10.1561/1500000019).
 
 <!-- pagebreak -->
 
-## Appendix A. Evidence identities and inspection
+## Appendix A. Reproducibility and Evidence
 
-The following byte hashes identify the original artifacts. They are not interchangeable with Git object hashes, reformatted JSON or stochastic reruns. Runtime source bytes can depend on checkout line endings; the frozen runner/cases and exported evidence preserve their recorded bytes.
+### A.1 Exact measured identities
 
-| Object | SHA-256 |
+| Identity | Recorded value |
 |---|---|
-| External metadata catalog | `1dbea26150a816ae4fc4d189a2a08e39628cbee997f3966b0dd5cd16843e907b` |
-| Challenge cases | `2ab256dc99112b6864f9c41f51f77d216ebff8aeccfa6458c30107f54787e7f5` |
-| Corrected runner bytes | `9c41b7abeb9a945d339f362ec8296e8aa02d3219f3a3ab32b6fa311ef0473d34` |
-| Corrected raw responses, local | `ab7edac1319e7281e4f8cabcaec927a8367039e4ba5da6d4abde2abfb3ac10fe` |
-| Explicit Root AI audit | `85b94e4715b2135300b912825be136fadfde6825940f4d12b91c0d3df6c136e0` |
-| Public answer projection | `095b5c18f7a8d918601c0093cb30528b6d3d2ba9ecd4a942a5d6defa8ab71968` |
-| Earlier defective raw run, local | `0b14ca2bcceeee4f5db023f19599229a4c156fbbb995fc747b8e92a816a3183b` |
-| Original 30-case responses, local | `4918ae3e066ccc8be654bb80c2369f43f5ab0ebae58e72b26c97ae6e52e6d5a8` |
+| Application source commit | `0a81de7447b1ddbfaf7f7786bb97d52815469939` |
+| Serving revision | `hk-movie-rag-demo-00001-qfix-0a81de7` |
+| Container digest | `6c031ad921888783e1167dca78e0138cf45ff4c34b0a17f58a1c9847ada92cbd` |
+| Catalog SHA-256 | `1dbea26150a816ae4fc4d189a2a08e39628cbee997f3966b0dd5cd16843e907b` |
+| Cases SHA-256 | `2ab256dc99112b6864f9c41f51f77d216ebff8aeccfa6458c30107f54787e7f5` |
+| Paired responses SHA-256 | `6567f1d86c43f03c18234580c54df22917a283a8b362d782a16032ab4d17fedb` |
+| Root AI review SHA-256 | `bc2d7f467f74868eaf30b5879bd5296c786bc31aa710e6dd6bc8325bb069b491` |
+| Measured runner SHA-256 | `b0aa2684ba1e52424039b63a49aceb55cf947f7f933a50fb0bf88ef17c03fae1` |
+| Pre-dispatch freeze SHA-256 | `93476c67efd75c522e1641a74f871f400d8008869565aa6fb75651ca3b901213` |
 
-### A.1 Reproduce offline checks
+### A.2 Inspect the paired evidence
 
-```shell
-uv sync --frozen --python 3.13
-uv run pytest -q course/test_simple_eval.py
-uv run pytest -q course/test_challenge_eval.py
-uv run pytest -q course/test_review_challenge.py
-```
+The repository publishes [all 120 answers and histories](https://github.com/jimmy00415/COMP4136_Project/blob/main/course/final_paired_answers.jsonl), [per-case Root AI review](https://github.com/jimmy00415/COMP4136_Project/blob/main/course/final_paired_review.json), [reviewed summary](https://github.com/jimmy00415/COMP4136_Project/blob/main/course/final_paired_summary.json), and [pre-dispatch freeze](https://github.com/jimmy00415/COMP4136_Project/blob/main/course/final_paired_freeze.json). Exact hashes prevent a later branch update from silently replacing measured evidence. The summary SHA-256 is `d73deb6b22b00902856584f24d9599b33afc10d76ad3a9ca8fd26b8d472c5760`.
 
-The application requires external PostgreSQL/pgvector, populated data and matching cloud/policy settings. Offline course tests require none of those inputs and make no live model calls. `report/BUILD.md` describes the separate PDF/plot dependencies; the report does not alter the locked application's dependencies.
+The exact measured source is `course/final_paired_eval.py`. The freeze also binds its imported evaluator modules. Original automatic verdicts are retained alongside seven reasoned review corrections. Full external catalog access is needed to independently repeat every fact and eligibility audit.
 
-### A.2 Evaluated release identity
+### A.3 Rebuild without model calls
 
-Release: `v1.2-demo-r3`. Serving revision: `hk-movie-rag-demo-00000-ui-7b1b870`. Embedding configuration: `gemini-embedding-2`, 768 dimensions. Generator configuration: `gemini-3.5-flash-lite`. The report discusses the state recorded by the experiments, not a promise that a public endpoint will remain unchanged.
+`report/FINAL_REPORT.md` is editable. The offline builder and `report/paired_evidence.py` verify exact evidence bytes and independently reconstruct paired counts, families, outcomes, cards, citations, and timings. Card-field agreement is a retained catalog audit. `report/BUILD.md` documents separate document dependencies, fonts, and full-page rendering; no cloud mutation or experiment dispatch occurs during building.
 
-### A.3 Remaining delivery conditions
-
-This report is the report-only technical artifact requested by the owner. A later course package still requires truthful member/group information, the presentation and the prescribed course-platform actions [8]. `human_audits` remains `pending` and `submission_ready` remains `false`; this report does not represent a submission receipt or grade guarantee.
+This report uses only the fresh paired observation, without pooling earlier runs. Human audit is pending; identity fields remain unfilled, and course submission and presentation are outside this deliverable.

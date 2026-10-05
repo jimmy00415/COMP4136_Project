@@ -4,20 +4,20 @@ On 5 October 2026 the repaired HK Movie service completed **60/60** known
 challenge turns: 60 actual responses, 60 mechanical passes and 60 accepted
 Root AI reviews. No question-level retries or omitted failures were used.
 
-| Family | Original system, AI-reviewed | Repaired system, AI-reviewed |
-|---|---:|---:|
-| Ambiguity / explicit ID | 5/10 | 10/10 |
-| Traditional / Simplified variants | 8/10 | 10/10 |
-| Compound recommendations | 2/10 | 10/10 |
-| Evidence / domain boundary | 8/10 | 10/10 |
-| Dialogue | 18/20 | 20/20 |
-| Total | 41/60 | **60/60** |
+| Family | Repaired system, AI-reviewed |
+|---|---:|
+| Ambiguity / explicit ID | 10/10 |
+| Traditional / Simplified variants | 10/10 |
+| Compound recommendations | 10/10 |
+| Evidence / domain boundary | 10/10 |
+| Dialogue | 20/20 |
+| Total | **60/60** |
 
 This is **development regression on previously observed questions**, not an
 unseen holdout. The baseline was not rerun. These before/after observations
 cannot establish population accuracy, causal module effects, or a new paired
 comparison with BM25. They do not guarantee a course grade or arbitrary future
-queries. Original scores, report, chart and baseline evidence remain unchanged.
+queries. This page retains the earlier system-only regression. The final report now uses a separate [fresh paired comparison](FINAL_COMPARISON_RESULTS.md); observations are not pooled.
 
 ## What changed
 

@@ -10,10 +10,7 @@ import argparse
 import hashlib
 import html
 import json
-import random
 import re
-import statistics
-from collections import Counter, defaultdict
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -22,6 +19,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch, Rectangle
+from paired_evidence import EXPECTED, evidence, family_chart
 from PIL import Image as PILImage
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
@@ -43,12 +41,8 @@ from reportlab.platypus import (
 ROOT = Path(__file__).resolve().parents[1]
 HERE = Path(__file__).resolve().parent
 BLUE, GOLD, INK, GREY = "#205A83", "#AD650D", "#243344", "#687782"
-EXPECTED = {
-    "challenge_cases.jsonl": "2ab256dc99112b6864f9c41f51f77d216ebff8aeccfa6458c30107f54787e7f5",
-    "challenge_answers.jsonl": "095b5c18f7a8d918601c0093cb30528b6d3d2ba9ecd4a942a5d6defa8ab71968",
-    "challenge_review.json": "85b94e4715b2135300b912825be136fadfde6825940f4d12b91c0d3df6c136e0",
-    "challenge_summary.json": "037fd237957a498286d0f76bc4b86ed76309c9f9d848d443e5c1da213f5604c8",
-}
+
+FIGURES = ("architecture", "constraint_pipeline", "family_results")
 
 
 def sha(path):
@@ -59,231 +53,74 @@ def jsonl(path):
     return [json.loads(x) for x in path.read_text(encoding="utf8").splitlines()]
 
 
-def evidence():
-    for name, expected in EXPECTED.items():
-        if sha(ROOT / "course" / name) != expected:
-            raise ValueError("Published evidence byte mismatch: " + name)
-    cases = jsonl(ROOT / "course/challenge_cases.jsonl")
-    answers = jsonl(ROOT / "course/challenge_answers.jsonl")
-    review = json.loads((ROOT / "course/challenge_review.json").read_text(encoding="utf8"))
-    summary = json.loads((ROOT / "course/challenge_summary.json").read_text(encoding="utf8"))
-    lookup = {(e["case_id"], e["arm"]): e for e in review["entries"]}
-    case_lookup = {c["id"]: c for c in cases}
-    assert len(cases) == 60 and len(case_lookup) == 60
-    assert len(answers) == len(lookup) == len(review["entries"]) == 120
-    assert set(lookup) == {(a["case_id"], a["arm"]) for a in answers}
-    assert summary["human_audits"] == "pending" and not summary["submission_ready"]
-    for arm in ("system", "baseline"):
-        rows = [a for a in answers if a["arm"] == arm]
-        verdicts = [lookup[a["case_id"], arm] for a in rows]
-        assert len(rows) == 60
-        assert sum(v["pass"] for v in verdicts) == summary["arms"][arm]["passed"]
-        assert dict(Counter(v["outcome"] for v in verdicts)) == summary["arms"][arm]["outcomes"]
-        assert (
-            statistics.median(a["latency_s"] for a in rows)
-            == summary["arms"][arm]["median_latency_s"]
-        )
-        for family, value in summary["arms"][arm]["families"].items():
-            family_rows = [a for a in rows if case_lookup[a["case_id"]]["family"] == family]
-            assert len(family_rows) == value["attempted"]
-            assert sum(lookup[a["case_id"], arm]["pass"] for a in family_rows) == value["passed"]
-    counts = Counter()
-    groups = defaultdict(list)
-    for case in cases:
-        s, b = (lookup[case["id"], arm]["pass"] for arm in ("system", "baseline"))
-        counts[(s, b)] += 1
-        groups[case["cluster"]].append(int(s) - int(b))
-    paired = summary["paired"]
-    assert [counts[True, True], counts[True, False], counts[False, True], counts[False, False]] == [
-        30,
-        11,
-        14,
-        5,
-    ]
-    assert len(groups) == paired["clusters"] == 40
-    assert (counts[True, False] - counts[False, True]) / 60 == paired["difference"]
-    rng = random.Random(4136)
-    clusters = list(groups.values())
-    draws = []
-    for _ in range(10000):
-        sample = [rng.choice(clusters) for _ in clusters]
-        draws.append(sum(sum(g) for g in sample) / sum(map(len, sample)))
-    draws.sort()
-    assert [draws[249], draws[9749]] == paired["cluster_bootstrap_95pct"]
-    assert (summary["arms"]["system"]["passed"], summary["arms"]["baseline"]["passed"]) == (41, 44)
-    return summary
-
-
 def save_figure(fig, name):
-    directory = HERE / "figures"
-    directory.mkdir(exist_ok=True)
-    fig.savefig(directory / (name + ".png"), dpi=300, facecolor="white")
-    fig.savefig(directory / (name + ".svg"), facecolor="white", metadata={"Date": None})
+    (HERE / "figures").mkdir(exist_ok=True)
+    fig.savefig(HERE / "figures" / (name + ".png"), dpi=300, facecolor="white")
+    fig.savefig(HERE / "figures" / (name + ".svg"), facecolor="white")
     plt.close(fig)
 
 
-def figures(summary):
-    plt.rcParams.update(
-        {
-            "font.family": "DejaVu Sans",
-            "font.size": 12,
-            "axes.labelcolor": INK,
-            "text.color": INK,
-            "axes.edgecolor": GREY,
-            "svg.fonttype": "none",
-        }
-    )
-    fig, ax = plt.subplots(figsize=(10.8, 4.05))
-    ax.set(xlim=(0, 10.8), ylim=(0, 4.05))
+def figures(result):
+    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11, "svg.fonttype": "none"})
+    fig, ax = plt.subplots(figsize=(10.2, 3.4))
+    ax.set(xlim=(0, 10.2), ylim=(0, 3.4))
     ax.axis("off")
 
-    def box(x, y, w, h, title, detail, face="#F4F7FA", edge=BLUE):
-        ax.add_patch(Rectangle((x, y), w, h, facecolor=face, edgecolor=edge, lw=1))
-        ax.text(
-            x + w / 2,
-            y + h * 0.68,
-            title,
-            ha="center",
-            va="center",
-            fontsize=12.3,
-            fontweight="bold",
-        )
-        ax.text(x + w / 2, y + h * 0.27, detail, ha="center", va="center", fontsize=10.7)
+    def box(x, y, w, h, label):
+        ax.add_patch(Rectangle((x, y), w, h, facecolor="#EFF4F8", edgecolor=BLUE, lw=1.2))
+        ax.text(x + w / 2, y + h / 2, label, ha="center", va="center", fontsize=10, color=INK)
 
-    def arrow(x1, y1, x2, y2, dashed=False):
-        ax.add_patch(
-            FancyArrowPatch(
-                (x1, y1),
-                (x2, y2),
-                arrowstyle="-|>",
-                mutation_scale=10,
-                lw=0.9,
-                color=GREY,
-                linestyle="--" if dashed else "-",
-            )
-        )
+    def arrow(a, b):
+        ax.add_patch(FancyArrowPatch(a, b, arrowstyle="-|>", mutation_scale=13, color=GREY, lw=1.2))
 
-    box(
-        0.05,
-        3.16,
-        5.05,
-        0.65,
-        "Frozen release: 4,659 film metadata records",
-        "Shared universe; gold stays outside inference",
-    )
-    box(
-        5.65,
-        3.16,
-        5.1,
-        0.65,
-        "Production also has 5 PDFs / 21 passages",
-        "Available, but outside this metadata evaluation",
-        face="#FAFAFA",
-        edge=GREY,
-    )
-    ax.text(0.05, 2.91, "DEPLOYED SYSTEM", fontsize=10, fontweight="bold", color=BLUE)
-    box(0.05, 2.07, 2.28, 0.65, "Intent + context", "Domain / title / filters")
-    box(2.78, 2.07, 2.28, 0.65, "Evidence selection", "Structured / vector")
-    box(5.51, 2.07, 2.28, 0.65, "Answer paths", "Direct facts / Vertex")
-    box(8.24, 2.07, 2.51, 0.65, "Validated output", "Citations + movie cards")
-    for x1, x2 in [(2.33, 2.78), (5.06, 5.51), (7.79, 8.24)]:
-        arrow(x1, 2.395, x2, 2.395)
-    arrow(3.92, 3.16, 3.92, 2.74)
-    arrow(8.2, 3.16, 7.1, 2.76, True)
-    ax.text(0.05, 1.78, "SIMPLE BASELINE", fontsize=10, fontweight="bold", color=GOLD)
-    box(0.05, 0.94, 2.28, 0.65, "Own actual history", "Current query + anchors", edge=GOLD)
-    box(2.78, 0.94, 2.28, 0.65, "BM25 top eight", "Generic script tokens", edge=GOLD)
-    box(5.51, 0.94, 2.28, 0.65, "Vertex reader", "Evidence-only prompt", edge=GOLD)
-    box(8.24, 0.94, 2.51, 0.65, "Identity adapter", "Retrieved, marked IDs", edge=GOLD)
-    for x1, x2 in [(2.33, 2.78), (5.06, 5.51), (7.79, 8.24)]:
-        arrow(x1, 1.265, x2, 1.265)
+    box(0.15, 1.3, 1.65, 0.8, "Browser\nQuestion + history")
+    box(2.2, 1.3, 1.8, 0.8, "API + query routing\nIdentity / constraints")
+    box(4.4, 2, 2.1, 0.85, "Structured catalog\nPostgreSQL")
+    box(4.4, 0.45, 2.1, 0.85, "Dense passages\npgvector + embeddings")
+    box(6.95, 1.3, 1.7, 0.8, "Answer layer\nDirect / Vertex AI")
+    box(8.95, 1.3, 1.1, 0.8, "Grounding\nCards + cites")
+    arrow((1.8, 1.7), (2.2, 1.7))
+    arrow((4, 1.7), (4.4, 2.4))
+    arrow((4, 1.7), (4.4, 0.9))
+    arrow((6.5, 2.4), (6.95, 1.7))
+    arrow((6.5, 0.9), (6.95, 1.7))
+    arrow((8.65, 1.7), (8.95, 1.7))
     ax.text(
-        5.4,
-        0.39,
-        "Same 60 turns  |  separate real histories  |  mechanical checks + explicit AI audit",
+        3.1,
+        0.65,
+        "Clarify / refuse when\nidentity or evidence is insufficient",
         ha="center",
-        fontsize=11.4,
+        fontsize=9,
+        color=GREY,
     )
-    fig.subplots_adjust(left=0.015, right=0.985, bottom=0.015, top=0.99)
+    fig.tight_layout(pad=0.3)
     save_figure(fig, "architecture")
-
-    fig, ax = plt.subplots(figsize=(9.8, 1.6))
+    fig, ax = plt.subplots(figsize=(10.2, 1.8))
+    ax.set(xlim=(0, 10.2), ylim=(0, 1.8))
     ax.axis("off")
-    ax.text(
-        0.5,
-        0.69,
-        r"$s(q,d)=\sum_{t\in\mathrm{unique}(q)}\log\!\left(1+\frac{N-df(t)+0.5}{df(t)+0.5}\right)\,\frac{f(t,d)(k_1+1)}{f(t,d)+k_1(1-b+bL_d/L_{avg})}$",
-        ha="center",
-        va="center",
-        fontsize=17,
-    )
-    ax.text(0.5, 0.15, r"$k_1=1.5\qquad b=0.75\qquad \mathrm{top\_k}=8$", ha="center", fontsize=15)
-    fig.subplots_adjust(left=0.01, right=0.99, bottom=0.05, top=0.95)
-    save_figure(fig, "bm25_equation")
-
-    order = [
-        ("ambiguity", "Ambiguity / explicit ID"),
-        ("language", "Script variants"),
-        ("compound", "Compound recommendations"),
-        ("boundary", "Evidence / domain"),
-        ("dialogue", "Dialogue"),
+    labels = [
+        "Parse constraints\n+ actual history",
+        "Filter candidates\nALL required predicates",
+        "Rank eligible items\nCount + no repetition",
+        "Answer from evidence\nCitations + cards",
     ]
-    fig, ax = plt.subplots(figsize=(9.4, 4.0))
-    for arm, offset, color, fill, label in [
-        ("system", -0.16, BLUE, True, "Deployed system"),
-        ("baseline", 0.16, GOLD, False, "BM25 + LLM"),
-    ]:
-        values = [summary["arms"][arm]["families"][f] for f, _ in order]
-        widths = [100 * v["passed"] / v["attempted"] for v in values]
-        yy = [i + offset for i in range(len(order))]
-        ax.barh(
-            yy,
-            widths,
-            height=0.28,
-            color=color if fill else "white",
-            edgecolor=color,
-            lw=1,
-            hatch=None if fill else "///",
-            label=label,
-            zorder=3,
-        )
-        for y, x, v in zip(yy, widths, values):
-            ax.text(
-                x + 1.5, y, f"{v['passed']}/{v['attempted']}", va="center", fontsize=11, color=color
+    for i, label in enumerate(labels):
+        x = 0.08 + i * 2.55
+        ax.add_patch(Rectangle((x, 0.55), 2.32, 0.82, facecolor="#EFF4F8", edgecolor=BLUE, lw=1.2))
+        ax.text(x + 1.16, 0.96, label, ha="center", va="center", fontsize=10, color=INK)
+        if i < 3:
+            ax.add_patch(
+                FancyArrowPatch(
+                    (x + 2.32, 0.96),
+                    (x + 2.55, 0.96),
+                    arrowstyle="-|>",
+                    mutation_scale=12,
+                    color=GREY,
+                )
             )
-    ax.set_yticks(range(len(order)), [label for _, label in order])
-    ax.invert_yaxis()
-    ax.set_xlim(0, 116)
-    ax.set_xticks([0, 25, 50, 75, 100], ["0%", "25%", "50%", "75%", "100%"])
-    ax.set_xlabel("AI-reviewed task completion", fontsize=12)
-    ax.grid(axis="x", color="#DDE3E8", lw=0.6, zorder=0)
-    ax.spines[["top", "right"]].set_visible(False)
-    ax.tick_params(axis="y", length=0, labelsize=11)
-    ax.legend(frameon=False, loc="lower left", bbox_to_anchor=(0, 1.03), ncols=2, fontsize=11)
-    fig.subplots_adjust(left=0.32, right=0.965, top=0.86, bottom=0.17)
-    save_figure(fig, "family_results")
-
-    fig, ax = plt.subplots(figsize=(9.2, 2.2))
-    lo, hi = [100 * x for x in summary["paired"]["cluster_bootstrap_95pct"]]
-    delta = 100 * summary["paired"]["difference"]
-    ax.axvline(0, color=INK, lw=0.9, linestyle="--")
-    ax.plot([lo, hi], [0, 0], color=BLUE, lw=2)
-    ax.plot([lo, hi], [0, 0], "|", color=BLUE, ms=16, mew=1.5)
-    ax.plot(delta, 0, "o", color=BLUE, ms=9)
-    ax.text(delta, 0.2, f"{delta:+.1f} pp", ha="center", fontweight="bold", fontsize=12)
-    ax.text(lo, -0.18, f"{lo:+.1f}", ha="center", fontsize=11)
-    ax.text(hi, -0.18, f"{hi:+.1f}", ha="center", fontsize=11)
-    ax.set(
-        xlim=(-30, 22),
-        ylim=(-0.4, 0.46),
-        yticks=[],
-        xlabel="Deployed system − baseline (percentage points)",
-    )
-    ax.set_xticks([-30, -20, -10, 0, 10, 20])
-    ax.grid(axis="x", lw=0.5, color="#E0E6EB")
-    ax.spines[["left", "right", "top"]].set_visible(False)
-    fig.subplots_adjust(left=0.08, right=0.98, bottom=0.28, top=0.98)
-    save_figure(fig, "paired_difference")
+    fig.tight_layout(pad=0.2)
+    save_figure(fig, "constraint_pipeline")
+    family_chart(result, HERE)
 
 
 def register_fonts(directory):
@@ -414,8 +251,8 @@ def pdf(font_directory):
         rightMargin=48,
         topMargin=49,
         bottomMargin=48,
-        title="Hong Kong Movie RAG: Evidence-Grounded Question Answering and a Paired Diagnostic Evaluation",
-        author="COMP4136 project owner — identity fields pending",
+        title="Hong Kong Movie RAG: Evidence-Grounded Chinese Question Answering and Conversational Recommendations",
+        author="COMP4136 project owner; identity fields unfilled",
         subject="Metadata study; AI review; human audit pending",
         invariant=1,
     )
@@ -456,7 +293,7 @@ def pdf(font_directory):
                     table.append([Paragraph(inline(x), styles["CellReport"]) for x in row])
                 i += 1
             n = len(table[0])
-            colwidths = [width * 0.29, width * 0.71] if n == 2 else [width / n] * n
+            colwidths = [width * 0.36, width * 0.64] if n == 2 else [width / n] * n
             if n == 3:
                 colwidths = (
                     [width * 0.32, width * 0.13, width * 0.55]
@@ -489,9 +326,9 @@ def pdf(font_directory):
             height = target * h / w
             maxheight = {
                 "architecture.png": 175,
-                "family_results.png": 220,
+                "family_results.png": 195,
                 "paired_difference.png": 135,
-                "bm25_equation.png": 85,
+                "constraint_pipeline.png": 105,
             }.get(path.name, 250)
             if height > maxheight:
                 target *= maxheight / height
@@ -561,11 +398,11 @@ def pdf(font_directory):
         canvas.setFont("Body", 8)
         canvas.setFillColor(colors.HexColor(GREY))
         canvas.drawString(48, A4[1] - 27, "COMP4136  |  Hong Kong Movie RAG")
-        canvas.drawRightString(A4[0] - 48, A4[1] - 27, "Technical report · 5 October 2026")
+        canvas.drawRightString(A4[0] - 48, A4[1] - 27, "Final report | 5 October 2026")
         canvas.setStrokeColor(colors.HexColor("#D9E1E7"))
         canvas.setLineWidth(0.5)
         canvas.line(48, A4[1] - 34, A4[0] - 48, A4[1] - 34)
-        canvas.drawString(48, 25, "Frozen metadata evaluation · Report only")
+        canvas.drawString(48, 25, "Final project report | Metadata development evaluation")
         canvas.drawRightString(A4[0] - 48, 25, str(document.page))
         canvas.restoreState()
 
@@ -582,14 +419,16 @@ def main():
     output = pdf(args.font_directory)
     generated = (
         [output]
-        + sorted((HERE / "figures").glob("*.png"))
-        + sorted((HERE / "figures").glob("*.svg"))
+        + [HERE / "figures" / (name + ".png") for name in FIGURES]
+        + [HERE / "figures" / (name + ".svg") for name in FIGURES]
     )
     manifest = {
         "built_at_utc": datetime.now(UTC).isoformat(),
-        "evidence_checks": "passed; independent aggregate/paired/bootstrap reproduction",
+        "evidence_checks": "passed; exact paired evidence bytes and independent paired aggregate reproduction",
+        "reproduced_metrics": summary,
         "sources": {
             **EXPECTED,
+            "paired_evidence.py": sha(HERE / "paired_evidence.py"),
             "FINAL_REPORT.md": sha(HERE / "FINAL_REPORT.md"),
             "build_report.py": sha(Path(__file__)),
         },
@@ -606,7 +445,7 @@ def main():
         json.dumps(
             {
                 "report": str(output),
-                "figures": 4,
+                "figures": 3,
                 "evidence_checks": "passed",
                 "visual_review": "pending",
             },

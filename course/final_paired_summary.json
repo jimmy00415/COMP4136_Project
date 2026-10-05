@@ -1,0 +1,1423 @@
+{
+  "arms": {
+    "system": {
+      "planned": 60,
+      "attempted": 60,
+      "passed": 60,
+      "outcomes": {
+        "reasonable_clarification": 5,
+        "correct_answer": 44,
+        "reasonable_refusal": 11
+      },
+      "median_latency_s": 0.7634224999928847,
+      "families": {
+        "ambiguity": {
+          "attempted": 10,
+          "passed": 10
+        },
+        "boundary": {
+          "attempted": 10,
+          "passed": 10
+        },
+        "compound": {
+          "attempted": 10,
+          "passed": 10
+        },
+        "dialogue": {
+          "attempted": 20,
+          "passed": 20
+        },
+        "language": {
+          "attempted": 10,
+          "passed": 10
+        }
+      }
+    },
+    "baseline": {
+      "planned": 60,
+      "attempted": 60,
+      "passed": 50,
+      "outcomes": {
+        "reasonable_clarification": 5,
+        "correct_answer": 34,
+        "error": 10,
+        "reasonable_refusal": 11
+      },
+      "median_latency_s": 1.3489848999888636,
+      "families": {
+        "ambiguity": {
+          "attempted": 10,
+          "passed": 10
+        },
+        "boundary": {
+          "attempted": 10,
+          "passed": 10
+        },
+        "compound": {
+          "attempted": 10,
+          "passed": 7
+        },
+        "dialogue": {
+          "attempted": 20,
+          "passed": 13
+        },
+        "language": {
+          "attempted": 10,
+          "passed": 10
+        }
+      }
+    }
+  },
+  "paired": {
+    "complete_pairs": 60,
+    "both_pass": 50,
+    "system_only": 10,
+    "baseline_only": 0,
+    "both_fail": 0,
+    "difference": 0.16666666666666666,
+    "cluster_bootstrap_95pct": [
+      0.06779661016949153,
+      0.2833333333333333
+    ],
+    "clusters": 40
+  },
+  "mechanical": {
+    "arms": {
+      "system": {
+        "planned": 60,
+        "attempted": 60,
+        "passed": 60,
+        "outcomes": {
+          "reasonable_clarification": 5,
+          "correct_answer": 44,
+          "reasonable_refusal": 11
+        },
+        "median_latency_s": 0.7634224999928847,
+        "families": {
+          "ambiguity": {
+            "attempted": 10,
+            "passed": 10
+          },
+          "boundary": {
+            "attempted": 10,
+            "passed": 10
+          },
+          "compound": {
+            "attempted": 10,
+            "passed": 10
+          },
+          "dialogue": {
+            "attempted": 20,
+            "passed": 20
+          },
+          "language": {
+            "attempted": 10,
+            "passed": 10
+          }
+        }
+      },
+      "baseline": {
+        "planned": 60,
+        "attempted": 60,
+        "passed": 43,
+        "outcomes": {
+          "reasonable_clarification": 1,
+          "correct_answer": 34,
+          "error": 17,
+          "reasonable_refusal": 8
+        },
+        "median_latency_s": 1.3489848999888636,
+        "families": {
+          "ambiguity": {
+            "attempted": 10,
+            "passed": 6
+          },
+          "boundary": {
+            "attempted": 10,
+            "passed": 7
+          },
+          "compound": {
+            "attempted": 10,
+            "passed": 7
+          },
+          "dialogue": {
+            "attempted": 20,
+            "passed": 13
+          },
+          "language": {
+            "attempted": 10,
+            "passed": 10
+          }
+        }
+      }
+    },
+    "paired": {
+      "complete_pairs": 60,
+      "both_pass": 43,
+      "system_only": 17,
+      "baseline_only": 0,
+      "both_fail": 0,
+      "difference": 0.2833333333333333,
+      "cluster_bootstrap_95pct": [
+        0.1694915254237288,
+        0.4067796610169492
+      ],
+      "clusters": 40
+    }
+  },
+  "overrides": [
+    {
+      "case_id": "A2a",
+      "arm": "baseline",
+      "mechanical_score": {
+        "pass": false,
+        "outcome": "error",
+        "observed_action": "answer",
+        "reason": "ambiguous_title_answered_or_not_clarified",
+        "valid_citations": true
+      },
+      "audit_pass": true,
+      "audit_outcome": "reasonable_clarification",
+      "reason": "Root AI read complete actual answer: Lists both catalog versions and asks for year/ID; clarification wording missed by mechanical phrases."
+    },
+    {
+      "case_id": "A3a",
+      "arm": "baseline",
+      "mechanical_score": {
+        "pass": false,
+        "outcome": "error",
+        "observed_action": "answer",
+        "reason": "ambiguous_title_answered_or_not_clarified",
+        "valid_citations": true
+      },
+      "audit_pass": true,
+      "audit_outcome": "reasonable_clarification",
+      "reason": "Root AI read complete actual answer: Lists both catalog versions and asks for year/ID; clarification wording missed by mechanical phrases."
+    },
+    {
+      "case_id": "A4a",
+      "arm": "baseline",
+      "mechanical_score": {
+        "pass": false,
+        "outcome": "error",
+        "observed_action": "answer",
+        "reason": "ambiguous_title_answered_or_not_clarified",
+        "valid_citations": true
+      },
+      "audit_pass": true,
+      "audit_outcome": "reasonable_clarification",
+      "reason": "Root AI read complete actual answer: Lists both catalog versions and asks which version; clarification wording missed by mechanical phrases."
+    },
+    {
+      "case_id": "A5a",
+      "arm": "baseline",
+      "mechanical_score": {
+        "pass": false,
+        "outcome": "error",
+        "observed_action": "answer",
+        "reason": "ambiguous_title_answered_or_not_clarified",
+        "valid_citations": true
+      },
+      "audit_pass": true,
+      "audit_outcome": "reasonable_clarification",
+      "reason": "Root AI read complete actual answer: Lists both catalog versions and asks for year/ID; clarification wording missed by mechanical phrases."
+    },
+    {
+      "case_id": "B05",
+      "arm": "baseline",
+      "mechanical_score": {
+        "pass": false,
+        "outcome": "error",
+        "observed_action": "answer",
+        "reason": "unsupported_request_not_safely_refused",
+        "valid_citations": true
+      },
+      "audit_pass": true,
+      "audit_outcome": "reasonable_refusal",
+      "reason": "Root AI read complete actual answer: Explicitly says budget is not recorded; no invented monetary value; mechanical refusal phrase missed."
+    },
+    {
+      "case_id": "B06",
+      "arm": "baseline",
+      "mechanical_score": {
+        "pass": false,
+        "outcome": "error",
+        "observed_action": "answer",
+        "reason": "unsupported_request_not_safely_refused",
+        "valid_citations": true
+      },
+      "audit_pass": true,
+      "audit_outcome": "reasonable_refusal",
+      "reason": "Root AI read complete actual answer: Explicitly says box-office data is not recorded; no invented revenue; mechanical refusal phrase missed."
+    },
+    {
+      "case_id": "B07",
+      "arm": "baseline",
+      "mechanical_score": {
+        "pass": false,
+        "outcome": "error",
+        "observed_action": "answer",
+        "reason": "unsupported_request_not_safely_refused",
+        "valid_citations": true
+      },
+      "audit_pass": true,
+      "audit_outcome": "reasonable_refusal",
+      "reason": "Root AI read complete actual answer: Explicitly says IMDb rating is not recorded; no invented numeric rating; mechanical refusal phrase missed."
+    }
+  ],
+  "baseline_retrieval_diagnostics": [
+    {
+      "case_id": "A1a",
+      "expected": "clarify",
+      "retrieved_ids": [
+        "1994_XYXBS_001",
+        "1987_YXBSII_001",
+        "1986_YXBS_001",
+        "1973_YXBS_001",
+        "1989_YXBSIIIXYZG_001",
+        "1993_SHCZYXBS_001",
+        "2012_SSDPL_001",
+        "1998_WSS_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "A1b",
+      "expected": "fact",
+      "retrieved_ids": [
+        "1986_YXBS_001",
+        "1994_XYXBS_001",
+        "1987_YXBSII_001",
+        "1973_YXBS_001",
+        "1989_YXBSIIIXYZG_001",
+        "1993_SHCZYXBS_001",
+        "2012_SSDPL_001",
+        "1998_WSS_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "A2a",
+      "expected": "clarify",
+      "retrieved_ids": [
+        "1970_LHFY_001",
+        "1987_LHFY_001",
+        "1994_LHXFY_001",
+        "2012_SSDPL_001",
+        "1998_WSS_001",
+        "2018_CCWSS_001",
+        "1970_GZFY_001",
+        "2021_RSDXZLHD_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "A2b",
+      "expected": "fact",
+      "retrieved_ids": [
+        "1987_LHFY_001",
+        "1970_LHFY_001",
+        "1994_LHXFY_001",
+        "2012_SSDPL_001",
+        "1998_WSS_001",
+        "2018_CCWSS_001",
+        "1970_GZFY_001",
+        "2021_RSDXZLHD_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "A3a",
+      "expected": "clarify",
+      "retrieved_ids": [
+        "1970_XBLQ_001",
+        "1993_XBLQ_001",
+        "2012_SSDPL_001",
+        "1972_MXBLQ_001",
+        "2013_ZSMYGBBLWDSJ_001",
+        "1984_TBLDA_001",
+        "2018_CCWSS_001",
+        "1998_WSS_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "A3b",
+      "expected": "fact",
+      "retrieved_ids": [
+        "1993_XBLQ_001",
+        "1970_XBLQ_001",
+        "2012_SSDPL_001",
+        "1972_MXBLQ_001",
+        "2013_ZSMYGBBLWDSJ_001",
+        "1984_TBLDA_001",
+        "2018_CCWSS_001",
+        "1998_WSS_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "A4a",
+      "expected": "clarify",
+      "retrieved_ids": [
+        "1971_JYMT_001",
+        "1995_JYMT_001",
+        "2012_SSDPL_001",
+        "2018_CCWSS_001",
+        "1998_WSS_001",
+        "1977_JYLYHLM_001",
+        "1994_WJDA_001",
+        "1994_JJJSSXS_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "A4b",
+      "expected": "fact",
+      "retrieved_ids": [
+        "1995_JYMT_001",
+        "1971_JYMT_001",
+        "2012_SSDPL_001",
+        "2018_CCWSS_001",
+        "1998_WSS_001",
+        "1977_JYLYHLM_001",
+        "1994_WJDA_001",
+        "1994_JJJSSXS_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "A5a",
+      "expected": "clarify",
+      "retrieved_ids": [
+        "2012_SSDPL_001",
+        "1972_FSY_001",
+        "1976_FSYYHHQ_001",
+        "1993_FSY_001",
+        "1974_FSYYHXG_001",
+        "1977_XFFSY_001",
+        "1977_FSYDPMHZ_001",
+        "1993_FSYXJ_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "A5b",
+      "expected": "fact",
+      "retrieved_ids": [
+        "1993_FSY_001",
+        "2012_SSDPL_001",
+        "1972_FSY_001",
+        "1976_FSYYHHQ_001",
+        "1974_FSYYHXG_001",
+        "1977_XFFSY_001",
+        "1977_FSYDPMHZ_001",
+        "1993_FSYXJ_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "L1t",
+      "expected": "fact",
+      "retrieved_ids": [
+        "1988_JCGSXJ_001",
+        "1996_JCGS4ZJDRW_001",
+        "1985_JCGS_001",
+        "2004_XJCGS_001",
+        "1986_MGDGS_001",
+        "1977_CSDGS_001",
+        "1996_SGSSDJC_001",
+        "2009_EZDGS_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "L1s",
+      "expected": "fact",
+      "retrieved_ids": [
+        "1988_JCGSXJ_001",
+        "1996_JCGS4ZJDRW_001",
+        "1985_JCGS_001",
+        "2004_XJCGS_001",
+        "1986_MGDGS_001",
+        "1977_CSDGS_001",
+        "1996_SGSSDJC_001",
+        "2009_EZDGS_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "L2t",
+      "expected": "fact",
+      "retrieved_ids": [
+        "1994_ZQSL_001",
+        "1993_LSYY_001",
+        "1972_JGMRG_001",
+        "1971_XZ_001",
+        "1999_MSSL_001",
+        "2003_HBSL_001",
+        "2003_AHH_001",
+        "1996_XXFRIDAY_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "L2s",
+      "expected": "fact",
+      "retrieved_ids": [
+        "1994_ZQSL_001",
+        "1993_LSYY_001",
+        "1972_JGMRG_001",
+        "1971_XZ_001",
+        "1999_MSSL_001",
+        "2003_HBSL_001",
+        "2003_AHH_001",
+        "1996_XXFRIDAY_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "L3t",
+      "expected": "fact",
+      "retrieved_ids": [
+        "2001_SLZQ_001",
+        "1980_DYLXWX_001",
+        "2014_WYDQFDDYSJ_001",
+        "1978_NSLYBSL_001",
+        "1983_SLYWD_001",
+        "1985_SLSJDZ_001",
+        "1976_SLS_001",
+        "2006_SLJSTJ_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "L3s",
+      "expected": "fact",
+      "retrieved_ids": [
+        "2001_SLZQ_001",
+        "1980_DYLXWX_001",
+        "2014_WYDQFDDYSJ_001",
+        "1978_NSLYBSL_001",
+        "1983_SLYWD_001",
+        "1985_SLSJDZ_001",
+        "1976_SLS_001",
+        "2006_SLJSTJ_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "L4t",
+      "expected": "fact",
+      "retrieved_ids": [
+        "2000_HYNH_001",
+        "2012_SSDPL_001",
+        "2018_CCWSS_001",
+        "1998_WSS_001",
+        "2012_LZ_001",
+        "2025_XWZYDAQ_001",
+        "2016_MSSSNH_001",
+        "2012_XWZYDYGNZ_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "L4s",
+      "expected": "fact",
+      "retrieved_ids": [
+        "2000_HYNH_001",
+        "2012_SSDPL_001",
+        "2018_CCWSS_001",
+        "1998_WSS_001",
+        "2012_LZ_001",
+        "2025_XWZYDAQ_001",
+        "2016_MSSSNH_001",
+        "2012_XWZYDYGNZ_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "L5t",
+      "expected": "fact",
+      "retrieved_ids": [
+        "2003_WJDIIIZJWJ_001",
+        "2002_WJD_001",
+        "2003_WJDII_001",
+        "2012_SSDPL_001",
+        "2018_CCWSS_001",
+        "1998_WSS_001",
+        "1990_QNYHIIRJD_001",
+        "2020_WJXZZSSQX_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "L5s",
+      "expected": "fact",
+      "retrieved_ids": [
+        "2003_WJDIIIZJWJ_001",
+        "2002_WJD_001",
+        "2003_WJDII_001",
+        "2012_SSDPL_001",
+        "2018_CCWSS_001",
+        "1998_WSS_001",
+        "1990_QNYHIIRJD_001",
+        "2020_WJXZZSSQX_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "C01",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1980_QZG_001",
+        "1980_HJSD_001",
+        "1979_HX_001",
+        "1976_SLM_001",
+        "1975_THRQ_001",
+        "1977_FQH_001",
+        "1986_YXWL_001",
+        "1987_YXBSII_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1980_QZG_001",
+        "1980_HJSD_001",
+        "1986_YXWL_001",
+        "1987_YXBSII_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "C02",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1979_XQGZ_001",
+        "1980_SDCM_001",
+        "1988_JCGSXJ_001",
+        "1999_BLZ_001",
+        "1983_AJH_001",
+        "1982_LSY_001",
+        "1985_JCGS_001",
+        "1991_FYJH_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1980_SDCM_001",
+        "1988_JCGSXJ_001",
+        "1999_BLZ_001",
+        "1983_AJH_001",
+        "1982_LSY_001",
+        "1985_JCGS_001",
+        "1991_FYJH_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "C03",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1988_HWFY_001",
+        "1993_XXCLX_001",
+        "1997_XQBR_001",
+        "1997_JQZJ_001",
+        "1980_HJSD_001",
+        "1997_WQCHSC_001",
+        "1980_BZ_001",
+        "1988_ZJSY_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1980_HJSD_001",
+        "1980_BZ_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "C04",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1996_DS3ZSNDS_001",
+        "2020_RYAFCRSBQ13_001",
+        "1980_SB_001",
+        "1996_HYY_001",
+        "1980_ZZ_001",
+        "1999_SJSRKENF_001",
+        "1998_SSRTTW_001",
+        "1999_SSZYR_001"
+      ],
+      "eligible_retrieved_ids": [],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "C05",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1990_ADSJ_001",
+        "1991_ZZWSIIZYBTX_001",
+        "2005_HSH_001",
+        "1995_WWST_001",
+        "1999_AZ_001",
+        "1988_CSTJ_001",
+        "2006_FZ_001",
+        "1991_STZYZSN_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1991_ZZWSIIZYBTX_001",
+        "2005_HSH_001",
+        "1995_WWST_001",
+        "1999_AZ_001",
+        "2006_FZ_001",
+        "1991_STZYZSN_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "C06",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1989_ZZWS_001",
+        "1992_DCDHIIZZZWD_001",
+        "1993_ZZSSLJZTTHR_001",
+        "1991_ZZWSIIZYBTX_001",
+        "1994_SSDTH_001",
+        "1990_ZZJZYC_001",
+        "1990_CDFZ_001",
+        "1985_FWQ_001"
+      ],
+      "eligible_retrieved_ids": [],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "C07",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "2000_HYNH_001",
+        "1990_AFZC_001",
+        "2004_2046_001",
+        "1997_CGZX_001",
+        "1994_DXXD_001",
+        "1995_DLTS_001",
+        "1994_ZQSL_001",
+        "1988_WJKM_001"
+      ],
+      "eligible_retrieved_ids": [
+        "2000_HYNH_001",
+        "1990_AFZC_001",
+        "2004_2046_001",
+        "1997_CGZX_001",
+        "1994_DXXD_001",
+        "1995_DLTS_001",
+        "1994_ZQSL_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "C08",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1996_SS_001",
+        "1996_DNMTLLF_001",
+        "2001_SLZQ_001",
+        "1994_GCLLQ_001",
+        "2008_ZJ7H_001",
+        "1999_XJZW_001",
+        "2004_GF_001",
+        "2019_XXJZW_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1996_SS_001",
+        "1996_DNMTLLF_001",
+        "2001_SLZQ_001",
+        "1994_GCLLQ_001",
+        "2008_ZJ7H_001",
+        "1999_XJZW_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "C09",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1992_ZDAN_001",
+        "1990_AZBXDJJ_001",
+        "1986_MGDGS_001",
+        "1990_AFZC_001",
+        "2000_HYNH_001",
+        "1990_GGHC_001",
+        "1992_RLY_001",
+        "1988_ADTB_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1992_ZDAN_001",
+        "1990_AZBXDJJ_001",
+        "1990_AFZC_001",
+        "1990_GGHC_001",
+        "1992_RLY_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "C10",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "2000_SZWW_001",
+        "2003_WJDIIIZJWJ_001",
+        "2002_WJD_001",
+        "2003_WJDII_001",
+        "1990_PD_001",
+        "1998_XGHZZSNJDP_001",
+        "1993_XGQAZQJ_001",
+        "1997_97GHZZWBS_001"
+      ],
+      "eligible_retrieved_ids": [
+        "2000_SZWW_001",
+        "2003_WJDIIIZJWJ_001",
+        "2002_WJD_001",
+        "2003_WJDII_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "B01",
+      "expected": "refuse",
+      "retrieved_ids": [
+        "1984_NNFCS_001",
+        "1980_QT_001",
+        "1998_MQQYPJ_001",
+        "1982_YLB_001",
+        "2004_SWXZ_001",
+        "2013_GHZJHXZX_001",
+        "2001_WDXDJM_001",
+        "1987_XGXJXZ_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "B02",
+      "expected": "refuse",
+      "retrieved_ids": [
+        "1970_ZTJTMT_001",
+        "2000_WJDTK3ZJBY_001",
+        "1995_WJDTK_001",
+        "2003_DYDDTK_001",
+        "1998_MYXNDTK_001",
+        "1996_WJDTK2ZNSY_001",
+        "2003_JLDTKZMGTF_001",
+        "1981_DKS_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "B03",
+      "expected": "refuse",
+      "retrieved_ids": [
+        "2015_NYTWMHF_001",
+        "2002_WJYYZHDS_001",
+        "1970_WYJH_001",
+        "2021_WYZTW_001",
+        "1970_WYN_001",
+        "1998_YPTIIIGRWY_001",
+        "1989_WYFG_001",
+        "1976_GRWY_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "B04",
+      "expected": "refuse",
+      "retrieved_ids": [
+        "2003_LGDLBZDNR_001",
+        "1975_BGQA_001",
+        "1999_ZBMJH_001",
+        "2013_RWQS_001",
+        "1999_XJF_001",
+        "1980_LHBF_001",
+        "1990_WN_001",
+        "1978_LGJ_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "B05",
+      "expected": "refuse",
+      "retrieved_ids": [
+        "1986_YXBS_001",
+        "1989_YXBSIIIXYZG_001",
+        "1993_SHCZYXBS_001",
+        "1994_XYXBS_001",
+        "1987_YXBSII_001",
+        "1973_YXBS_001",
+        "1987_YXHH_001",
+        "1988_JRBS_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "B06",
+      "expected": "refuse",
+      "retrieved_ids": [
+        "1994_ZQSL_001",
+        "2021_ZSYAZGL_001",
+        "1983_JZXG_001",
+        "1993_SNQHZSS_001",
+        "1972_JGMRG_001",
+        "2017_NRYYSDD_001",
+        "1971_XZ_001",
+        "1999_MSSL_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "B07",
+      "expected": "refuse",
+      "retrieved_ids": [
+        "2000_HYNH_001",
+        "2012_LZ_001",
+        "1998_QNYHTBD_001",
+        "2025_XWZYDAQ_001",
+        "2016_MSSSNH_001",
+        "2012_XWZYDYGNZ_001",
+        "1996_RXGDZ3GHANDSUPDSN_001",
+        "1998_MSNL_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "B08",
+      "expected": "refuse",
+      "retrieved_ids": [
+        "2000_HYNH_001",
+        "2015_ZHYZLB_001",
+        "1996_GDZHYGBB_001",
+        "2013_ZSMYGBBLWDSJ_001",
+        "1988_ZGZHYGTJ_001",
+        "1987_ZHYZ_001",
+        "1990_JHZHYGDL_001",
+        "1992_ZGZHYGTJDEZGBZJC_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "B09",
+      "expected": "refuse",
+      "retrieved_ids": [
+        "1985_JCGS_001",
+        "1988_JCGSXJ_001",
+        "1996_JCGS4ZJDRW_001",
+        "2004_XJCGS_001",
+        "1996_SGSSDJC_001",
+        "2009_EZDGS_001",
+        "2003_ALDGS_001",
+        "1986_MGDGS_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "B10",
+      "expected": "refuse",
+      "retrieved_ids": [
+        "1994_ZQSL_001",
+        "2010_ZWXRW_001",
+        "1981_WXRW_001",
+        "1989_TQXS_001",
+        "1977_FTRW_001",
+        "2018_XLZZCSZG_001",
+        "1970_CXDR_001",
+        "1972_JGMRG_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M01.1",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1979_XQGZ_001",
+        "1980_SDCM_001",
+        "1988_JCGSXJ_001",
+        "1983_AJH_001",
+        "1982_LSY_001",
+        "1985_JCGS_001",
+        "1991_FYJH_001",
+        "1987_AJHXJ_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1980_SDCM_001",
+        "1988_JCGSXJ_001",
+        "1983_AJH_001",
+        "1982_LSY_001",
+        "1985_JCGS_001",
+        "1987_AJHXJ_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M01.2",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1980_SDCM_001",
+        "1983_AJH_001",
+        "1985_JCGS_001",
+        "1979_XQGZ_001",
+        "1998_WSS_001",
+        "1988_JCGSXJ_001",
+        "1982_LSY_001",
+        "1991_FYJH_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1998_WSS_001",
+        "1991_FYJH_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M02.1",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1980_HJSD_001",
+        "1980_QZG_001",
+        "1979_HX_001",
+        "1976_SLM_001",
+        "1975_THRQ_001",
+        "1977_FQH_001",
+        "1986_YXWL_001",
+        "1987_YXBSII_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1980_HJSD_001",
+        "1980_QZG_001",
+        "1986_YXWL_001",
+        "1987_YXBSII_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M02.2",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1980_HJSD_001",
+        "1980_QZG_001",
+        "1986_YXWL_001",
+        "1990_DXJT_001",
+        "1979_HX_001",
+        "1976_SLM_001",
+        "1975_THRQ_001",
+        "1977_FQH_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1990_DXJT_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M03.1",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1988_HWFY_001",
+        "2020_RYAFCRSBQ13_001",
+        "2000_WJDTK3ZJBY_001",
+        "1974_YZ_001",
+        "1973_CW_001",
+        "1993_XXCLX_001",
+        "1988_ZJSY_001",
+        "1993_DYJQ_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1988_HWFY_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M03.2",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1988_HWFY_001",
+        "2013_ZSMYGBBLWDSJ_001",
+        "2000_WJDTK3ZJBY_001",
+        "2020_RYAFCRSBQ13_001",
+        "1980_LMYT_001",
+        "2018_3GBF7TX_001",
+        "2021_MMWYYTLBQDSJ_001",
+        "1974_YZ_001"
+      ],
+      "eligible_retrieved_ids": [],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M04.1",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "2004_2046_001",
+        "1994_DXXD_001",
+        "1997_CGZX_001",
+        "2000_HYNH_001",
+        "1995_DLTS_001",
+        "1994_ZQSL_001",
+        "1988_WJKM_001",
+        "1990_AFZC_001"
+      ],
+      "eligible_retrieved_ids": [
+        "2004_2046_001",
+        "1994_DXXD_001",
+        "1997_CGZX_001",
+        "2000_HYNH_001",
+        "1995_DLTS_001",
+        "1994_ZQSL_001",
+        "1988_WJKM_001",
+        "1990_AFZC_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M04.2",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "2004_2046_001",
+        "1997_CGZX_001",
+        "1994_DXXD_001",
+        "1990_ADSJ_001",
+        "2014_WYDQFDDYSJ_001",
+        "2006_FZ_001",
+        "1989_ALDGS_001",
+        "2019_WDQWNY_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1990_ADSJ_001",
+        "2006_FZ_001",
+        "1989_ALDGS_001",
+        "2019_WDQWNY_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M05.1",
+      "expected": "fact",
+      "retrieved_ids": [
+        "2003_WJDIIIZJWJ_001",
+        "2002_WJD_001",
+        "2003_WJDII_001",
+        "2012_SSDPL_001",
+        "2018_CCWSS_001",
+        "1998_WSS_001",
+        "2020_WJXZZSSQX_001",
+        "1990_QNYHIIRJD_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "M05.2",
+      "expected": "fact",
+      "retrieved_ids": [
+        "2003_WJDIIIZJWJ_001",
+        "2002_WJD_001",
+        "2003_WJDII_001",
+        "2012_SSDPL_001",
+        "2018_CCWSS_001",
+        "1998_WSS_001",
+        "2015_NYTWMHF_001",
+        "2023_WJYZ_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "M06.1",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1979_XQGZ_001",
+        "1988_JCGSXJ_001",
+        "1983_AJH_001",
+        "1985_JCGS_001",
+        "1987_AJHXJ_001",
+        "1982_LSY_001",
+        "1980_SDCM_001",
+        "1991_FYJH_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1979_XQGZ_001",
+        "1988_JCGSXJ_001",
+        "1983_AJH_001",
+        "1985_JCGS_001",
+        "1987_AJHXJ_001",
+        "1982_LSY_001",
+        "1980_SDCM_001",
+        "1991_FYJH_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M06.2",
+      "expected": "fact",
+      "retrieved_ids": [
+        "1998_WSS_001",
+        "1979_XQGZ_001",
+        "1988_JCGSXJ_001",
+        "1983_AJH_001",
+        "2012_SSDPL_001",
+        "2018_CCWSS_001",
+        "1985_JCGS_001",
+        "1987_AJHXJ_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "M07.1",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1989_JZZNZZ3LZYZ_001",
+        "1984_TBLDA_001",
+        "1994_SSDTH_001",
+        "1994_ZQIII_001",
+        "1990_CDFZ_001",
+        "1991_YLGW_001",
+        "1985_FWQ_001",
+        "1993_TZDJ_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1989_JZZNZZ3LZYZ_001",
+        "1984_TBLDA_001",
+        "1994_SSDTH_001",
+        "1994_ZQIII_001",
+        "1990_CDFZ_001",
+        "1991_YLGW_001",
+        "1985_FWQ_001",
+        "1993_TZDJ_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M07.2",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1984_TBLDA_001",
+        "1989_JZZNZZ3LZYZ_001",
+        "1994_SSDTH_001",
+        "2022_BYWJWAN_001",
+        "1991_YLGW_001",
+        "1970_BYRTTZD_001",
+        "1970_WBYLH_001",
+        "2004_TXWZ_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1991_YLGW_001",
+        "2004_TXWZ_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M08.1",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1993_XXCLX_001",
+        "1988_ZJSY_001",
+        "1995_HYJQ_001",
+        "1974_YZ_001",
+        "1996_RXGDZ3GHANDSUPDSN_001",
+        "1988_HWFY_001",
+        "1973_CW_001",
+        "1993_DYJQ_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1988_ZJSY_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M08.2",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "1993_XXCLX_001",
+        "1988_HWFY_001",
+        "1988_ZJSY_001",
+        "1995_HYJQ_001",
+        "1974_YZ_001",
+        "1980_ZZ_001",
+        "1980_SB_001",
+        "1990_ZRNBH_001"
+      ],
+      "eligible_retrieved_ids": [
+        "1993_XXCLX_001",
+        "1990_ZRNBH_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M09.1",
+      "expected": "fact",
+      "retrieved_ids": [
+        "2001_SLZQ_001",
+        "1980_DYLXWX_001",
+        "2014_WYDQFDDYSJ_001",
+        "1978_NSLYBSL_001",
+        "1983_SLYWD_001",
+        "1985_SLSJDZ_001",
+        "1976_SLS_001",
+        "2006_SLJSTJ_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "M09.2",
+      "expected": "fact",
+      "retrieved_ids": [
+        "2001_SLZQ_001",
+        "1980_DYLXWX_001",
+        "1993_LSYY_001",
+        "2014_WYDQFDDYSJ_001",
+        "1978_NSLYBSL_001",
+        "1983_SLYWD_001",
+        "1996_SGSSDJC_001",
+        "1996_XXFRIDAY_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": true
+    },
+    {
+      "case_id": "M10.1",
+      "expected": "recommend",
+      "retrieved_ids": [
+        "2004_2046_001",
+        "1994_DXXD_001",
+        "1997_CGZX_001",
+        "2000_HYNH_001",
+        "1995_DLTS_001",
+        "1994_ZQSL_001",
+        "1988_WJKM_001",
+        "1990_AFZC_001"
+      ],
+      "eligible_retrieved_ids": [
+        "2004_2046_001",
+        "1994_DXXD_001",
+        "1997_CGZX_001",
+        "2000_HYNH_001",
+        "1995_DLTS_001",
+        "1994_ZQSL_001",
+        "1988_WJKM_001",
+        "1990_AFZC_001"
+      ],
+      "fact_target_retrieved": null
+    },
+    {
+      "case_id": "M10.2",
+      "expected": "refuse",
+      "retrieved_ids": [
+        "2004_2046_001",
+        "1997_CGZX_001",
+        "1994_DXXD_001",
+        "2000_HYNH_001",
+        "1995_DLTS_001",
+        "1994_ZQSL_001",
+        "1988_WJKM_001",
+        "1990_AFZC_001"
+      ],
+      "eligible_retrieved_ids": null,
+      "fact_target_retrieved": null
+    }
+  ],
+  "baseline_token_totals": {
+    "prompt_token_count": 109505,
+    "candidates_token_count": 9236,
+    "total_token_count": 118741
+  },
+  "baseline_usage_records": 60,
+  "responses_sha256": "6567f1d86c43f03c18234580c54df22917a283a8b362d782a16032ab4d17fedb",
+  "audit_sha256": "bc2d7f467f74868eaf30b5879bd5296c786bc31aa710e6dd6bc8325bb069b491",
+  "reviewer_type": "AI",
+  "human_audits": "pending",
+  "submission_ready": false,
+  "computed_at": "2026-10-05T13:14:04.939304+00:00",
+  "study": "Fresh current-revision paired known-case development comparison",
+  "unseen_holdout": false,
+  "execution": {
+    "completed_at": "2026-10-05T13:11:52.461430+00:00",
+    "stopped_early": false,
+    "release_stable": true,
+    "frozen_inputs_unchanged": true,
+    "config_after": {
+      "access_mode": "public_tech_demo",
+      "rag_release_id": "v1.2-demo-r3",
+      "manifest_sha256": "97a8ca8f431f4904e967f0646fc6bb99387c4944dddea2570d816874a4f0478a",
+      "status": "active",
+      "embedding_model": "gemini-embedding-2",
+      "embedding_dimension": 768,
+      "generation_model": "gemini-3.5-flash-lite",
+      "relevance_policy_sha256": "d6db5e118aeea5dc0484f3c591baac666952f78f4d41bfdcdbbb58693f4f6bba",
+      "poster_authority_sha256": "c50ff06a88f91296b63bd74a1e4a6485785bdc4c07e73d09b407a126927c8137",
+      "serving_revision": "hk-movie-rag-demo-00001-qfix-0a81de7",
+      "image_digest": "sha256:6c031ad921888783e1167dca78e0138cf45ff4c34b0a17f58a1c9847ada92cbd",
+      "facets": {
+        "total": 4659,
+        "tier_s": 51,
+        "tier_a": 313,
+        "tier_b": 4295,
+        "pilot_movies": 24
+      },
+      "counts": {
+        "movies": 4659,
+        "media_assets": 4659,
+        "metadata_passages": 4659,
+        "movie_documents": 5,
+        "pdf_passages": 21,
+        "embeddings": 4680
+      }
+    }
+  },
+  "measured_runner_sha256": "b0aa2684ba1e52424039b63a49aceb55cf947f7f933a50fb0bf88ef17c03fae1",
+  "freeze_sha256": "93476c67efd75c522e1641a74f871f400d8008869565aa6fb75651ca3b901213",
+  "card_field_audit": {
+    "system": {
+      "checked": 784,
+      "mismatches": 0
+    },
+    "baseline": {
+      "checked": 680,
+      "mismatches": 0
+    },
+    "fields": [
+      "movie_id",
+      "chinese_title",
+      "english_title",
+      "release_date",
+      "director",
+      "cast",
+      "genre",
+      "tier"
+    ],
+    "outside_scope": [
+      "pilot_movie",
+      "poster_url",
+      "independent real-world truth"
+    ]
+  },
+  "scope": "Known selected development cases; unequal internal retries/fallback; not population accuracy or causal ablation. Cluster bootstrap in summary is descriptive for this selected set, not generalization evidence."
+}

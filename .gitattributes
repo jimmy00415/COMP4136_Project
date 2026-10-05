@@ -21,3 +21,15 @@ course/query_fix_answers.jsonl -text
 course/query_fix_review.json -text
 course/query_fix_summary.json -text
 course/query_fix_eval_run1.py -text
+
+# Exact bytes of the final contemporaneous paired comparison.
+course/final_paired_answers.jsonl -text
+course/final_paired_review.json -text
+course/final_paired_summary.json -text
+course/final_paired_freeze.json -text
+course/final_paired_eval.py text eol=lf
+course/final-comparison-plan.md text eol=lf
+course/query_fix_eval.py text eol=lf
+course/run_simple_eval.py text eol=lf
+course/test_final_paired_eval.py text eol=lf
+course/FINAL_COMPARISON_RESULTS.md text eol=lf
