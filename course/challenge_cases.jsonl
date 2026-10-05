@@ -1,0 +1,60 @@
+{"candidates": ["1973_YXBS_001", "1986_YXBS_001"], "cluster": "A1", "expected": "clarify", "family": "ambiguity", "id": "A1a", "question": "《英雄本色》的導演是誰？"}
+{"cluster": "A1", "expected": "fact", "family": "ambiguity", "field": "director", "id": "A1b", "movie_id": "1986_YXBS_001", "question": "電影 ID 1986_YXBS_001《英雄本色》的導演是誰？"}
+{"candidates": ["1970_LHFY_001", "1987_LHFY_001"], "cluster": "A2", "expected": "clarify", "family": "ambiguity", "id": "A2a", "question": "《龍虎風雲》的導演是誰？"}
+{"cluster": "A2", "expected": "fact", "family": "ambiguity", "field": "director", "id": "A2b", "movie_id": "1987_LHFY_001", "question": "電影 ID 1987_LHFY_001《龍虎風雲》的導演是誰？"}
+{"candidates": ["1970_XBLQ_001", "1993_XBLQ_001"], "cluster": "A3", "expected": "clarify", "family": "ambiguity", "id": "A3a", "question": "《新不了情》的導演是誰？"}
+{"cluster": "A3", "expected": "fact", "family": "ambiguity", "field": "director", "id": "A3b", "movie_id": "1993_XBLQ_001", "question": "電影 ID 1993_XBLQ_001《新不了情》的導演是誰？"}
+{"candidates": ["1971_JYMT_001", "1995_JYMT_001"], "cluster": "A4", "expected": "clarify", "family": "ambiguity", "id": "A4a", "question": "《金玉滿堂》的導演是誰？"}
+{"cluster": "A4", "expected": "fact", "family": "ambiguity", "field": "director", "id": "A4b", "movie_id": "1995_JYMT_001", "question": "電影 ID 1995_JYMT_001《金玉滿堂》的導演是誰？"}
+{"candidates": ["1972_FSY_001", "1993_FSY_001"], "cluster": "A5", "expected": "clarify", "family": "ambiguity", "id": "A5a", "question": "《方世玉》的導演是誰？"}
+{"cluster": "A5", "expected": "fact", "family": "ambiguity", "field": "director", "id": "A5b", "movie_id": "1993_FSY_001", "question": "電影 ID 1993_FSY_001《方世玉》的導演是誰？"}
+{"cluster": "L1", "expected": "fact", "family": "language", "field": "year", "id": "L1t", "movie_id": "1985_JCGS_001", "question": "請查詢《警察故事》的上映年份。"}
+{"cluster": "L1", "expected": "fact", "family": "language", "field": "year", "id": "L1s", "movie_id": "1985_JCGS_001", "question": "请查询《警察故事》的上映年份。"}
+{"cluster": "L2", "expected": "fact", "family": "language", "field": "cast", "id": "L2t", "movie_id": "1994_ZQSL_001", "question": "《重慶森林》的演員有哪些？"}
+{"cluster": "L2", "expected": "fact", "family": "language", "field": "cast", "id": "L2s", "movie_id": "1994_ZQSL_001", "question": "《重庆森林》的演员有哪些？"}
+{"cluster": "L3", "expected": "fact", "family": "language", "field": "genre", "id": "L3t", "movie_id": "2001_SLZQ_001", "question": "《少林足球》的電影類型有哪些？"}
+{"cluster": "L3", "expected": "fact", "family": "language", "field": "genre", "id": "L3s", "movie_id": "2001_SLZQ_001", "question": "《少林足球》的电影类型有哪些？"}
+{"cluster": "L4", "expected": "fact", "family": "language", "field": "director", "id": "L4t", "movie_id": "2000_HYNH_001", "question": "《花樣年華》的導演是誰？"}
+{"cluster": "L4", "expected": "fact", "family": "language", "field": "director", "id": "L4s", "movie_id": "2000_HYNH_001", "question": "《花样年华》的导演是谁？"}
+{"cluster": "L5", "expected": "fact", "family": "language", "field": "screenwriter", "id": "L5t", "movie_id": "2002_WJD_001", "question": "《無間道》的編劇是誰？"}
+{"cluster": "L5", "expected": "fact", "family": "language", "field": "screenwriter", "id": "L5s", "movie_id": "2002_WJD_001", "question": "《无间道》的编剧是谁？"}
+{"cluster": "C01", "constraints": {"director": "吳宇森", "genre": "動作", "year_max": 1999, "year_min": 1980}, "count": 3, "eligible_count": 11, "expected": "recommend", "family": "compound", "id": "C01", "question": "推薦3部1980至1999年吳宇森導演的動作片。"}
+{"cluster": "C02", "constraints": {"cast": "成龍", "genre": "動作", "year_max": 1999, "year_min": 1980}, "count": 3, "eligible_count": 28, "expected": "recommend", "family": "compound", "id": "C02", "question": "推薦3部1980至1999年成龍主演的動作電影。"}
+{"cluster": "C03", "constraints": {"genres_all": ["動作", "喜劇"], "year_max": 1989, "year_min": 1980}, "count": 3, "eligible_count": 121, "expected": "recommend", "family": "compound", "id": "C03", "question": "推薦3部1980年代同時屬於動作和喜劇的電影。"}
+{"cluster": "C04", "constraints": {"genre": "動作", "tier": "S", "year_max": 1999, "year_min": 1980}, "count": 3, "eligible_count": 20, "expected": "recommend", "family": "compound", "id": "C04", "question": "推薦3部1980至1999年S級動作電影。"}
+{"cluster": "C05", "constraints": {"director": "杜琪峯", "genre": "犯罪", "year_max": 2009, "year_min": 1990}, "count": 3, "eligible_count": 14, "expected": "recommend", "family": "compound", "id": "C05", "question": "推薦3部1990至2009年杜琪峯導演的犯罪電影。"}
+{"cluster": "C06", "constraints": {"cast": "劉德華", "genre": "犯罪", "year_max": 2009, "year_min": 2000}, "count": 3, "eligible_count": 6, "expected": "recommend", "family": "compound", "id": "C06", "question": "推薦3部2000至2009年劉德華主演的犯罪電影。"}
+{"cluster": "C07", "constraints": {"director": "王家衞", "genre": "劇情", "year_max": 2009, "year_min": 1990}, "count": 3, "eligible_count": 7, "expected": "recommend", "family": "compound", "id": "C07", "question": "推薦3部1990至2009年王家衞導演的劇情片。"}
+{"cluster": "C08", "constraints": {"director": "周星馳", "genre": "喜劇", "year_max": 2010, "year_min": 1990}, "count": 3, "eligible_count": 6, "expected": "recommend", "family": "compound", "id": "C08", "question": "推薦3部1990至2010年周星馳導演的喜劇電影。"}
+{"cluster": "C09", "constraints": {"cast": "張曼玉", "genre": "愛情", "year_max": 1999, "year_min": 1990}, "count": 3, "eligible_count": 13, "expected": "recommend", "family": "compound", "id": "C09", "question": "推薦3部1990年代張曼玉主演的愛情片。"}
+{"cluster": "C10", "constraints": {"director": "劉偉強", "genre": "犯罪", "year_max": 2009, "year_min": 2000}, "count": 3, "eligible_count": 4, "expected": "recommend", "family": "compound", "id": "C10", "question": "推薦3部2000至2009年劉偉強導演的犯罪片。"}
+{"cluster": "B01", "expected": "refuse", "family": "boundary", "id": "B01", "question": "請幫我寫Python排序程式。", "unsupported": "domain"}
+{"cluster": "B02", "expected": "refuse", "family": "boundary", "id": "B02", "question": "告訴我明天香港的天氣。", "unsupported": "domain"}
+{"cluster": "B03", "expected": "refuse", "family": "boundary", "id": "B03", "question": "我要投資哪一隻股票？", "unsupported": "domain"}
+{"cluster": "B04", "expected": "refuse", "family": "boundary", "id": "B04", "question": "如何做法式牛角包？", "unsupported": "domain"}
+{"cluster": "B05", "expected": "refuse", "family": "boundary", "id": "B05", "question": "電影 ID 1986_YXBS_001《英雄本色》的製作預算是多少港元？", "unsupported": "budget"}
+{"cluster": "B06", "expected": "refuse", "family": "boundary", "id": "B06", "question": "《重慶森林》在香港的總票房是多少？", "unsupported": "box_office"}
+{"cluster": "B07", "expected": "refuse", "family": "boundary", "id": "B07", "question": "《花樣年華》的IMDb評分是多少？", "unsupported": "rating"}
+{"cluster": "B08", "expected": "refuse", "family": "boundary", "id": "B08", "question": "《花樣年華》最後一幕每句對白是甚麼？", "unsupported": "dialogue"}
+{"cluster": "B09", "expected": "refuse", "family": "boundary", "id": "B09", "question": "逐場分析電影 ID 1985_JCGS_001《警察故事》的鏡頭語言。", "unsupported": "scene_analysis"}
+{"cluster": "B10", "expected": "refuse", "family": "boundary", "id": "B10", "question": "電影 ID 1994_ZQSL_001《重慶森林》的人物心理轉變有哪些？請根據詳細情節分析。", "unsupported": "character_analysis"}
+{"cluster": "M01", "constraints": {"cast": "成龍", "genre": "動作", "year_max": 1989, "year_min": 1980}, "count": 3, "eligible_count": 17, "expected": "recommend", "family": "dialogue", "id": "M01.1", "question": "推薦3部1980年代成龍主演的動作片。", "session": "M01", "turn": 1}
+{"cluster": "M01", "constraints": {"cast": "成龍", "genre": "動作", "year_max": 1999, "year_min": 1990}, "count": 3, "eligible_count": 11, "expected": "recommend", "family": "dialogue", "id": "M01.2", "question": "改成1990年代，仍然是成龍主演的動作片，推薦3部。", "session": "M01", "turn": 2}
+{"cluster": "M02", "constraints": {"director": "吳宇森", "genre": "動作", "year_max": 1989, "year_min": 1980}, "count": 3, "eligible_count": 8, "expected": "recommend", "family": "dialogue", "id": "M02.1", "question": "推薦3部1980年代吳宇森導演的動作片。", "session": "M02", "turn": 1}
+{"cluster": "M02", "constraints": {"director": "吳宇森", "genre": "動作", "year_max": 1999, "year_min": 1990}, "count": 3, "eligible_count": 3, "expected": "recommend", "family": "dialogue", "id": "M02.2", "question": "改成1990年代，其他條件不變，推薦3部。", "session": "M02", "turn": 2}
+{"cluster": "M03", "constraints": {"genre": "犯罪", "year_max": 1989, "year_min": 1980}, "count": 3, "eligible_count": 139, "expected": "recommend", "family": "dialogue", "id": "M03.1", "question": "推薦3部1980年代的犯罪電影。", "session": "M03", "turn": 1}
+{"cluster": "M03", "constraints": {"genre": "犯罪", "year_max": 1999, "year_min": 1990}, "count": 3, "eligible_count": 282, "expected": "recommend", "family": "dialogue", "id": "M03.2", "question": "改成1990年代，其他條件不變。", "session": "M03", "turn": 2}
+{"cluster": "M04", "constraints": {"director": "王家衞"}, "count": 3, "eligible_count": 9, "expected": "recommend", "family": "dialogue", "id": "M04.1", "question": "推薦3部王家衞導演的電影。", "session": "M04", "turn": 1}
+{"cluster": "M04", "constraints": {"director": "杜琪峯"}, "count": 3, "eligible_count": 50, "expected": "recommend", "family": "dialogue", "id": "M04.2", "question": "現在換成杜琪峯導演的，推薦3部。", "session": "M04", "turn": 2}
+{"cluster": "M05", "expected": "fact", "family": "dialogue", "field": "director", "id": "M05.1", "movie_id": "2002_WJD_001", "question": "《無間道》的導演是誰？", "session": "M05", "turn": 1}
+{"cluster": "M05", "expected": "fact", "family": "dialogue", "field": "year", "history_ordinal": 1, "id": "M05.2", "question": "它是哪一年上映的？", "session": "M05", "turn": 2}
+{"cluster": "M06", "constraints": {"cast": "成龍"}, "count": 3, "eligible_count": 45, "expected": "recommend", "family": "dialogue", "id": "M06.1", "question": "推薦3部成龍主演的電影。", "session": "M06", "turn": 1}
+{"cluster": "M06", "expected": "fact", "family": "dialogue", "field": "director", "history_ordinal": 2, "id": "M06.2", "question": "第二部的導演是誰？", "session": "M06", "turn": 2}
+{"cluster": "M07", "constraints": {"cast": "劉德華"}, "count": 3, "eligible_count": 129, "expected": "recommend", "family": "dialogue", "id": "M07.1", "question": "推薦3部劉德華主演的電影。", "session": "M07", "turn": 1}
+{"cluster": "M07", "constraints": {"cast": "劉德華"}, "count": 3, "eligible_count": 129, "exclude_previous": true, "expected": "recommend", "family": "dialogue", "id": "M07.2", "question": "再推薦3部，不要與剛才重複。", "session": "M07", "turn": 2}
+{"cluster": "M08", "constraints": {"genre": "喜劇", "year_max": 1989, "year_min": 1980}, "count": 3, "eligible_count": 321, "expected": "recommend", "family": "dialogue", "id": "M08.1", "question": "推薦3部1980年代的喜劇電影。", "session": "M08", "turn": 1}
+{"cluster": "M08", "constraints": {"genre": "動作", "year_max": 1999, "year_min": 1990}, "count": 3, "eligible_count": 373, "expected": "recommend", "family": "dialogue", "id": "M08.2", "question": "改為1990年代的動作片，推薦3部。", "session": "M08", "turn": 2}
+{"cluster": "M09", "expected": "fact", "family": "dialogue", "field": "genre", "id": "M09.1", "movie_id": "2001_SLZQ_001", "question": "《少林足球》的電影類型有哪些？", "session": "M09", "turn": 1}
+{"cluster": "M09", "expected": "fact", "family": "dialogue", "field": "cast", "history_ordinal": 1, "id": "M09.2", "question": "它的演員有哪些？", "session": "M09", "turn": 2}
+{"cluster": "M10", "constraints": {"director": "王家衞"}, "count": 3, "eligible_count": 9, "expected": "recommend", "family": "dialogue", "id": "M10.1", "question": "推薦3部王家衞導演的電影。", "session": "M10", "turn": 1}
+{"cluster": "M10", "expected": "refuse", "family": "dialogue", "id": "M10.2", "question": "現在請幫我寫Python排序程式。", "session": "M10", "turn": 2, "unsupported": "domain"}
