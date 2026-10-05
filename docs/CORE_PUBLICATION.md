@@ -13,4 +13,10 @@ Verified locally before publication:
 - 11 offline course evaluator unit tests passed. These use mocked transports and send no live requests.
 - Staged core files and Git destination checked; credential-pattern scan found no matches.
 
-External-data integration tests require the governed film release and PDFs and are not claimed to pass in this source-only checkout. Live study inputs and receipts remain outside this core publication. This Git push does not represent course-platform submission or human approval.
+External-data integration tests require the governed film release and PDFs and are not claimed to pass in this source-only checkout. This Git push does not represent course-platform submission or human approval.
+
+## 5 October challenge supplement
+
+The new paired evaluation adds 60 frozen turns per implementation, a local BM25 baseline with the same configured generator, strict output checks, actual arm-specific history, and offline explicit AI review. The corrected 120-call run and its parent protocol failure are disclosed in [CHALLENGE_RESULTS.md](../course/CHALLENGE_RESULTS.md). Root AI reviewed all 120 outputs/errors: deployed system 41/60, baseline 44/60; dialogue 18/20 versus 8/20. This is an author-selected implementation comparison, not an independent holdout or causal retriever ablation.
+
+Public files include the 60 cases, safe projections of actual answers, explicit AI verdicts and reviewed summaries. Full catalog, raw operating/provider receipts, original study inputs and credentials remain external. Application source, release and cloud resource configuration are unchanged. No PDF or presentation was generated. The new focused course suite has 33 tests; the earlier 171 configuration/deployment checks are historical validation, not a newly rerun full integration suite. Human audits are pending and submission_ready remains false.

@@ -1,6 +1,9 @@
-tests/fixtures/analysis/**/*.md text eol=lf
-evals/*.jsonl text eol=lf
-evals/*.json text eol=lf
-src/hk_movie_rag/policies/*.json text eol=lf
-src/hk_movie_rag/policies/*.jsonl text eol=lf
-src/hk_movie_rag/authorities/*.json text eol=lf
+# Preserve the challenge's exact frozen inputs and runtime source bytes.
+course/challenge_cases.jsonl text eol=lf
+course/challenge_eval.py text eol=lf
+course/prepare_challenge.py text eol=lf
+course/review_challenge.py text eol=lf
+# Evidence hashes refer to these exact exported bytes, including line endings.
+course/challenge_review.json -text whitespace=cr-at-eol
+course/challenge_summary.json -text whitespace=cr-at-eol
+course/challenge_answers.jsonl -text

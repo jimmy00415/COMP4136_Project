@@ -1,0 +1,973 @@
+{
+  "reviewer": "Root AI",
+  "reviewer_type": "AI",
+  "status": "complete",
+  "responses_sha256": "ab7edac1319e7281e4f8cabcaec927a8367039e4ba5da6d4abde2abfb3ac10fe",
+  "human_audits": "pending",
+  "submission_ready": false,
+  "entries": [
+    {
+      "case_id": "A1a",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Read full answer: identifies the two catalog versions and asks for year/movie identity; does not pick an unqualified version.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A1a",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Read full answer: identifies the two catalog versions and asks for year/movie identity; does not pick an unqualified version.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A1b",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Explicit movie ID and director match catalog and marked citation.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A1b",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Unnecessary evidence-limit refusal despite the explicit target and its available director field.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A2a",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Read full answer: identifies the two catalog versions and asks for year/movie identity; does not pick an unqualified version.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A2a",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Read full answer: identifies the two catalog versions and asks for year/movie identity; does not pick an unqualified version.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A2b",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Explicit movie ID and director match catalog and marked citation.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A2b",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Unnecessary evidence-limit refusal despite the explicit target and its available director field.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A3a",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Read full answer: identifies the two catalog versions and asks for year/movie identity; does not pick an unqualified version.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A3a",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Read full answer: identifies the two catalog versions and asks for year/movie identity; does not pick an unqualified version.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A3b",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Explicit movie ID and director match catalog and marked citation.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A3b",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Unnecessary evidence-limit refusal despite the explicit target and its available director field.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A4a",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Read full answer: identifies the two catalog versions and asks for year/movie identity; does not pick an unqualified version.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A4a",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Read full answer: identifies the two catalog versions and asks for year/movie identity; does not pick an unqualified version.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A4b",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Explicit movie ID and director match catalog and marked citation.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A4b",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Unnecessary evidence-limit refusal despite the explicit target and its available director field.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A5a",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Read full answer: identifies the two catalog versions and asks for year/movie identity; does not pick an unqualified version.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A5a",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_clarification",
+      "reason": "Read full answer: identifies the two catalog versions and asks for year/movie identity; does not pick an unqualified version.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A5b",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Explicit movie ID and director match catalog and marked citation.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "A5b",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Unnecessary evidence-limit refusal despite the explicit target and its available director field.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L1t",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Year is available in the target metadata but the service refuses the natural query wording.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L1t",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L1s",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L1s",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Year is available in the target metadata but the service refuses the natural query wording.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L2t",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L2t",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L2s",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L2s",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L3t",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L3t",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L3s",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L3s",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L4t",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L4t",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L4s",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L4s",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L5t",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L5t",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L5s",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "L5s",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Read full fact answer; required values and target metadata citation agree with the frozen catalog.",
+      "reviewed_at": "2026-10-05T10:44:26.840543+00:00"
+    },
+    {
+      "case_id": "C01",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Year range was narrowed to 1980-1980 and available corpus recommendations were refused.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C01",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three cited movies meet director alias, action and full requested year range.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C02",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three distinct cited movies satisfy cast, genre and requested year range.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C02",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three distinct cast/action/year-eligible movies; all stated metadata facts and marked citations agree.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C03",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Includes Martial Club 1981_WG_001, whose catalog genre lacks comedy; violates conjunction.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C03",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Safe partial answer: only two eligible movies were retrieved and returned; corpus has 121 and task asks three.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C04",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Safe retrieval insufficiency: no eligible S-tier records in top eight; catalog has 20 matches.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C04",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Year-range narrowing yields an erroneous insufficient-result response; catalog has 20 eligible movies.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C05",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Narrows requested range to 1990-1990 and gives zero results despite 14 eligible catalog records.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C05",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three cited Johnnie To crime films in the requested range; aliases and years verified.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C06",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Safe retrieval insufficiency: zero eligible movies in top eight although catalog has six.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C06",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Narrows requested range to 2000-2000 and gives zero results despite 6 eligible catalog records.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C07",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Range narrowed to 1990-1990; task requires 3 movies and catalog contains 7.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C07",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three cited Wong Kar Wai drama movies satisfy the full range and director metadata.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C08",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Reader underuses evidence: only two movies returned while six retrieved records meet the requested co-director/comedy/year criteria.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C08",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Range narrowed to 1990-1990; no requested three-movie recommendation despite 6 catalog matches.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C09",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three unique romantic films starring Maggie Cheung in the requested decade, with correct citations.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C09",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three distinct Maggie Cheung romantic movies in the decade; facts and citations match metadata.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C10",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three cited crime movies meet the director including co-director and year-range constraints.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "C10",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Narrows year range to 2000-2000 and underanswers despite 4 eligible catalog records.",
+      "reviewed_at": "2026-10-05T10:45:02.970964+00:00"
+    },
+    {
+      "case_id": "B01",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B01",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B02",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B02",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B03",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B03",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B04",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B04",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B05",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B05",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B06",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B06",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B07",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B07",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B08",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B08",
+      "arm": "system",
+      "pass": false,
+      "outcome": "transport_error",
+      "reason": "Actual RemoteDisconnected call failure; no answer and no retry.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B09",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Safely supplies no scene analysis but wrongly diagnoses a movie/person-list request that the user did not make; refusal justification is incorrect.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B09",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B10",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "B10",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Read full answer: declines unsupported domain/evidence request without supplying requested unsupported facts; any metadata citation identity is valid.",
+      "reviewed_at": "2026-10-05T10:45:47.453550+00:00"
+    },
+    {
+      "case_id": "M01.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three distinct 1980s Jackie Chan action films, correct cited metadata.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M01.1",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three distinct eligible Jackie Chan action movies, grounded in retrieved metadata.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M01.2",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Only two eligible movies retrieved and returned; safe underanswer to a three-movie request.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M01.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Correctly replaces decade with 1990s and returns three eligible movies.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M02.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three cited John Woo action movies in the 1980s; director and credits verified.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M02.1",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Returns only two while four retrieved metadata records satisfy the director/genre/decade; reader underuses evidence.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M02.2",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Returns one eligible film; top eight contain only one although catalog contains three.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M02.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Maintains director and action filter, replaces decade, returns all three eligible films.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M03.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three cited crime movies in the 1980s with correct dates/credits/genres.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M03.1",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "One eligible movie in retrieval and response; safe partial answer, task requires three.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M03.2",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Zero eligible retrieved records; safely declines but does not complete feasible catalog task.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M03.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Retains crime genre, changes decade and returns three valid recommendations.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M04.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three Wong Kar Wai films with correct metadata and distinct citations.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M04.1",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three distinct Wong Kar Wai films with correct identities.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M04.2",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Switches to Johnnie To and returns three correct distinct director matches.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M04.2",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Fails to resolve an existing director after natural person-switch wording; no required recommendations.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M05.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Exact title director answer includes both catalog co-directors, correctly cited.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M05.1",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Incorrectly treats sequels with different titles as same-title versions and requires unnecessary disambiguation, despite listing correct credits.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M05.2",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Continues false sequel ambiguity and requests disambiguation of the original exact title, rather than a resolved year answer.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M05.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Resolves pronoun to its own previous target and states catalog year/date.",
+      "reviewed_at": "2026-10-05T10:46:53.781238+00:00"
+    },
+    {
+      "case_id": "M06.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three cited Jackie Chan films with accurate metadata.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M06.1",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three distinct Jackie Chan films, correct dates and citations.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M06.2",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Correctly resolves own second card to Police Story sequel and director Jackie Chan; not graded against the other arm list.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M06.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Correctly resolves own second card to Drunken Master and its director Yuen Woo-ping.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M07.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three unique Andy Lau cast records, credits and cited facts match catalog.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M07.1",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three unique Andy Lau movies from evidence with correct titles and citations.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M07.2",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Two unseen eligible movies after excluding own three prior cards; safe retrieval undercoverage, not a complete three-movie response.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M07.2",
+      "arm": "system",
+      "pass": false,
+      "outcome": "error",
+      "reason": "No recommendation; misreads no-repeat follow-up as multiple positive people despite one active actor.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M08.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three cited 1980s comedy records, correctly stated cast/director/date/genre.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M08.1",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Returns only one eligible movie; top eight contain one while catalog has 321.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M08.2",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "Returns one although two retrieved movies meet new filters; retrieval still below three.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M08.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Updates genre and decade, returns three distinct 1990s action movies with valid metadata facts.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M09.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "All three catalog genres for Shaolin Soccer are correctly cited.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M09.1",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "transport_error",
+      "reason": "Actual ClientError call failure after 51.13 seconds; no response, no retry and no assumed cause.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M09.2",
+      "arm": "baseline",
+      "pass": false,
+      "outcome": "error",
+      "reason": "First-turn call failure left actual history empty; conditional clarification is safe but session task lacks a target and remains incomplete.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M09.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Pronoun resolves to own previous Shaolin Soccer card; all four stored cast credits stated.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M10.1",
+      "arm": "system",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three distinct Wong Kar Wai movies and credits match catalog.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M10.1",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "correct_answer",
+      "reason": "Three distinct Wong Kar Wai movies with correct citations.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M10.2",
+      "arm": "baseline",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Correctly refuses programming request instead of carrying stale movie intent.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    },
+    {
+      "case_id": "M10.2",
+      "arm": "system",
+      "pass": true,
+      "outcome": "reasonable_refusal",
+      "reason": "Domain changes to programming; refuses without code despite previous movie context.",
+      "reviewed_at": "2026-10-05T10:47:58.806625+00:00"
+    }
+  ],
+  "completed_at": "2026-10-05T10:47:58.806625+00:00",
+  "method": "Root AI read every full output text or actual error, fixed gold, selected movie metadata, retrieval eligibility and own-arm history in five batches; explicit verdicts, no judge-model calls.",
+  "scope": "technical qualitative AI review only; not a human audit or course submission"
+}

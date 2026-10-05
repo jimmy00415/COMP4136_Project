@@ -2,6 +2,8 @@
 
 This is the author's native course project. **Start with [START_HERE.md](START_HERE.md)** for setup, source tests, course evaluation scope and source provenance.
 
+The [60-turn challenge and BM25 comparison](course/CHALLENGE_RESULTS.md) includes real outputs, explicit AI review and disclosed protocol failures. It preserves the original 30-case diagnostic study and does not claim overall method superiority.
+
 This publication contains core source code and test fixtures. External movie data, raw PDFs/posters and operational receipts are not included. The retired memory experiment is not part of this repository. Report PDF and presentation creation remain deferred at the author's request.
 
 The original engineering documentation follows. Its full data-build procedure is separate from running the repository's offline source tests.

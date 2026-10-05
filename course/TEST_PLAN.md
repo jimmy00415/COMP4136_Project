@@ -1,5 +1,7 @@
 # Core source publication note
 
+Supplement: the independent [5 October challenge evaluation](CHALLENGE_RESULTS.md) adds harder tasks and a paired BM25 baseline. Its cases, safe answer projections and AI-reviewed summary are published separately. The original 30-case plan and results below are preserved; its no-baseline statement refers only to that original study.
+
 The plan below describes the actual completed metadata study. Its data and raw result files remain in the author's local course workspace and are not included in this core-code publication. Install the application and run offline source/unit tests as documented in START_HERE.md. Do not infer that referenced study data or receipts are present in this repository.
 
 ---
