@@ -1,6 +1,6 @@
 # COMP4136 Hong Kong Movie RAG
 
-Start with the [complete README](README.md), [final report PDF](report/COMP4136_HK_Movie_RAG_Report.pdf) or [live chatbot](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app).
+Start with the [project README](README.md), [getting-started guide](docs/GETTING_STARTED.md), [evaluation guide](docs/EVALUATION.md), [final report PDF](report/COMP4136_HK_Movie_RAG_Report.pdf), or [live chatbot](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app).
 
 The final report compares the repaired serving revision `hk-movie-rag-demo-00001-qfix-0a81de7` with BM25 + LLM in one fresh paired development run: **60/60 versus 50/60**. The system completes more constrained recommendation and dialogue tasks; both methods return catalog-consistent cards and appropriate clarification/refusal. All 120 outputs, reviews, freeze identities, and exact runner are linked in [final paired results](course/FINAL_COMPARISON_RESULTS.md). Known-case and unequal-computation limitations are explicit.
 

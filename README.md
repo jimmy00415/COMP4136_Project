@@ -1,143 +1,175 @@
-# Hong Kong Movie RAG - COMP4136
+<div align="center">
 
-A Chinese-language cinema assistant for evidence-grounded factual questions, constrained recommendations and conversational follow-ups. The owner developed this native project for COMP4136; it is not a previously submitted assignment.
+# HK Movie RAG
 
-**[Live chatbot](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app)** | **[Final report PDF](report/COMP4136_HK_Movie_RAG_Report.pdf)** | **[Editable report](report/FINAL_REPORT.md)**
+**Evidence-grounded discovery for Hong Kong cinema.**
 
-The final report includes a **fresh paired comparison: deployed system 60/60 versus BM25 + LLM 50/60** on the same known development questions, catalog and configured generator. It explains the observed advantage in complete constrained recommendations and dialogue, while showing ties on ambiguity, script variants and evidence boundaries. This is not an unseen-test accuracy estimate or an equal-compute experiment.
+Ask in Chinese. Resolve the right film. Recommend within constraints. Inspect the evidence.
 
-## Evidence and deliverables
+<a href="pyproject.toml"><img src="https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white" alt="Runtime: Python 3.13"></a>
+<a href="src/hk_movie_rag/rag_db.py"><img src="https://img.shields.io/badge/PostgreSQL-pgvector-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL with pgvector"></a>
+<a href="src/hk_movie_rag/vertex_clients.py"><img src="https://img.shields.io/badge/Google_Cloud-Vertex_AI-4285F4?logo=googlecloud&logoColor=white" alt="Google Cloud Vertex AI"></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-205A83" alt="MIT source-code license"></a>
 
-| Resource | Purpose |
+**[Try the chatbot](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app)** · **[Getting started](docs/GETTING_STARTED.md)** · **[Evaluation](docs/EVALUATION.md)** · **[Read the report](report/COMP4136_HK_Movie_RAG_Report.pdf)**
+
+</div>
+
+HK Movie RAG turns a versioned **4,659-film catalog** into a conversational interface for factual lookup and constrained recommendations. It combines entity resolution, structured filtering, PostgreSQL/pgvector retrieval, and Vertex AI generation. Answers expose citations and canonical movie cards; ambiguous titles and unsupported facts lead to clarification or refusal.
+
+<p align="center">
+  <a href="https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app"><img src="docs/assets/chatbot-preview.png" width="880" alt="Live HK Movie RAG interface showing a three-film John Woo recommendation, metadata citations, and the first canonical movie card"></a>
+</p>
+
+<p align="center"><sub>Actual deployed interface: a constrained recommendation with metadata citations. Preview shows the answer and first movie card; this documentation example is separate from the evaluation run.</sub></p>
+
+[Capabilities](#capabilities) · [Quick start](#quick-start) · [Architecture](#architecture) · [Evaluation](#evaluation) · [API](#api) · [Documentation](#documentation) · [Contributing](#contributing)
+
+## Capabilities
+
+| Capability | What the system does |
 |---|---|
-| [Final paired results](course/FINAL_COMPARISON_RESULTS.md) | Family comparison, failure cases, fairness and limitations |
-| [Actual paired answers and histories](course/final_paired_answers.jsonl) | All 120 retained responses, baseline retrieval and generation metadata |
-| [Root AI review](course/final_paired_review.json) | All per-case verdicts and card-field audit |
-| [Reviewed paired summary](course/final_paired_summary.json) | Recountable aggregates and seven transparent scoring corrections |
-| [Pre-dispatch freeze](course/final_paired_freeze.json) | Runner, imported modules, catalog, cases, configuration and model identities |
-| [Exact measured runner](course/final_paired_eval.py) | GET-only by default; explicit execution creates a fresh paired run |
-| [Deployment receipts](course/query_fix_summary.json) | Source/image pins, cloud build and promotion before the paired run |
-| [Report build / visual review](report/BUILD.md) | Offline figures, PDF build and actual page inspection |
-| [Engineering guide](docs/ENGINEERING_GUIDE.md) | Data-build, release and deployment procedures |
+| **Precise film identity** | Resolves explicit IDs and title variants; asks for clarification when a title refers to multiple records. |
+| **Chinese-language lookup** | Handles Traditional/Simplified variants while returning canonical catalog fields. |
+| **Constraint-aware recommendations** | Applies director, cast, genre, tier, year-range, count, and exclusion requirements before answering. |
+| **Conversational follow-ups** | Updates a decade or director, resolves references to earlier selections, and avoids requested repeats using actual history. |
+| **Inspectable evidence** | Returns source citations and structured cards populated from canonical records. |
+| **Evidence boundaries** | Withholds unsupported facts and handles out-of-domain questions without inventing an answer. |
 
-Author name, student ID and group number remain blank at the owner's request. Human audit and course-platform submission are pending. This deliverable contains a report; no presentation is included.
+The application also includes PDF passage retrieval and a same-origin poster proxy. The published comparison evaluates **metadata tasks**; it does not certify document reasoning or poster correctness.
 
-## Problem, data and architecture
+## Quick start
 
-Users ask who directed a film, request three movies satisfying multiple predicates, switch a decade or director, or refer to a previous selection. The system must distinguish same-title records and avoid inventing unavailable facts.
+### Explore the hosted demo
 
-The active release contains **4,659 films**, **4,659 metadata passages**, **five PDFs / 21 document passages**, and **4,680 embeddings**. Metadata agreement is the evaluation reference, not independent verification of every film fact. This experiment measures metadata tasks; PDF comprehension and poster correctness are not certified.
+Open the **[live chatbot](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app)**. No local setup is needed.
 
-![Evidence-controlled system](report/figures/architecture.png)
-
-1. FastAPI receives a question and bounded actual history.
-2. Identity, domain and constraint handling chooses a structured or dense-retrieval route.
-3. PostgreSQL/pgvector supplies release-bound evidence.
-4. Canonical facts are rendered directly; other supported answers use evidence and Vertex AI.
-5. Grounding checks expose citations and canonical movie cards. Ambiguity or insufficient support triggers clarification or refusal.
-
-The code changes are generic parser/answering repairs, not model-weight training or hardcoded benchmark answers. Data, embeddings, managed models and existing resource configuration were retained.
-
-| Component | Location |
+| Try this | Behavior to inspect |
 |---|---|
-| API and UI | `src/hk_movie_rag/demo_api.py`, `src/hk_movie_rag/static/` |
-| Answer orchestration / grounding | `src/hk_movie_rag/rag_query.py` |
-| Query / recommendation / history parsing | `src/hk_movie_rag/retrieval.py` |
-| PostgreSQL / pgvector | `src/hk_movie_rag/rag_db.py`, `migrations/` |
-| Managed-model clients | `src/hk_movie_rag/vertex_clients.py` |
+| `《少林足球》的電影類型有哪些？` | Factual lookup with a metadata citation |
+| `推薦3部1980至1999年吳宇森導演的動作片。` | Three unique films satisfying all conditions |
+| `改成1990年代，其他條件不變。` | Follow-up that preserves relevant constraints |
+| `《英雄本色》的導演是誰？` | Clarification between same-title films |
+| `《重慶森林》在香港的總票房是多少？` | Refusal when the stored fields cannot support the requested fact |
 
-## Install and test
+### Install and verify the source
 
-Use **Python 3.13** and **uv**, matching Docker. Inherited package metadata declares Python 3.11+, but the original archive module imports `collections.abc.Buffer`; the complete application cannot load on Python 3.11.
+Use **Python 3.13**, **Git**, and **[uv](https://docs.astral.sh/uv/getting-started/installation/)**. The application follows the Python 3.13 runtime pinned in its Dockerfile.
 
-```shell
+```bash
 git clone https://github.com/jimmy00415/COMP4136_Project.git
 cd COMP4136_Project
 uv sync --frozen --python 3.13
 
-# Course tests: no catalog, credentials or live model calls.
-uv run pytest -q course/test_simple_eval.py course/test_challenge_eval.py course/test_review_challenge.py course/test_query_fix_eval.py course/test_final_paired_eval.py
-
-# Relevant application regressions; the excluded test needs an external CSV.
-uv run pytest -q tests/test_retrieval.py tests/test_rag_query.py -k "not every_bounded_release_credit"
-node --test tests/static_app_ui_contract.mjs
-
-# Broader source tests, excluding external-release integration tests.
-uv run pytest -q --ignore=tests/integration
+# Offline evaluation-tool tests: no cloud credentials or full catalog required.
+uv run --frozen pytest -q course/test_simple_eval.py course/test_challenge_eval.py course/test_review_challenge.py course/test_query_fix_eval.py course/test_final_paired_eval.py
 ```
 
-After the deployed repair, **45 course tests**, **1,464 relevant application tests** (one external-catalog test deselected) and **7 browser-script tests** passed. Earlier publication verified 171 configuration/deployment-script tests. A full pytest run without external release inputs is not expected to pass; even `--ignore=tests/integration` needs the external CSV for one release-credit test.
+To serve the application locally, provide a populated PostgreSQL/pgvector database, a matching release, Google Cloud credentials, and the required process environment, then run:
 
-The repository provides application code, controlled fixtures, policies, migrations, Dockerfile and dependency lock. A populated database, full catalog, raw PDFs/posters, credentials and complete operating receipts are external.
-
-### Run the backend
-
-A real backend needs populated PostgreSQL/pgvector, the matching verified release, Google Cloud credentials and serving/policy identities. Copy `.env.example` only as a configuration-name template and supply environment variables securely. It contains historical release values; **it is not the evaluated R3 configuration**. Current revision/image pins and actual cloud readbacks are in [runtime summary](course/query_fix_summary.json).
-
-After supplying all matching data and environment variables:
-
-```shell
-uv run uvicorn hk_movie_rag.demo_api:app --host 127.0.0.1 --port 8080
+```bash
+uv run --frozen uvicorn hk_movie_rag.demo_api:app --host 127.0.0.1 --port 8080
 ```
 
-This command reads the process environment; it does not automatically load `.env`. Follow the engineering guide for ingestion/deployment. Installing source does not provision cloud resources.
+Open `http://127.0.0.1:8080`. The source repository includes fixtures and migrations; the full catalog, documents, posters, database, and credentials are external. **[Getting started](docs/GETTING_STARTED.md)** explains runtime compatibility, configuration, test boundaries, and common setup errors.
 
-The [Cloud Run technical demo](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app) now serves revision `hk-movie-rag-demo-00001-qfix-0a81de7`. It is externally operated, not a guaranteed permanent grading endpoint. Offline tests and published observations remain inspectable without it.
+## Architecture
 
-## API
+![Evidence-controlled system architecture](report/figures/architecture.png)
 
-| Endpoint | Function |
+1. **Interpret** the question and bounded history: identify the film, intent, and explicit constraints.
+2. **Retrieve** release-bound evidence through structured catalog operations or compatible dense passage search.
+3. **Answer** canonical facts directly or generate supported descriptions from selected evidence.
+4. **Validate** citation identity and materialize canonical cards before returning the response.
+
+Recommendation eligibility is checked before ranking and again before generation. Conversation updates operate on actual earlier questions, answers, and selected IDs. The implementation is application-level orchestration; it does not fine-tune model weights.
+
+| Layer | Implementation |
 |---|---|
-| `GET /` | Browser chat |
-| `GET /health` | Health |
-| `GET /api/config` | Nonsecret release/model/policy/serving configuration |
-| `POST /api/chat` | Answers/recommendations |
-| `GET /api/posters/{movie_id}` | Validated same-origin poster proxy |
+| API and browser UI | [`demo_api.py`](src/hk_movie_rag/demo_api.py), [`static/`](src/hk_movie_rag/static/) |
+| Answer routing and grounding | [`rag_query.py`](src/hk_movie_rag/rag_query.py) |
+| Identity, constraints, and history | [`retrieval.py`](src/hk_movie_rag/retrieval.py) |
+| PostgreSQL and pgvector | [`rag_db.py`](src/hk_movie_rag/rag_db.py), [migrations](src/hk_movie_rag/migrations/) |
+| Managed-model clients | [`vertex_clients.py`](src/hk_movie_rag/vertex_clients.py) |
 
-Illustrative request, not an additional experiment:
+The evaluated release contains **4,659 metadata passages**, **21 passages from five PDFs**, and **4,680 768-dimensional embeddings**. Generation uses `gemini-3.5-flash-lite`; embeddings use `gemini-embedding-2`. Release, model, policy, revision, and container identities are retained in the [experiment freeze](course/final_paired_freeze.json).
 
-```json
-{
-  "question": "推薦三部1990年代吳宇森導演的動作電影。",
-  "history": []
-}
-```
+## Evaluation
 
-Responses contain `answer_markdown`, `citations` and `movies`. History uses `question`, `answer` and `movie_ids`, bounded to four exchanges and 12,000 characters. Citation identity validation does not guarantee correct parsing of natural-language conditions.
-
-## Final paired development evaluation
-
-Actual paired requests ran on **5 October 2026, 21:08:06-21:11:51 HKT**, one question-level attempt per arm/turn. Arm order alternates; each dialogue uses its own actual earlier outputs. Every response was retained and read in full by Root AI, with independent AI review. No expected answer or eligible-ID set entered inference.
-
-![Paired task completion](report/figures/family_results.png)
+A fresh paired study ran on **5 October 2026**: **60 turns per method**, **120 retained responses**, alternating method order, and each method's own actual dialogue history. Both methods use the same catalog, questions, configured generator, and acceptance criteria.
 
 | Task family | Deployed system | BM25 + LLM |
 |---|---:|---:|
-| Ambiguity / explicit ID | 10/10 | 10/10 |
-| Traditional / Simplified variants | 10/10 | 10/10 |
-| Compound recommendations | 10/10 | 7/10 |
-| Evidence / domain boundary | 10/10 | 10/10 |
-| Dialogue | 20/20 | 13/20 |
-| **Total** | **60/60** | **50/60** |
+| Ambiguity / explicit ID | **10/10** | 10/10 |
+| Traditional / Simplified Chinese | **10/10** | 10/10 |
+| Compound recommendations | **10/10** | 7/10 |
+| Evidence / domain boundary | **10/10** | 10/10 |
+| Dialogue | **20/20** | 13/20 |
+| **Total task completion** | **60/60 · 100%** | **50/60 · 83.3%** |
 
-The difference is **16.7 percentage points**: 50 both-pass turns and ten system-only turns. All ten baseline failures are incomplete recommendations: the top-eight BM25 context contains fewer than three eligible movies, even though the catalog has sufficient valid candidates. These conservative incomplete answers do not demonstrate hallucination. Recommendation tasks complete at **24/24 versus 14/24**.
+**Observed gain: 16.7 percentage points.** All ten gains concern completing recommendations: the BM25 top-eight context contains too few eligible films even when the catalog has enough. Both methods return catalog-consistent card fields (**784/784 vs. 680/680**) and appropriately clarify or refuse unsupported requests.
 
-Both methods appropriately clarify five and refuse eleven requests. The system gives 44 correct answers; baseline 34. Baseline mechanical scoring initially accepted 43 turns; qualitative review corrects seven wording-related false negatives, with reasons retained in the audit. Both methods' returned cards match the catalog: **784/784 system fields and 680/680 baseline fields**, all metadata citations.
+These are **known development cases with AI-reviewed outcomes**, not unseen-test accuracy. Seven baseline automatic false negatives were corrected transparently. The applications have different internal retry, rendering, and fallback policies. System median latency is lower (**0.763 vs. 1.349 s**), but its observed maximum is higher (**51.523 vs. 14.430 s**). Human review remains pending.
 
-Median latency is **0.763 s versus 1.349 s**, but the system has a worse observed maximum (**51.523 s versus 14.430 s**). The public API does not expose its exact internal model-call count. Baseline uses one SDK attempt; the deployed application permits three SDK attempts, up to two recommendation generations, direct rendering and deterministic fallback. This is a complete-application comparison, not equal-compute retrieval or an isolated module ablation.
+**[Protocol and reproducibility](docs/EVALUATION.md)** · **[Complete results](course/FINAL_COMPARISON_RESULTS.md)** · **[All 120 responses](course/final_paired_answers.jsonl)** · **[Per-case review](course/final_paired_review.json)**
 
-These cases were known during development. Earlier observations are not pooled into this report. Unseen accuracy, universal superiority, PDF reasoning, concurrency and cost are not inferred. Catalog agreement is dataset consistency, not independently established real-world truth. Human review remains pending.
+## API
 
-## Inspect or reproduce
+| Endpoint | Purpose |
+|---|---|
+| `GET /` | Browser chat interface |
+| `GET /health` | Service health |
+| `GET /api/config` | Nonsecret release, model, policy, and serving identities |
+| `POST /api/chat` | Factual answers and recommendations |
+| `GET /api/posters/{movie_id}` | Validated poster proxy |
 
-The raw answers, reviews, summary, freeze and exact runner are published above. Cases: `course/challenge_cases.jsonl`, SHA-256 `2ab256dc99112b6864f9c41f51f77d216ebff8aeccfa6458c30107f54787e7f5`. Independent field/eligibility re-auditing requires the external 4,659-record catalog, SHA-256 `1dbea26150a816ae4fc4d189a2a08e39628cbee997f3966b0dd5cd16843e907b`.
+Minimal Python request to the hosted demo:
 
-The fresh paired runner defaults to **GET-only configuration validation**. Its `--help` describes required catalog, revision/image pins and a fresh output directory. Adding `--execute` makes a new billable 120-response paired run; it never overwrites retained outputs or retries failed cases. Google credentials and matching release inputs are external. Report authoring needs no model calls.
+```python
+import json
+from urllib.request import Request, urlopen
 
-[Build instructions](report/BUILD.md) explain the separate document environment and fonts. Building verifies exact paired evidence hashes, reconstructs aggregate metrics and generates figures offline. A changed PDF requires fresh full-page visual review.
+url = "https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app/api/chat"
+payload = {"question": "《少林足球》的電影類型有哪些？", "history": []}
+request = Request(
+    url,
+    data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+    headers={"Content-Type": "application/json"},
+)
+with urlopen(request, timeout=90) as response:
+    result = json.load(response)
+print(result["answer_markdown"])
+```
 
-## Provenance and contribution
+The response contains `answer_markdown`, `citations`, and `movies`. To continue a conversation, send prior exchanges as `question`, `answer`, and `movie_ids`; the API accepts up to **four exchanges** and **12,000 history characters**. See the [API usage guide](docs/GETTING_STARTED.md#api-and-history) for a complete follow-up example.
 
-The owner confirms that this native project was developed for COMP4136 and was not submitted for another course. Initial source is versioned at [7b1b870](https://github.com/jimmy00415/HK_Movie_RAG_Chatbot/tree/7b1b87002a0b0bc3548fc365a46095c00ea683da); the deployed repair is [0a81de7](https://github.com/jimmy00415/COMP4136_Project/tree/0a81de7447b1ddbfaf7f7786bb97d52815469939).
+## Documentation
 
-AI assistance supported repairs, regression tests, evaluation, audit, figures and documentation. AI is not a human member. Names/IDs/group number remain unfilled. GitHub publication does not replace registration or Moodle submission. The retired memory experiment is excluded from this repository. The existing [LICENSE](LICENSE) does not independently grant rights to external metadata, posters or PDFs.
+| Guide | Start here when you want to… |
+|---|---|
+| [Getting started](docs/GETTING_STARTED.md) | Install, run offline tests, configure a backend, or use the API |
+| [Evaluation](docs/EVALUATION.md) | Understand the comparator, scoring, limitations, and reproduction controls |
+| [Engineering guide](docs/ENGINEERING_GUIDE.md) | Inspect data-build, ingestion, release, and deployment procedures |
+| [Final report](report/COMP4136_HK_Movie_RAG_Report.pdf) | Read methodology, related work, experiments, and case studies |
+| [Report source and build](report/FINAL_REPORT.md), [build guide](report/BUILD.md) | Edit or rebuild the report offline |
+| [Contributing](CONTRIBUTING.md) | Report a reproducible issue or propose a focused change |
+
+```text
+src/hk_movie_rag/    API, retrieval, answering, model clients, policies, migrations, UI
+course/             Evaluation tools, frozen questions, retained answers and reviews
+config/             Data and deployment configuration
+scripts/gcp/        Provisioning, deployment and smoke-check tools
+tests/              Controlled unit fixtures and release integration tests
+docs/               Setup, evaluation, engineering and source contracts
+report/             Report source, PDF, figures and verification records
+```
+
+## Contributing
+
+Bug reports, documentation fixes, and focused improvements are welcome. Use [GitHub Issues](https://github.com/jimmy00415/COMP4136_Project/issues) for reproducible problems and read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Include the query, expected behavior, observed behavior, and nonsecret runtime identity where relevant.
+
+## License and project context
+
+Source code is available under the **[MIT License](LICENSE)**. External metadata, posters, and PDFs have their own provenance and rights; the code license does not grant rights to those assets.
+
+Developed as a native **COMP4136** project, not a previously submitted assignment. AI assistance in repairs, tests, evaluation, figures, and documentation is disclosed in the report. Student identity fields remain unfilled at the owner's request; course submission is a separate step. Source provenance and deployed-image identity are recorded in the [deployment summary](course/query_fix_summary.json).

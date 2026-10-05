@@ -4,7 +4,7 @@ The original engineering procedures below are retained for reference. Run comman
 
 This is the author's native course project. **Start with [START_HERE.md](../START_HERE.md)** for setup, source tests, course evaluation scope and source provenance.
 
-The [60-turn challenge and BM25 comparison](../course/CHALLENGE_RESULTS.md) includes real outputs, explicit AI review and disclosed protocol failures. It preserves the original 30-case diagnostic study and does not claim overall method superiority.
+The current [paired evaluation](EVALUATION.md) compares the repaired deployment with BM25 + LLM on 60 known development turns per method. It retains all 120 outputs, explicit AI review and scoring corrections. Earlier observations remain separate and are not pooled into the final report.
 
 This publication contains core source code and test fixtures. External movie data, raw PDFs/posters and operational receipts are not included. The retired memory experiment is not part of this repository. The [final report PDF](../report/COMP4136_HK_Movie_RAG_Report.pdf) is now included; presentation creation remains deferred at the author's request.
 
