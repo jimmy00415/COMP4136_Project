@@ -1,96 +1,89 @@
 {
-  "at_utc": "2026-10-05T13:23:07.928465+00:00",
+  "at_utc": "2026-10-05T14:06:07.870124+00:00",
   "reviewer_type": "Root AI",
   "human_audits": "pending",
   "submission_ready": false,
-  "pdf_sha256": "c49d829ccd7870b7fe7606626980ae16829495de2557a2179fb3e6b14b7c19ab",
+  "pdf_sha256": "e4378a8c3dd83d356adacf4f48c4d4fc9af792c71aa7c00f482f296f1ea2ef3f",
   "pages": 13,
-  "method": "All13 final Poppler120-dpi page images actually opened and visually inspected after paired report edits and C03 correction. Earlier system-only review is superseded.",
+  "method": "All 13 final Poppler 120-dpi PNG page images were actually opened and visually inspected after the minimal course-frontend/PDF-engineering update. This supersedes the previous PDF visual receipt.",
   "page_reviews": [
     {
       "page": 1,
-      "image_sha256": "920b92867fc0dbd4d50e45c5431cfe283cf457c3e32134274d408b2ebfea4d8b",
+      "image_sha256": "d8a8b5d2c7c976b8c4daf4a4f96f6394235f439a5c3bd6611bb0547584984c7d",
       "status": "visually_checked",
-      "notes": "Cover and paired abstract: links, deliberate blank identities, 60/50 and both latency summaries are legible."
+      "notes": "New course frontend link and GitHub link are readable; cover and paired abstract preserved."
     },
     {
       "page": 2,
       "image_sha256": "a9627424497feb3883252a4ea78fb64556e4fb3a197a707299d3c702ccb8c1a7",
       "status": "visually_checked",
-      "notes": "Motivation and five-paper background survey: headings and paragraphs fit cleanly."
+      "notes": "Background survey fits unchanged."
     },
     {
       "page": 3,
-      "image_sha256": "772a578729a3483ba4a4333d77350f0a674f1e43f872399162ef358fa7bfee08",
+      "image_sha256": "1bb7fe76844753cd3f8dc82bb99e6139b7c9db38aa243ca8830c44679e1085eb",
       "status": "visually_checked",
-      "notes": "Data, architecture diagram and metadata-only boundary: caption and final paragraph fit on one page."
+      "notes": "Five named PDF analyses, extraction identities, vector counts and PDF/metadata evaluation distinction fit with architecture diagram."
     },
     {
       "page": 4,
-      "image_sha256": "41db5b83fd66c95d1192c2ca62b88d0cd79fd3400c6b9b646e9b62723b4c3cbb",
+      "image_sha256": "8a9edd14360c6a47ed9ef3a0fcb5eed6c8bbb1c5a5ab9a87880a7a797214e90b",
       "status": "visually_checked",
-      "notes": "Methodology: eligibility notation, tier/ranking, bilingual examples and process figure readable."
+      "notes": "Document-grounded retrieval, page citations/excerpts and unsupported-topic handling fit without clipping."
     },
     {
       "page": 5,
-      "image_sha256": "adb334b04aba0cef1cfaf550952dba40ee99b5f456ff5dda39a617d276a30542",
+      "image_sha256": "e01b45f4304f37a57490aa42c19b630170faa4b5bfd03b2dd60f36513f5cb06a",
       "status": "visually_checked",
-      "notes": "Conversation and implementation: source paths, model identities, deployment lineage and 45 course checks fit."
+      "notes": "Course frontend same-backend engineering note fits with implementation table."
     },
     {
       "page": 6,
       "image_sha256": "8acdc87d15349113c99c78b477a60b47c5e78cb279ab9b511f0e2a361f17b644",
       "status": "visually_checked",
-      "notes": "Baseline: BM25 parameters, evidence-controlled prompt and unequal retry/fallback policies are explicit and legible."
+      "notes": "Baseline settings and fairness text remain readable and unchanged."
     },
     {
       "page": 7,
       "image_sha256": "b35336a6e97f2324dc11231c4c20aaefc7c5f2289ebe67474d03beb6ae44d9cb",
       "status": "visually_checked",
-      "notes": "Protocol: two arms, known cases, seven corrected baseline verdicts and genuine run time fit."
+      "notes": "Protocol, sample sizes, review disclosures and experimental controls preserved."
     },
     {
       "page": 8,
       "image_sha256": "9c398563779f4a5d7648844f3cdb17afcbd635e14f62a57243497f7d5fe0684a",
       "status": "visually_checked",
-      "notes": "Results: paired blue/orange chart labels, all metric table rows and honest worse system latency tail readable."
+      "notes": "Paired comparison chart, all table values and conclusions preserved."
     },
     {
       "page": 9,
       "image_sha256": "430b44de6bb10e78ad4840576eb84c4ccf59f95466c4c7158209edbcb8560404",
       "status": "visually_checked",
-      "notes": "Actual cases: Chinese quotes, IDs and citations readable; no truncation."
+      "notes": "Original actual-output case studies remain readable."
     },
     {
       "page": 10,
       "image_sha256": "2826ab79f93f8f18dfa4bb3460a0a7e27ffff774db915f43b4637d15353f0b03",
       "status": "visually_checked",
-      "notes": "Comparative cases: C03 corrected to1980-1989/action+comedy, C04 and actual-history M02.2; failure distinctions fit."
+      "notes": "Comparative cases and fairness findings preserved."
     },
     {
       "page": 11,
       "image_sha256": "85601290e860283767cbd108310a8d2b951fc0e87a7c002cb43ccfb59b0fa672",
       "status": "visually_checked",
-      "notes": "Discussion: observed advantage and known-case/AI/compute/generalization limitations readable."
+      "notes": "Limitations and PDF evaluation boundary preserved."
     },
     {
       "page": 12,
       "image_sha256": "337259957317123c12841727d537cf5de0cbbeda579bf91523ba83a35ff24097",
       "status": "visually_checked",
-      "notes": "Conclusion, contribution/AI assistance and eight linked references fit on the same page."
+      "notes": "Conclusion, contribution disclosure and new clickable chatbot reference fit."
     },
     {
       "page": 13,
       "image_sha256": "bf8917d9fe5eb960feb0145f8d9659e2c85fe47ba7d1798639323a0ba26a29c8",
       "status": "visually_checked",
-      "notes": "Appendix: exact full hashes wrap without lost characters; evidence links and offline build instructions fit."
+      "notes": "Exact scientific identities and reproducibility links remain readable."
     }
-  ],
-  "content_checks": {
-    "paired_evidence_hashes": "passed",
-    "reproduced_aggregate_metrics": "passed",
-    "pdf_link_annotations": "GitHub, chatbot and evidence links present",
-    "independent_ai_review": "Reviewed source, all120 response texts and paired report; C03 wording and README endpoint correction applied. AI review, not human approval."
-  },
-  "build_manifest_sha256": "08d8e9cb31e50c1700a063d067ce9aecce117a611d8166ecde43818cd0cc579d"
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "built_at_utc": "2026-10-05T13:21:40.519674+00:00",
+  "built_at_utc": "2026-10-05T14:04:29.917425+00:00",
   "evidence_checks": "passed; exact paired evidence bytes and independent paired aggregate reproduction",
   "reproduced_metrics": {
     "arms": {
@@ -98,11 +98,11 @@
     "final_paired_freeze.json": "93476c67efd75c522e1641a74f871f400d8008869565aa6fb75651ca3b901213",
     "final_paired_eval.py": "b0aa2684ba1e52424039b63a49aceb55cf947f7f933a50fb0bf88ef17c03fae1",
     "paired_evidence.py": "0bfbeabf20da1263bb1c9c869c6c7505432c37e483777f60294e16eab144d856",
-    "FINAL_REPORT.md": "ab54007652012d95c6fbf1757a6560613eca4da7d0607ed5eb694b700252375b",
+    "FINAL_REPORT.md": "0974ed58edee73e42e7af21380fc81faeee8da631f881027348cf2a3a17632b5",
     "build_report.py": "0bf149894de07d26e87484e6d8d9ed24917bdb789bd6c71b77b4de590fb1c399"
   },
   "outputs": {
-    "COMP4136_HK_Movie_RAG_Report.pdf": "c49d829ccd7870b7fe7606626980ae16829495de2557a2179fb3e6b14b7c19ab",
+    "COMP4136_HK_Movie_RAG_Report.pdf": "e4378a8c3dd83d356adacf4f48c4d4fc9af792c71aa7c00f482f296f1ea2ef3f",
     "figures\\architecture.png": "58824173af53ec2dfc8096dd1a6ad463193337b4c618b04881ddf406e74c08d6",
     "figures\\constraint_pipeline.png": "6d328f7051d2b1eeeba94a793cb6644e6afaef6aee15ba9e50554523ad3d26eb",
     "figures\\family_results.png": "c96fc77babac6d8249377351ed79ac9a9880acb64eea796b22fefd0c9e84ad7f",
@@ -115,5 +115,6 @@
   },
   "human_audits": "pending",
   "submission_ready": false,
-  "visual_review": "pending; build success does not establish visual inspection"
+  "visual_review": "pending; updated PDF requires a fresh full-page inspection",
+  "build_mode": "Document-only update: unchanged build_report.py evidence() and pdf(); existing comparative figures retained byte-for-byte"
 }

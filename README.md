@@ -36,7 +36,7 @@ HK Movie RAG turns a versioned **4,659-film catalog** into a conversational inte
 | **Inspectable evidence** | Returns source citations and structured cards populated from canonical records. |
 | **Evidence boundaries** | Withholds unsupported facts and handles out-of-domain questions without inventing an answer. |
 
-The application also includes PDF passage retrieval and a same-origin poster proxy. The published comparison evaluates **metadata tasks**; it does not certify document reasoning or poster correctness.
+The application also retrieves page-level evidence from **five movie deep-analysis PDFs**, covering *Drunken Master*, *Aces Go Places*, *It's a Mad, Mad, Mad World*, *Mr. Vampire*, and *Shaolin Soccer*. Their 21 extracted passages are embedded and support attributed analysis of visual aesthetics, space, action, comedy, and sound, with document/page citations and excerpts. A same-origin proxy serves posters. The published comparison evaluates **metadata tasks**; it does not certify document reasoning or poster correctness.
 
 ## Quick start
 

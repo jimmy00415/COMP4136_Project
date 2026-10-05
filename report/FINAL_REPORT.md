@@ -13,7 +13,7 @@
 
 **GitHub repository:** [https://github.com/jimmy00415/COMP4136_Project](https://github.com/jimmy00415/COMP4136_Project)
 
-**Live chatbot:** [https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app)
+**Live chatbot:** [https://hk-movie-course-frontend-4l6lw3rnaa-uc.a.run.app](https://hk-movie-course-frontend-4l6lw3rnaa-uc.a.run.app)
 
 ### Abstract
 
@@ -64,7 +64,7 @@ The contribution is an implemented domain application with generic query and evi
 
 Metadata includes movie ID, Chinese and English titles, release date, director, cast, genre, production information, and tier. Returned source labels include the Hong Kong Film Archive, IMDb, Wikidata, and operator-approved corrections. These are provenance labels in the release, not a claim that this study independently re-verified each original website. Tier is a catalog field, not an independently measured quality score.
 
-Film identity is represented by a stable movie ID. Chinese script normalization and bounded title/person handling support matching while keeping canonical returned fields intact. Metadata is represented as citable passages, preserving source kind and movie identity. Stored-vector compatibility is checked against the release's embedding model and dimension. The experiment uses the existing release; it does not rebuild data, re-embed records, or change model weights.
+Stable movie IDs and script normalization preserve canonical fields. Five deep-analysis PDFs cover *Drunken Master*, *Aces Go Places*, *It's a Mad, Mad, Mad World*, *Mr. Vampire*, and *Shaolin Soccer*. Extraction retains movie/document IDs, filenames, page numbers, and content hashes for 21 passages. Embedding these and 4,659 metadata passages yields 4,680 768-dimensional vectors, checked against the release model/dimension. This study reuses the existing collection without re-embedding or model-weight changes.
 
 ### 2.2 Application architecture
 
@@ -72,9 +72,9 @@ Film identity is represented by a stable movie ID. Chinese script normalization 
 
 *Figure 1. Evidence-controlled application flow. Structured lookup and vector retrieval feed the answer layer; clarification and refusal are valid terminal actions. The experiment measures metadata tasks, not every available retrieval route.*
 
-The browser submits a question and bounded history to FastAPI. The application resolves identity, intent, constraints, and conversational context before selecting release-bound evidence. PostgreSQL stores canonical fields and pgvector supports dense passage search. The answer layer renders supported canonical facts directly or requests evidence-grounded text from Vertex AI. Citation checks and canonical movie cards expose the evidence selected for the response.
+The browser sends questions and bounded history to FastAPI, which resolves identity, intent, constraints, and context. PostgreSQL/pgvector supplies release-bound canonical and passage evidence. The answer layer renders canonical facts or uses Vertex AI for supported descriptions; citations and canonical cards expose the selected evidence.
 
-All observed citations (98 system, 95 baseline) were metadata. Available PDF retrieval and poster correctness are not evaluated.
+PDFs support attributed analysis of visual aesthetics, space, action, comedy, and sound, rather than independent film-history ground truth. Paired-study citations (98 system, 95 baseline) were metadata; PDF reasoning and poster correctness were not evaluated.
 
 <!-- pagebreak -->
 
@@ -101,6 +101,8 @@ Chinese ranges such as "1980至1999" are parsed before a single-year fallback. G
 Dense retrieval uses query embeddings compatible with the stored release and cosine-distance search in pgvector. Structured identity and recommendation routes use corresponding repository operations. Relevance policy and release identity are explicit inputs. No universal distance threshold or single top-k is asserted for every route; the application selects the appropriate path.
 
 The answer contract includes `answer_markdown`, `citations`, and `movies`. Citations identify selected evidence and source kind. Movie cards are constructed from canonical evidence, rather than trusting a model to invent structured fields. These controls make errors easier to inspect; a valid citation identity alone does not prove that every generated sentence is entailed.
+
+For supported deep-analysis questions, compatible query embeddings and movie-bounded retrieval select PDF pages. The answer layer produces focused, attributed film analysis with source filenames, page numbers, citations, and excerpts; unsupported topics are withheld.
 
 <!-- pagebreak -->
 
@@ -132,6 +134,8 @@ The candidate was previously regression-tested at zero production traffic, then 
 Recorded checks include 1,464 affected application tests, 45 course-harness tests, and seven browser-script contract tests passing. One external-catalog integration test was excluded because its release CSV was unavailable. Full repository integration certification is not claimed. Parser regressions cover variants outside the measured questions, including conjunction scope, unsupported requests, director switching, and deduplication.
 
 This is application-level adaptation, not parameter fine-tuning. Neither the dataset nor the evaluation questions were rewritten to manufacture passing scores. The live chatbot [7] provides a practical way to inspect the interface and evidence.
+
+The course frontend removes corporate branding while retaining the same browser styles and chat logic. A thin same-origin proxy forwards chat, configuration, and poster requests to the existing backend; the measured application revision, models, database, and evidence collection remain unchanged.
 
 <!-- pagebreak -->
 
@@ -337,7 +341,7 @@ AI assistance supported query repairs, regression tests, evaluation tooling, out
 
 [6] Project owner, "COMP4136_Project: Hong Kong Movie RAG," code and evaluation package, 2026. [GitHub](https://github.com/jimmy00415/COMP4136_Project). Accessed: Oct. 5, 2026.
 
-[7] Project owner, "Hong Kong Movie RAG: live technical demo," 2026. [Chatbot](https://hk-movie-rag-demo-4l6lw3rnaa-uc.a.run.app). Accessed: Oct. 5, 2026.
+[7] Project owner, "Hong Kong Movie RAG: live technical demo," 2026. [Chatbot](https://hk-movie-course-frontend-4l6lw3rnaa-uc.a.run.app). Accessed: Oct. 5, 2026.
 
 [8] S. Robertson and H. Zaragoza, "The Probabilistic Relevance Framework: BM25 and Beyond," *Foundations and Trends in Information Retrieval*, vol. 3, no. 4, pp. 333-389, 2009, doi: 10.1561/1500000019. [Publisher record](https://doi.org/10.1561/1500000019).
 
