@@ -251,3 +251,13 @@ def test_runtime_manifest_resolves_actual_installed_opencc_distribution():
     assert versions["opencc_distribution"] == "OpenCC"
     assert versions["opencc_version"]
     assert versions["google_genai_version"]
+
+
+def test_retrieved_bare_citation_ids_are_canonicalized_without_rewriting_answer():
+    obj = {"answer_markdown": "成龍 [metadata:a]", "movie_ids": ["a"], "citation_ids": ["a"]}
+    response = validate_generated(obj, [CAT["a"]])
+    assert response["answer_markdown"] == obj["answer_markdown"]
+    assert response["citations"][0]["citation_id"] == "metadata:a"
+    assert obj["citation_ids"] == ["a"]
+    with pytest.raises(ValueError):
+        validate_generated(obj | {"citation_ids": ["unknown"]}, [CAT["a"]])

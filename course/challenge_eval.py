@@ -132,6 +132,10 @@ def validate_generated(obj, evidence):
         or any(not isinstance(x, str) for x in mids + cids)
     ):
         raise ValueError("invalid generated identities")
+    # IDs identify the same retrieved passage whether represented as its movie
+    # key or its metadata passage key. Normalize identity syntax only; never
+    # modify answer text or accept anything outside supplied evidence.
+    cids = ["metadata:" + cid if cid in lookup else cid for cid in cids]
     if len(set(mids)) != len(mids) or len(set(cids)) != len(cids):
         raise ValueError("duplicate generated identities")
     for cid in cids:
@@ -516,6 +520,7 @@ def main():
     )
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--execute", action="store_true")
+    ap.add_argument("--parent-run", type=Path, help="Preserved earlier protocol run; lineage only")
     args = ap.parse_args()
     if digest(args.catalog) != CATALOG_SHA:
         raise ValueError("catalog differs from original release-matched metadata")
@@ -607,7 +612,17 @@ def main():
         "order": "system first on even turn indexes, baseline first on odd indexes",
         "human_audits": "pending",
         "submission_ready": False,
+        "protocol_revision": "citation-adapter-v2",
     }
+    if args.parent_run:
+        parent = json.loads((args.parent_run / "summary.json").read_text(encoding="utf8"))
+        if digest(args.parent_run / "responses.jsonl") != parent["responses_sha256"]:
+            raise ValueError("parent evidence hash mismatch")
+        freeze["parent_run"] = {
+            "responses_sha256": parent["responses_sha256"],
+            "freeze_sha256": digest(args.parent_run / "freeze.json"),
+            "role": "preserved citation-adapter-defect diagnostic; not pooled with corrected study",
+        }
     args.output.mkdir(parents=True, exist_ok=False)
     (args.output / "freeze.json").write_text(
         json.dumps(freeze, ensure_ascii=False, indent=2), encoding="utf8"
