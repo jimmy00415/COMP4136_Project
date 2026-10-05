@@ -376,6 +376,7 @@ _SAFE_METADATA_ENGLISH = frozenset(
         "film",
         "for",
         "in",
+        "id",
         "is",
         "its",
         "me",
@@ -396,6 +397,10 @@ _SAFE_METADATA_ENGLISH = frozenset(
     }
 )
 _SAFE_METADATA_CHINESE = (
+    "請查詢",
+    "请查询",
+    "查詢",
+    "查询",
     "我想問一下",
     "我想问一下",
     "請問一下",

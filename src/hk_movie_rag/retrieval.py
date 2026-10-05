@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 from collections.abc import Sequence
 from dataclasses import dataclass, replace
+from itertools import pairwise
 from typing import Literal
 
 from opencc import OpenCC
@@ -375,7 +376,7 @@ _CJK_PERSON_CATALOG_SUFFIX_PATTERN = re.compile(
     r"(?:的)?(?:電影|影片|作品)(?=$|[\s。！？!?，,、:：;；.])"
 )
 _CJK_PERSON_CATALOG_CONTINUATION_PREFIX_PATTERN = re.compile(
-    r"^(?P<prefix>還有|还有|再來些?|再来些?|再推薦|再推荐|"
+    r"^(?:現在|现在)?\s*(?P<prefix>還有|还有|再來些?|再来些?|再推薦|再推荐|"
     r"更多|別的|别的|其他|換成|换成|換一(?:部|套|齣|出)?|"
     r"换一(?:部|套|齣|出)?)\s*"
 )
@@ -441,7 +442,7 @@ _PERSON_BARE_TRAILING_EXCLUSION_PATTERN = re.compile(
 )
 _DEDUPLICATION_TERM_TEXT = (
     r"(?:(?:(?:和|與|与|跟)?(?:前面|剛才|刚才|之前)(?:的)?"
-    r"(?:一樣|一样|同樣|同样|相同))|"
+    r"(?:一樣|一样|同樣|同样|相同|重複|重复|重覆))|"
     r"(?:重複|重复|重覆|一樣|一样|同樣|同样|相同)(?:的)?|"
     r"同一(?:部|套|齣))"
     r"(?:電影|影片|作品|片)?(?:推薦|推介|建議)?"
@@ -639,8 +640,9 @@ _NEGATIVE_SELECTION_CLAUSE_LEAD_IN_PATTERN = re.compile(
     r"^(?:want|to\s+watch|to\s+see)\s+",
     re.IGNORECASE,
 )
-_GENRE_ALTERNATIVE_OPERATOR_PATTERN = re.compile(
-    r"(?:或(?:者)?|還是|(?<![a-z])or(?![a-z]))", re.IGNORECASE
+_GENRE_OPERATOR_GAP_PATTERN = re.compile(
+    r"\s*(?:(?:電影|影片|片|movies?|films?)\s*)?"
+    r"(?P<operator>或(?:者)?|還是|和|與|及|and|or)\s*", re.IGNORECASE
 )
 _PERSON_REGION_OR_TOPIC_QUALIFIERS = frozenset(
     {
@@ -1857,6 +1859,8 @@ def _is_tentative_cjk_person_catalog_candidate(candidate: str) -> bool:
         return False
     if candidate.casefold().startswith(_CONTINUATION_WORDS):
         return False
+    if "分析" in candidate:
+        return False
     if any(qualifier in candidate for qualifier in _TENTATIVE_CJK_CATALOG_BLOCKERS):
         return False
     return not any(genre in candidate for genre, _ in _GENRE_ALIASES)
@@ -1904,15 +1908,17 @@ def _question_constraints(question: str) -> _QuestionConstraints:
     person_genres_all: tuple[str, ...] = ()
     person_genres_any: tuple[str, ...] = ()
     if (
-        person_query_shape is not None
-        and len(person_query_shape.candidate_names) == 1
-        and not person_query_shape.exclusionary
-        and len(genres) > 1
+        len(genres) > 1
         and not (structured_policy.genres_all or structured_policy.genres_any)
     ):
-        if _GENRE_ALTERNATIVE_OPERATOR_PATTERN.search(canonical) is not None:
+        genre_operator = _genre_coordination_operator(canonical, genres)
+        if genre_operator == "any":
             person_genres_any = genres
-        else:
+        elif (
+            person_query_shape is not None
+            and len(person_query_shape.candidate_names) == 1
+            and not person_query_shape.exclusionary
+        ) or genre_operator == "all":
             person_genres_all = genres
     tier_match = _TIER_PATTERN.search(routing_question)
     tier = tier_match.group("tier").upper() if tier_match else None
@@ -2367,7 +2373,44 @@ def _count_value(raw: str) -> int:
     return _DEFAULT_RECOMMENDATION_COUNT
 
 
+def _genre_coordination_operator(
+    question: str, genres: tuple[str, ...]
+) -> Literal["all", "any"] | None:
+    """Recognize only a connector directly joining two different genre names."""
+    spans = sorted(
+        (*match.span(), genre)
+        for genre, aliases in _GENRE_ALIASES
+        if genre in genres
+        for alias in aliases
+        for match in re.finditer(
+            rf"(?<![a-z0-9]){re.escape(alias.casefold())}(?![a-z0-9])"
+            if alias.isascii() else re.escape(alias), question
+        )
+    )
+    operators = set()
+    for left, right in pairwise(spans):
+        if left[2] == right[2] or left[1] > right[0]:
+            continue
+        match = _GENRE_OPERATOR_GAP_PATTERN.fullmatch(question[left[1] : right[0]])
+        if match is not None:
+            operators.add(
+                "any" if match.group("operator") in {"或", "或者", "還是", "or"}
+                else "all"
+            )
+    return operators.pop() if len(operators) == 1 else None
+
+
+_CHINESE_YEAR_RANGE_PATTERN = re.compile(
+    r"(?<![a-zA-Z0-9_])(?P<start>(?:18|19|20)\d{2})\s*年?\s*"
+    r"(?:至|到)\s*(?P<end>(?:18|19|20)\d{2})(?![a-zA-Z0-9_])"
+)
+
+
 def _year_constraints(question: str) -> tuple[int | None, int | None, bool]:
+    if match := _CHINESE_YEAR_RANGE_PATTERN.search(question):
+        start = int(match.group("start"))
+        end = int(match.group("end"))
+        return min(start, end), max(start, end), True
     if match := _BETWEEN_YEAR_PATTERN.search(question):
         start = int(match.group("start"))
         end = int(match.group("end"))

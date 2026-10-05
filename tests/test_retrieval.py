@@ -2268,3 +2268,90 @@ def test_person_catalog_name_boundary_reuses_modeled_year_starters(
         retrieval.has_explicit_person_catalog_intent(question)
         or retrieval.has_tentative_person_catalog_intent(question)
     )
+
+
+@pytest.mark.parametrize(
+    "question",
+    [
+        "推薦3部1980至1999年的動作電影",
+        "推荐3部1980年到1999年的动作电影",
+        "推薦3部1999至1980年的動作電影",
+    ],
+)
+def test_course_chinese_year_range_is_inclusive(question: str) -> None:
+    plan = plan_recommendation(question, ())
+    assert plan is not None
+    assert (plan.year_from, plan.year_to) == (1980, 1999)
+
+
+def test_course_explicit_joint_genres_without_person_require_both() -> None:
+    plan = plan_recommendation("推薦3部1980年代同時屬於動作和喜劇的電影", ())
+    assert plan is not None
+    assert set(plan.genres_all) == {"動作", "喜劇"}
+    assert plan.genres_any == ()
+
+
+def test_course_analysis_verb_is_not_a_person_catalog_candidate() -> None:
+    assert not retrieval.has_tentative_person_catalog_intent("逐場分析電影 id 《 》的鏡頭語言。")
+
+
+def test_course_now_director_switch_preserves_person_identity() -> None:
+    shape = retrieval.parse_person_query_shape("現在換成杜琪峯導演的，其他條件保持不變，推薦3部。")
+    assert shape is not None
+    assert shape.candidate_names == ("杜琪峰",)
+    assert shape.role == "director"
+    assert shape.transition == "switch"
+
+
+def test_course_no_repeat_reference_is_not_a_person_exclusion() -> None:
+    question = "再推薦3部成龍主演的動作電影，不要與剛才重複。"
+    shape = retrieval.parse_person_query_shape(question)
+    assert shape is not None
+    assert shape.candidate_names == ("成龍",)
+    assert not shape.exclusionary
+    assert retrieval.has_recommendation_deduplication_request(question)
+
+
+def test_course_reference_only_no_repeat_keeps_history_constraints() -> None:
+    question = "再推薦3部，不要與剛才重複。"
+    assert retrieval.parse_person_query_shape(question) is None
+    history = (ConversationExchange("推薦3部1980年代的喜劇電影", "", ("a", "b", "c")),)
+    plan = plan_recommendation(question, history)
+    assert plan is not None
+    assert (plan.year_from, plan.year_to) == (1980, 1989)
+    assert plan.genres == ("喜劇",)
+    assert plan.excluded_movie_ids == ("a", "b", "c")
+
+
+@pytest.mark.parametrize("question", [
+    "推薦3部動作或喜劇電影", "recommend 3 action or comedy movies",
+])
+def test_course_explicit_genre_alternatives_remain_disjunction(question: str) -> None:
+    plan = plan_recommendation(question, ())
+    assert plan is not None
+    assert plan.genres_all == ()
+    assert set(plan.genres_any) == {"動作", "喜劇"}
+
+
+def test_course_output_language_alternative_does_not_relax_joint_genres() -> None:
+    plan = plan_recommendation("推薦3部同時屬於動作和喜劇的電影，請列中文或英文片名", ())
+    assert plan is not None
+    assert set(plan.genres_all) == {"動作", "喜劇"}
+    assert plan.genres_any == ()
+
+
+def test_course_separate_comparison_clause_does_not_create_joint_filter() -> None:
+    plan = plan_recommendation("推薦3部喜劇電影。和動作電影相比有甚麼不同？", ())
+    assert plan is not None
+    assert plan.genres_all == ()
+
+
+@pytest.mark.parametrize("question", [
+    "推薦3部成龍主演的喜劇電影或動作電影",
+    "推薦3部周星馳主演的喜劇片或動作片",
+])
+def test_course_person_genre_or_with_movie_suffix_is_not_and(question: str) -> None:
+    plan = plan_recommendation(question, ())
+    assert plan is not None
+    assert plan.genres_all == ()
+    assert set(plan.genres_any) == {"喜劇", "動作"}

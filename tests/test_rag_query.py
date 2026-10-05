@@ -9959,3 +9959,70 @@ def test_resolved_different_person_semantic_continuation_resets_active_chain(
     assert plan.continuation is False
     assert plan.excluded_movie_ids == ()
     assert plan.context_text == current
+
+
+@pytest.mark.parametrize(
+    "question",
+    [
+        "電影 ID 1978_ZQ_001《醉拳》的導演是誰？",
+        "电影 ID 1978_ZQ_001《醉拳》的导演是谁？",
+        "請查詢《醉拳》的導演",
+        "请查询《醉拳》的导演",
+    ],
+)
+def test_course_id_and_query_wrappers_use_present_metadata(question: str) -> None:
+    passage = _passage(
+        "metadata:1978_ZQ_001",
+        "1978_ZQ_001",
+        chinese_title="醉拳",
+        english_title="Drunken Master",
+        director="袁和平",
+    )
+    service, _, _, generator = _service([passage], "must not be used", ())
+    answer = service.answer(question)
+    assert answer.answer_markdown == "《醉拳》導演：袁和平。[metadata:1978_ZQ_001]"
+    assert generator.calls == []
+
+
+@pytest.mark.parametrize("question", [
+    "電影 ID 1978_ZQ_001《醉拳》的導演及製作預算是多少？",
+    "請查詢《醉拳》的逐場鏡頭語言分析",
+])
+def test_course_metadata_wrappers_do_not_grant_missing_analysis(question: str) -> None:
+    passage = _passage(
+        "metadata:1978_ZQ_001", "1978_ZQ_001",
+        chinese_title="醉拳", english_title="Drunken Master", director="袁和平",
+    )
+    service, _, _, generator = _service([passage], "must not be used", ())
+    answer = service.answer(question)
+    assert "不足" in answer.answer_markdown
+    assert generator.calls == []
+
+
+def test_course_joint_genre_and_range_evidence_rejects_invalid_candidate() -> None:
+    passages = [
+        _passage("metadata:good", "good", chinese_title="合格片", english_title="Eligible Film", genre="動作、喜劇", release_date="1995-01-01"),
+        _passage("metadata:wrong-genre", "wrong-genre", chinese_title="錯誤類型", english_title="Wrong Genre", genre="動作、劇情", release_date="1995-01-01"),
+        _passage("metadata:wrong-year", "wrong-year", chinese_title="錯誤年份", english_title="Wrong Year", genre="動作、喜劇", release_date="2001-01-01"),
+    ]
+    service, repository, _, generator = _service(
+        passages, "《合格片》：符合條件。[metadata:good]", ("metadata:good",),
+    )
+    with pytest.raises(GroundingError, match="outside typed constraints"):
+        service.answer("推薦1部1980至1999年同時屬於動作和喜劇的電影")
+    assert generator.calls == []
+    plan = repository.recommendation_calls[0]
+    assert set(plan.genres_all) == {"喜劇", "動作"}
+    assert (plan.year_from, plan.year_to) == (1980, 1999)
+
+
+def test_course_joint_genre_and_range_returns_matching_evidence() -> None:
+    passage = _passage(
+        "metadata:good", "good", chinese_title="合格片", english_title="Eligible Film",
+        genre="動作、喜劇", release_date="1995-01-01",
+    )
+    service, _, _, _ = _service(
+        [passage], "《合格片》：符合條件。[metadata:good]", ("metadata:good",),
+    )
+    answer = service.answer("推薦1部1980至1999年同時屬於動作和喜劇的電影")
+    assert [movie.movie_id for movie in answer.movies] == ["good"]
