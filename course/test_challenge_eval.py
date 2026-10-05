@@ -242,3 +242,12 @@ def test_negated_gold_fact_is_an_error():
     assert not classify({"expected": "fact", "movie_id": "a", "field": "director"}, resp, CAT, [])[
         "pass"
     ]
+
+
+def test_runtime_manifest_resolves_actual_installed_opencc_distribution():
+    from challenge_eval import runtime_versions
+
+    versions = runtime_versions()
+    assert versions["opencc_distribution"] == "OpenCC"
+    assert versions["opencc_version"]
+    assert versions["google_genai_version"]

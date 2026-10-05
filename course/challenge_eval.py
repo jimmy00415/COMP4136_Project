@@ -47,6 +47,16 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def runtime_versions():
+    from importlib.metadata import version
+
+    return {
+        "google_genai_version": version("google-genai"),
+        "opencc_distribution": "OpenCC",
+        "opencc_version": version("OpenCC"),
+    }
+
+
 def norm(value):
     text = CONVERTER.convert(unicodedata.normalize("NFKC", str(value))).lower()
     return re.sub(r"[^\w\u3400-\u9fff]", "", text)
@@ -570,7 +580,6 @@ def main():
         )
         print("Separate baseline smoke recorded; no benchmark questions executed.")
         return
-    args.output.mkdir(parents=True, exist_ok=False)
     freeze = {
         "at": utc(),
         "catalog_sha256": digest(args.catalog),
@@ -586,12 +595,7 @@ def main():
         "planned_calls": 120,
         "config_before": before,
         "python": __import__("sys").version,
-        "google_genai_version": __import__("importlib.metadata", fromlist=["version"]).version(
-            "google-genai"
-        ),
-        "opencc_version": __import__("importlib.metadata", fromlist=["version"]).version(
-            "opencc-python-reimplemented"
-        ),
+        **runtime_versions(),
         "baseline_config": {
             "k1": 1.5,
             "b": 0.75,
@@ -604,6 +608,7 @@ def main():
         "human_audits": "pending",
         "submission_ready": False,
     }
+    args.output.mkdir(parents=True, exist_ok=False)
     (args.output / "freeze.json").write_text(
         json.dumps(freeze, ensure_ascii=False, indent=2), encoding="utf8"
     )

@@ -37,3 +37,5 @@ Frozen semantic audit rules: a disclaimer followed by unsupported requested cont
 ## Completion evidence
 
 To be filled with actual test output, freeze/response hashes, counts, review findings and the published commit. Failed runs remain failed; no substituted scores.
+
+Pre-dispatch start at protocol commit ccbcd5f exited with PackageNotFoundError because the manifest requested opencc-python-reimplemented whereas the installed locked distribution is OpenCC 1.4.1. The output directory was empty: no freeze, responses or benchmark dispatches existed. Preserve a startup failure receipt in that directory. Correct only runtime version lookup, add a regression test, and use a fresh -run1 directory for the one actual benchmark. Cases, prompt, scoring and system pins remain unchanged.
