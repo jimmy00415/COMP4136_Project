@@ -1,5 +1,22 @@
-# Preserve the exact bytes bound by evaluation SHA-256 receipts on all platforms.
-course/challenge_cases.jsonl -text
+# Preserve the challenge's exact frozen inputs and runtime source bytes.
+course/challenge_cases.jsonl text eol=lf
+course/challenge_eval.py text eol=lf
+course/prepare_challenge.py text eol=lf
+course/review_challenge.py text eol=lf
+# Evidence hashes refer to these exact exported bytes, including line endings.
+course/challenge_review.json -text whitespace=cr-at-eol
+course/challenge_summary.json -text whitespace=cr-at-eol
+course/challenge_answers.jsonl -text
+# Keep report source/output hashes stable across checkout platforms.
+report/*.md text eol=lf
+report/*.py text eol=lf
+report/*.json text eol=lf
+# Generated SVG path whitespace and line endings belong to the exact export.
+report/figures/*.svg -text whitespace=-blank-at-eol,cr-at-eol
+report/figures/*.png binary
+report/*.pdf binary
+
+# Exact byte binding for the repaired system development regression.
 course/query_fix_answers.jsonl -text
 course/query_fix_review.json -text
 course/query_fix_summary.json -text
